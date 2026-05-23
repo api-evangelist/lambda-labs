@@ -1,0 +1,146 @@
+aid: lambda-labs
+name: Lambda
+description: Lambda (formerly Lambda Labs) is a GPU cloud provider offering on-demand NVIDIA GPU instances,
+  1-Click Clusters of 16-2,000+ interconnected H100 and B200 GPUs, long-term reserved Hyperplane capacity,
+  filesystems, firewalls, and SSH key management. Lambda Cloud is accessed via a REST control-plane API,
+  the web console, and SDKs/CLI tooling.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/lambda-labs/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.19'
+type: Index
+access: 3rd-Party
+position: Producer
+tags:
+- AI
+- Cloud
+- Clusters
+- Compute
+- GPU
+- Inference
+- Machine Learning
+apis:
+- aid: lambda-labs:cloud-api
+  name: Lambda Cloud API
+  description: The Lambda Cloud API is the REST control plane for launching, listing, starting, stopping,
+    and terminating GPU instances, managing SSH keys, firewalls, filesystems, images, and instance types.
+    It supports on-demand single instances and underpins programmatic access to Lambda's GPU fleet.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Cloud
+  - Compute
+  - Filesystems
+  - Firewalls
+  - GPU
+  - Instances
+  - REST
+  - SSH Keys
+  properties:
+  - type: Documentation
+    url: https://docs.lambda.ai/api/cloud
+  - type: Documentation
+    url: https://docs.lambda.ai/public-cloud/cloud-api/
+- aid: lambda-labs:1-click-clusters
+  name: Lambda 1-Click Clusters
+  description: Lambda 1-Click Clusters provision interconnected clusters of 16 to 2,000+ NVIDIA H100 SXM
+    or B200 GPUs for short-duration distributed training workloads. The product is exposed through the Lambda
+    Cloud console and is integrated with the Cloud API surface.
+  humanURL: https://docs.lambda.ai/public-cloud/1-click-clusters/
+  tags:
+  - B200
+  - Clusters
+  - GPU
+  - H100
+  - Training
+  properties:
+  - type: Documentation
+    url: https://docs.lambda.ai/public-cloud/1-click-clusters/
+- aid: lambda-labs:filesystems
+  name: Lambda Cloud Filesystems
+  description: Lambda Cloud Filesystems provide persistent, sharable storage attached to on-demand instances
+    for datasets and checkpoints. Filesystems are managed through the Cloud API and console.
+  humanURL: https://docs.lambda.ai/public-cloud/filesystems/
+  tags:
+  - Filesystems
+  - Persistent Storage
+  - Storage
+  properties:
+  - type: Documentation
+    url: https://docs.lambda.ai/public-cloud/filesystems/
+common:
+- type: Website
+  url: https://lambda.ai
+- type: Developer
+  url: https://docs.lambda.ai
+- type: Documentation
+  url: https://docs.lambda.ai
+- type: Portal
+  url: https://cloud.lambda.ai
+- type: SignUp
+  url: https://cloud.lambda.ai/sign-up
+- type: Login
+  url: https://cloud.lambda.ai/login
+- type: Pricing
+  url: https://lambda.ai/service/gpu-cloud
+- type: Blog
+  url: https://lambda.ai/blog
+- type: TermsOfService
+  url: https://lambda.ai/legal/terms-of-service
+- type: PrivacyPolicy
+  url: https://lambda.ai/legal/privacy-policy
+- type: Support
+  url: https://lambda.ai/contact
+- type: GitHubOrganization
+  url: https://github.com/LambdaLabsML
+- type: LinkedIn
+  url: https://www.linkedin.com/company/lambda-labs
+- name: Lambda Stack
+  url: https://lambda.ai/lambda-stack-deep-learning-software
+  type: SDK
+- type: Features
+  data:
+  - name: On-Demand GPU Instances
+    description: Self-serve, first-come access to 1x, 2x, 4x, and 8x NVIDIA GPU virtual machines billed
+      per-hour with no egress fees.
+  - name: 1-Click Clusters
+    description: Pre-configured clusters of 16-2,000+ interconnected H100 SXM or B200 GPUs for distributed
+      training.
+  - name: Hyperplane Reserved Capacity
+    description: Long-term reserved GPU clusters sold via direct sales engagement for sustained training
+      workloads.
+  - name: Lambda Stack
+    description: Pre-installed CUDA, cuDNN, PyTorch, and TensorFlow software stack across all Lambda Cloud
+      instances.
+  - name: Filesystems
+    description: Persistent, sharable storage attached to on-demand instances for datasets and checkpoints.
+- type: GPUs
+  data:
+  - name: NVIDIA B200 SXM6
+    description: Blackwell-generation flagship GPU, listed at $6.69-$6.99/GPU/hr.
+  - name: NVIDIA H100 SXM
+    description: 80GB Hopper GPU on SXM, listed at $3.99-$4.29/GPU/hr.
+  - name: NVIDIA GH200
+    description: Grace Hopper Superchip, listed at $2.29/GPU/hr.
+  - name: NVIDIA A100 SXM (80GB)
+    description: 80GB Ampere GPU on SXM, listed at $2.79/GPU/hr.
+  - name: NVIDIA A100 PCIe (40GB)
+    description: 40GB Ampere GPU on PCIe, listed at $1.99/GPU/hr.
+  - name: NVIDIA RTX A6000
+    description: 48GB Ada/Ampere workstation GPU, listed at $1.09/GPU/hr.
+  - name: NVIDIA Tesla V100
+    description: 16GB Volta GPU, listed at $0.79/GPU/hr.
+- type: Integrations
+  data:
+  - name: Hugging Face
+    description: Reference workflows and templates for serving and training Hugging Face models on Lambda
+      Cloud.
+  - name: PyTorch
+    description: PyTorch ships pre-installed via Lambda Stack on all instances.
+  - name: TensorFlow
+    description: TensorFlow ships pre-installed via Lambda Stack on all instances.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
