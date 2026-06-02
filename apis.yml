@@ -7,7 +7,7 @@ description: Lambda (formerly Lambda Labs) is a GPU cloud provider offering on-d
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/lambda-labs/refs/heads/main/apis.yml
 created: '2026-05-23'
-modified: '2026-05-23'
+modified: '2026-05-29'
 specificationVersion: '0.19'
 type: Index
 access: 3rd-Party
@@ -69,6 +69,32 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.lambda.ai/public-cloud/filesystems/
+- aid: lambda-labs:inference-api
+  name: Lambda Inference API
+  description: Lambda Inference API is an OpenAI-compatible REST gateway at https://api.lambda.ai/v1 that
+    serves hosted open-source language models (Llama, DeepSeek, Hermes, Qwen, and others) behind the standard
+    OpenAI Chat Completions surface. Chat completion responses can be streamed as HTTP Server-Sent Events
+    by setting "stream":true on the POST /chat/completions request body; the SSE stream emits
+    chat.completion.chunk events terminated by a data [DONE] sentinel. As of 2026-05-29 Lambda has announced
+    the Inference API is winding down in favor of customer self-hosted deployments on Lambda GPU instances.
+  humanURL: https://docs.lambda.ai/public-cloud/lambda-inference-api/
+  baseURL: https://api.lambda.ai/v1
+  tags:
+  - AI
+  - Chat
+  - Completions
+  - Inference
+  - LLM
+  - OpenAI Compatible
+  - SSE
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://docs.lambda.ai/public-cloud/lambda-inference-api/
+  - type: Documentation
+    url: https://lambda.ai/inference
+  - type: AsyncAPI
+    url: asyncapi/lambda-labs-asyncapi.yml
 common:
 - type: Website
   url: https://lambda.ai
