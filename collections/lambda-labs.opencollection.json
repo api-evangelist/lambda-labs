@@ -1,0 +1,779 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get audit events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/audit-events",
+            "params": [
+              {
+                "name": "start",
+                "value": "2025-09-01T10:30:45.123456Z",
+                "type": "query",
+                "description": "An ISO 8601 timestamp defining the start of the time range to query, inclusive. If omitted, the response starts at the earliest available event."
+              },
+              {
+                "name": "end",
+                "value": "2025-09-15T10:30:45.123456Z",
+                "type": "query",
+                "description": "An ISO 8601 timestamp defining the end of the time range to query, inclusive. If omitted, the response ends at the most recent event."
+              },
+              {
+                "name": "page_token",
+                "value": "abCdEFg0h1I2jKlm34n5O6Pq78r=",
+                "type": "query",
+                "description": "The token returned by the previous API response to retrieve the next page of results."
+              },
+              {
+                "name": "resource_type",
+                "value": "cloud.api_key",
+                "type": "query",
+                "description": "The resource type to filter by. By default, all available resource types are retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of audit events that have occurred in your account. To view the full catalog of possible audit events, visit [Access and security > Audit logs](https://docs.lambda.ai/public-cloud/access-security#audit-logs) in the Lambda Cloud documentation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fabric",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create partition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/fabric",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new partition in a region."
+        },
+        {
+          "info": {
+            "name": "Update partition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/fabric/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "43336648-096d-4cba-9aa2-f9bb7727639d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the partition"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a partition's details."
+        },
+        {
+          "info": {
+            "name": "Delete partition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/fabric/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "43336648-096d-4cba-9aa2-f9bb7727639d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the partition"
+              }
+            ]
+          },
+          "docs": "Deletes a partition. This will return a 400 error unless there are no instances currently assigned to the partition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Filesystems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List filesystems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/file-systems"
+          },
+          "docs": "Retrieves a list of your filesystems."
+        },
+        {
+          "info": {
+            "name": "Create filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/filesystems",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new filesystem."
+        },
+        {
+          "info": {
+            "name": "Delete filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/filesystems/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "398578a2336b49079e74043f0bd2cfe8",
+                "type": "path",
+                "description": "The unique identifier (ID) of the filesystem to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the filesystem with the specified ID. The filesystem must not be mounted to any running instances at the time of deletion."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Firewalls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inbound firewall rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rules"
+          },
+          "docs": "Retrieves a list of your firewall rules.\n\n**Note:** Firewall rules do not apply to the **us-south-1** region."
+        },
+        {
+          "info": {
+            "name": "Replace inbound firewall rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrites the inbound firewall rules currently active for your account's instances with the desired rules.\n\n**Note:** Firewall rules do not apply to the **us-south-1** region."
+        },
+        {
+          "info": {
+            "name": "List firewall rulesets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets"
+          },
+          "docs": "Retrieves a list of your firewall rulesets."
+        },
+        {
+          "info": {
+            "name": "Create firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new firewall ruleset with the specified name and rules."
+        },
+        {
+          "info": {
+            "name": "Retrieve global firewall ruleset details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/global"
+          },
+          "docs": "Retrieves the details of the global firewall ruleset."
+        },
+        {
+          "info": {
+            "name": "Update global firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/global",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the global firewall ruleset. This allows updating the rules only."
+        },
+        {
+          "info": {
+            "name": "Retrieve firewall ruleset details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "c4d291f47f9d436fa39f58493ce3b50d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the firewall ruleset"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific firewall ruleset."
+        },
+        {
+          "info": {
+            "name": "Update firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "c4d291f47f9d436fa39f58493ce3b50d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the firewall ruleset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a firewall ruleset. This is a partial update that allows updating either the name, rules, or both."
+        },
+        {
+          "info": {
+            "name": "Delete firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "c4d291f47f9d436fa39f58493ce3b50d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the firewall ruleset"
+              }
+            ]
+          },
+          "docs": "Deletes the firewall ruleset with the specified ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/images"
+          },
+          "docs": "Retrieves a list of available images by region."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Launch instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instance-operations/launch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launches a Lambda On-Demand Cloud instance."
+        },
+        {
+          "info": {
+            "name": "Restart instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instance-operations/restart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restarts one or more instances."
+        },
+        {
+          "info": {
+            "name": "Terminate instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instance-operations/terminate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Terminates one or more instances."
+        },
+        {
+          "info": {
+            "name": "List available instance types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/instance-types"
+          },
+          "docs": "Retrieves a list of the instance types currently offered on Lambda's public cloud, as well as details about each type. Details include resource specifications, pricing, and regional availability."
+        },
+        {
+          "info": {
+            "name": "List running instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/instances",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "ddaedf1b7a0e41ac981711504493b242",
+                "type": "query",
+                "description": "If provided, the resulting list will only include\ninstances that are part of a cluster with this unique identifier (ID)."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of your running instances."
+        },
+        {
+          "info": {
+            "name": "Retrieve instance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ddaedf1b7a0e41ac981711504493b242",
+                "type": "path",
+                "description": "The unique identifier (ID) of the instance"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific instance, including whether or not the instance is running."
+        },
+        {
+          "info": {
+            "name": "Update instance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ddaedf1b7a0e41ac981711504493b242",
+                "type": "path",
+                "description": "The unique identifier (ID) of the instance"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of the specified instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Regions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/regions"
+          },
+          "docs": "Retrieves a list of available regions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SSH keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List your SSH keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/ssh-keys"
+          },
+          "docs": "Retrieves a list of your SSH keys."
+        },
+        {
+          "info": {
+            "name": "Add an SSH key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/ssh-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an SSH key to your Lambda Cloud account. You can upload an existing public\nkey, or you can generate a new key pair.\n\n-  To use an existing key pair, set the `public_key` property in the request body\n   to your public key.\n\n-  To generate a new key pair, omit the `public_key` property from the request\n   body.\n\n:::note{type=\"attention\" title=\"Important\"}\nLambda doesn't store your private key after it's been generated.\nIf you generate a new key pair, make sure to save the resulting private key"
+        },
+        {
+          "info": {
+            "name": "Delete an SSH key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/ssh-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ddf9a910ceb744a0bb95242cbba6cb50",
+                "type": "path",
+                "description": "The unique identifier (ID) of the SSH key to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the specified SSH key."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Support Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List support tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets",
+            "params": [
+              {
+                "name": "status",
+                "value": "open,pending",
+                "type": "query",
+                "description": "The current status of a support ticket."
+              },
+              {
+                "name": "type",
+                "value": "incident,service_request,automated_event",
+                "type": "query",
+                "description": "The type of support ticket."
+              },
+              {
+                "name": "severity",
+                "value": "sev_1,sev_2",
+                "type": "query",
+                "description": "The severity level for incident tickets."
+              },
+              {
+                "name": "order_by",
+                "value": "created_at",
+                "type": "query",
+                "description": "Specifies the field used to sort the list of tickets."
+              },
+              {
+                "name": "direction",
+                "value": "desc",
+                "type": "query",
+                "description": "Specifies the order in which to sort the list of tickets."
+              },
+              {
+                "name": "page_token",
+                "value": "abCdEFg0h1I2jKlm34n5O6Pq78r=",
+                "type": "query",
+                "description": "A page token. Provide this token in your next request to retrieve the next page of results. If there are no additional pages, this field has a null value."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of support tickets for your account."
+        },
+        {
+          "info": {
+            "name": "Create a support ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/tickets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new support ticket."
+        },
+        {
+          "info": {
+            "name": "Get a support ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific support ticket by ID."
+        },
+        {
+          "info": {
+            "name": "Update a support ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a support ticket status or severity, or adds a comment to the ticket. Returns a 202. Ticket updates happen asynchronously so to see the result of an update, re-query the tickets API."
+        },
+        {
+          "info": {
+            "name": "List ticket attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "status",
+                "value": "uploaded",
+                "type": "query",
+                "description": "The current status of an attachment upload."
+              }
+            ]
+          },
+          "docs": "Retrieves all attachments for a ticket."
+        },
+        {
+          "info": {
+            "name": "Initiate attachment upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start the upload process for a ticket attachment. Returns a presigned URL for direct upload to storage."
+        },
+        {
+          "info": {
+            "name": "Delete attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments/:attachment_id",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "attachment_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The attachment ID."
+              }
+            ]
+          },
+          "docs": "Delete an attachment."
+        },
+        {
+          "info": {
+            "name": "Complete attachment upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments/:attachment_id/complete",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "attachment_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The attachment ID."
+              }
+            ]
+          },
+          "docs": "Mark attachment upload as complete after client finishes uploading to storage."
+        },
+        {
+          "info": {
+            "name": "Get attachment download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments/:attachment_id/download",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "attachment_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The attachment ID."
+              }
+            ]
+          },
+          "docs": "Generate a temporary download URL for an attachment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
