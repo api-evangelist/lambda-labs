@@ -4,7 +4,7 @@ description: Lambda (formerly Lambda Labs) is a GPU cloud provider offering on-d
   1-Click Clusters of 16-2,000+ interconnected H100 and B200 GPUs, long-term reserved Hyperplane capacity,
   filesystems, firewalls, and SSH key management. Lambda Cloud is accessed via a REST control-plane API,
   the web console, and SDKs/CLI tooling.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/lambda-labs/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-29'
