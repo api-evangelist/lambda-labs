@@ -104,7 +104,7 @@ common:
   url: https://docs.lambda.ai
 - type: Portal
   url: https://cloud.lambda.ai
-- type: SignUp
+- type: Signup
   url: https://cloud.lambda.ai/sign-up
 - type: Login
   url: https://cloud.lambda.ai/login
@@ -124,7 +124,7 @@ common:
   url: https://www.linkedin.com/company/lambda-labs
 - name: Lambda Stack
   url: https://lambda.ai/lambda-stack-deep-learning-software
-  type: SDK
+  type: SDKs
 - type: Features
   data:
   - name: On-Demand GPU Instances
