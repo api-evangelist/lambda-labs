@@ -96,6 +96,14 @@ apis:
   - type: AsyncAPI
     url: asyncapi/lambda-labs-asyncapi.yml
 common:
+- type: TrustCenter
+  url: security/lambda-labs-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/lambda-labs-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/lambda-labs-domain-security.yml
+- type: Authentication
+  url: authentication/lambda-labs-authentication.yml
 - type: Website
   url: https://lambda.ai
 - type: Developer
