@@ -96,6 +96,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/lambda-labs-asyncapi.yml
 common:
+- type: AgenticAccess
+  url: agentic-access/lambda-labs-agentic-access.yml
 - type: TrustCenter
   url: security/lambda-labs-trust-center.yml
 - type: VulnerabilityDisclosure
