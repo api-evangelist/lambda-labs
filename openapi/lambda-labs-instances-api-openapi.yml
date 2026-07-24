@@ -1,0 +1,1452 @@
+openapi: 3.1.0
+info:
+  title: Lambda Cloud Audit Events Instances API
+  version: 1.10.0
+  description: "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.\n\nRequests to the API are generally limited to one request per second. Requests to\nthe `/instance-operations/launch` endpoint are limited to one request per 12\nseconds, or five requests per minute.\n\n## Response types and formats {#formats}\n\nThe format of each response object depends on whether the request succeeded or failed.\n\n### Success responses {#success-responses}\n\nWhen a request succeeds, the API returns a response object in the following format. `<PAYLOAD>`\nrepresents the endpoint-specific data object returned as part of the response object.\n\n```json\n{\n    \"data\": <PAYLOAD>\n}\n```\n\n### Error responses {#error-responses}\n\nWhen a request fails, the API returns an error response object in the following format:\n\n```json\n{\n    \"error\": {\n        \"code\": string,\n        \"message\": string,\n        \"suggestion\": string?\n    }\n}\n```\n\n- `code`: A machine- and human-readable error code specific to a particular failure mode.\n- `message`: An explanation of the error.\n- `suggestion`: When present, a suggestion for how to address the error.\n\n:::note{type=\"info\" title=\"Note\"}\nWhen handling errors, avoid relying on the values of `message` or `suggestion`, as\nthese values are subject to change. Instead, use the value of `code`.\n:::\n\n#### Provider errors {#provider-errors}\n\nIn some cases, you might receive errors that come from upstream services/providers rather than directly\nfrom Lambda services. You can identify these errors by their error code prefix, `provider/`.\n\nCommon provider errors include:\n\n- Network outages or connectivity issues\n- Service unavailability\n- Quota limitations or resource exhaustion\n\nAn example of a typical service unavailability error:\n\n```json\n{\n  \"error\": {\n    \"code\": \"provider/internal-unavailable\",\n    \"message\": \"Provider unavailable\",\n    \"suggestion\": \"Try again shortly\"\n  }\n}\n```\n## Outgoing webhooks {#outgoing-webhooks}\n\nLambda can send webhook notifications to your URL when support ticket events occur,\nenabling near real-time integration with your systems.\n\n### Event types {#event-types}\n\n- `ticket.created` - A support ticket was created.\n- `ticket.status_changed` - A support ticket's status was updated, and the ticket remains open.\n- `ticket.resolved` - A support ticket's status was set to `solved`, or the ticket was closed.\n\n### Payload structure {#payload-structure}\n\nAll webhook payloads follow this structure:\n\n```json\n{\n  \"id\": \"a3b7c9d1e5f642a8b0c2d4e6f8a0b2c4\",\n  \"object\": \"event\",\n  \"type\": \"ticket.created\",\n  \"created\": 1700000000,\n  \"api_version\": \"2025-11-18\",\n  \"data\": {\n    \"object\": \"ticket\",\n    \"id\": \"f1e2d3c4b5a647869708192a3b4c5d6e\",\n    \"subject\": \"Issue with instance 0920582c7ff041399e34823a0be62549\",\n    \"description\": \"Detailed description of the issue...\",\n    \"request_type\": \"incident\",\n    \"severity\": \"sev_2\",\n    \"status\": \"new\",\n    \"created_at\": \"2024-11-15T10:00:00+00:00\",\n    \"updated_at\": \"2024-11-15T10:00:00+00:00\",\n    \"instance_ip\": \"192.168.1.100\",\n    \"instance_id\": \"0920582c7ff041399e34823a0be62549\",\n    \"cluster_id\": null,\n    \"source\": \"api\"\n  }\n}\n```\n\n### Webhook authentication {#webhook-authentication}\n\nWebhook requests include a Bearer token in the `Authorization` header for authentication:\n\n```http\nAuthorization: Bearer <token>\n```\n## Authentication {#authentication}\n\nThe Lambda Cloud API uses API keys to authenticate incoming requests. You\ncan generate a new API key pair or view your existing API keys by visiting\nthe [API keys page](https://cloud.lambda.ai/api-keys) in the Lambda Cloud\ndashboard.\n\nIn general, Lambda recommends passing an HTTP Bearer header that contains\nyour API key:\n\n```http\nAuthorization: Bearer <YOUR-API-KEY>\n```\n\n### Authenticating with `curl` {#authenticating-with-curl}\n\nThe API also supports passing an HTTP Basic header. This option chiefly exists\nto support `curl`'s `-u` flag, which allows you to pass your credentials\nwithout having to write out the full `Authorization: Basic` header string.\nFor example:\n\n```bash\ncurl --request GET --url 'https://cloud.lambda.ai/api/v1/instances' \\\n  --header 'accept: application/json' \\\n  --user '<YOUR-API-KEY>:'\n```\n\nIf your use case requires it, you can also pass the HTTP Basic header directly.\nThe value you pass must be a Base64-encoded string containing your API key\nand a trailing colon:\n\n```http\nAuthorization: Basic <BASE64-ENCODED-API-KEY>:\n```\n\n:::note{type=\"attention\" title=\"Important\"}\nIf you make a request without including a supported `Authorization` header,\nthe request will fail.\n:::"
+servers:
+- url: https://cloud.lambda.ai/
+  description: Production server
+- url: https://cloud.lambdalabs.com/
+  description: Secondary production server (deprecated)
+security:
+- bearerAuth: []
+- basicAuth: []
+tags:
+- name: Instances
+paths:
+  /api/v1/instance-operations/launch:
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/InstanceLaunchResponse'
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    anyOf:
+                    - $ref: '#/components/schemas/ApiErrorFileSystemInWrongRegion'
+                    - $ref: '#/components/schemas/ApiErrorInsufficientCapacity'
+                    - $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                    - $ref: '#/components/schemas/ApiErrorLaunchResourceNotFound'
+                    - $ref: '#/components/schemas/ApiErrorQuotaExceeded'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    anyOf:
+                    - $ref: '#/components/schemas/ApiErrorAccountInactive'
+                    - $ref: '#/components/schemas/ApiErrorInvalidBillingAddress'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorLaunchResourceNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: Launch instances
+      description: Launches a Lambda On-Demand Cloud instance.
+      operationId: launchInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                region_name:
+                  type: string
+                  description: The region into which you want to launch the instance.
+                instance_type_name:
+                  type: string
+                  description: 'The type of instance you want to launch. To retrieve a list of available instance types, see
+
+                    [List available instance types](#listInstanceTypes).'
+                  examples:
+                  - gpu_8x_a100
+                ssh_key_names:
+                  type: array
+                  items:
+                    type: string
+                  description: 'The names of the SSH keys you want to use to provide access to the instance.
+
+                    Currently, exactly one SSH key must be specified.'
+                  examples:
+                  - - my-public-key
+                file_system_names:
+                  type: array
+                  items:
+                    type: string
+                  description: 'The names of the filesystems you want to mount to the instance. When specified
+
+                    alongside `file_system_mounts`, any filesystems referred to in both lists will use the
+
+                    mount path specified in `file_system_mounts`, rather than the default.'
+                  examples:
+                  - - my-filesystem
+                  - []
+                file_system_mounts:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequestedFilesystemMountEntry'
+                  description: 'The filesystem mounts to mount to the instance. When specified alongside
+
+                    `file_system_names`, any filesystems referred to in both lists will use the
+
+                    mount path specified in `file_system_mounts`, rather than the default.'
+                hostname:
+                  type: string
+                  minLength: 1
+                  maxLength: 63
+                  pattern: ^[a-z0-9][0-9a-z-]{0,62}$
+                  description: 'The hostname to assign to the instance. If not specified, a default, IP-address-based
+
+                    hostname is assigned. This hostname is driven into /etc/hostname on the instance.'
+                  examples:
+                  - headnode1
+                name:
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                  description: The name you want to assign to your instance. Must be 64 characters or fewer.
+                  examples:
+                  - My Instance
+                image:
+                  anyOf:
+                  - $ref: '#/components/schemas/ImageSpecificationID'
+                  - $ref: '#/components/schemas/ImageSpecificationFamily'
+                  description: The machine image you want to use. Defaults to the latest Lambda Stack image.
+                user_data:
+                  type: string
+                  writeOnly: true
+                  format: password
+                  description: 'An instance configuration string specified in a valid
+
+                    [cloud-init user-data](https://cloudinit.readthedocs.io/en/latest/explanation/format.html)
+
+                    format. You can use this field to configure your instance on launch. The
+
+                    user data string must be plain text and cannot exceed 1MB in size.'
+                tags:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequestedTagEntry'
+                  description: Key/value pairs representing the instance's tags.
+                firewall_rulesets:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FirewallRulesetEntry'
+                  description: 'The firewall rulesets to associate with the instance.
+
+                    The firewall rulesets must exist in the same region as the instance.'
+              required:
+              - region_name
+              - instance_type_name
+              - ssh_key_names
+              title: InstanceLaunchRequest
+              type: object
+        required: true
+  /api/v1/instance-operations/restart:
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/InstanceRestartResponse'
+                    examples:
+                    - restarted_instances:
+                      - id: 0920582c7ff041399e34823a0be62549
+                        name: My Instance
+                        ip: 198.51.100.2
+                        private_ip: 10.0.2.100
+                        status: active
+                        ssh_key_names:
+                        - My SSH key
+                        file_system_names:
+                        - my-filesystem
+                        file_system_mounts:
+                        - mount_point: /lambda/nfs/my-filesystem
+                          file_system_id: a098b0c7ff041399e34823a0be62549
+                        region:
+                          name: us-west-1
+                          description: California, USA
+                        instance_type:
+                          name: gpu_8x_example
+                          description: 8x Example GPU (40 GB SXM4)
+                          gpu_description: Example GPU (40 GB SXM4)
+                          price_cents_per_hour: 1592
+                          specs:
+                            vcpus: 124
+                            memory_gib: 1800
+                            storage_gib: 6144
+                            gpus: 8
+                        hostname: 198.51.100.2
+                        jupyter_token: 03b7d30d9d3e4d8fa41657bc0d478c1b
+                        jupyter_url: https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b
+                        is_reserved: false
+                        actions:
+                          migrate:
+                            available: true
+                          rebuild:
+                            available: true
+                          restart:
+                            available: true
+                          cold_reboot:
+                            available: true
+                          terminate:
+                            available: true
+                        tags:
+                        - key: key1
+                          value: value1
+                        - key: key2
+                          value: value2
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorAccountInactive'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInstanceNotFound'
+                required:
+                - error
+                type: object
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorConflict'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: Restart instances
+      description: Restarts one or more instances.
+      operationId: restartInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                instance_ids:
+                  type: array
+                  items:
+                    type: string
+                    example: ddaedf1b7a0e41ac981711504493b242
+                  description: The unique identifiers (IDs) of the instances to restart.
+                  examples:
+                  - - 0920582c7ff041399e34823a0be62549
+              required:
+              - instance_ids
+              title: InstanceRestartRequest
+              type: object
+        required: true
+  /api/v1/instance-operations/terminate:
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/InstanceTerminateResponse'
+                    examples:
+                    - terminated_instances:
+                      - id: 0920582c7ff041399e34823a0be62549
+                        name: My Instance
+                        ip: 198.51.100.2
+                        private_ip: 10.0.2.100
+                        status: terminating
+                        ssh_key_names:
+                        - My SSH key
+                        file_system_names:
+                        - my-filesystem
+                        file_system_mounts:
+                        - mount_point: /lambda/nfs/my-filesystem
+                          file_system_id: a098b0c7ff041399e34823a0be62549
+                        region:
+                          name: us-west-1
+                          description: California, USA
+                        instance_type:
+                          name: gpu_8x_example
+                          description: 8x Example GPU (40 GB SXM4)
+                          gpu_description: Example GPU (40 GB SXM4)
+                          price_cents_per_hour: 1592
+                          specs:
+                            vcpus: 124
+                            memory_gib: 1800
+                            storage_gib: 6144
+                            gpus: 8
+                        hostname: 198.51.100.2
+                        jupyter_token: 03b7d30d9d3e4d8fa41657bc0d478c1b
+                        jupyter_url: https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b
+                        is_reserved: false
+                        actions:
+                          migrate:
+                            available: true
+                          rebuild:
+                            available: true
+                          restart:
+                            available: true
+                          cold_reboot:
+                            available: true
+                          terminate:
+                            available: true
+                        tags:
+                        - key: key1
+                          value: value1
+                        - key: key2
+                          value: value2
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorAccountInactive'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInstanceNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: Terminate instances
+      description: Terminates one or more instances.
+      operationId: terminateInstance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                instance_ids:
+                  type: array
+                  items:
+                    type: string
+                    example: ddaedf1b7a0e41ac981711504493b242
+                  description: The unique identifiers (IDs) of the instances to terminate.
+                  examples:
+                  - - 0920582c7ff041399e34823a0be62549
+              required:
+              - instance_ids
+              title: InstanceTerminateRequest
+              type: object
+        required: true
+  /api/v1/instance-types:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/InstanceTypes'
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorAccountInactive'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: List available instance types
+      description: Retrieves a list of the instance types currently offered on Lambda's public cloud, as well as details about each type. Details include resource specifications, pricing, and regional availability.
+      operationId: listInstanceTypes
+  /api/v1/instances:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Instance'
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    anyOf:
+                    - $ref: '#/components/schemas/ApiErrorAccountInactive'
+                    - $ref: '#/components/schemas/ApiErrorForbidden'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: List running instances
+      description: Retrieves a list of your running instances.
+      operationId: listInstances
+      parameters:
+      - name: cluster_id
+        in: query
+        description: 'If provided, the resulting list will only include
+
+          instances that are part of a cluster with this unique identifier (ID).'
+        required: false
+        schema:
+          description: 'If provided, the resulting list will only include
+
+            instances that are part of a cluster with this unique identifier (ID).'
+          example: ddaedf1b7a0e41ac981711504493b242
+          type: string
+        example: ddaedf1b7a0e41ac981711504493b242
+  /api/v1/instances/{id}:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Instance'
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    anyOf:
+                    - $ref: '#/components/schemas/ApiErrorAccountInactive'
+                    - $ref: '#/components/schemas/ApiErrorForbidden'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInstanceNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: Retrieve instance details
+      description: Retrieves the details of a specific instance, including whether or not the instance is running.
+      operationId: getInstance
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier (ID) of the instance
+        required: true
+        schema:
+          description: The unique identifier (ID) of the instance
+          example: ddaedf1b7a0e41ac981711504493b242
+          type: string
+        example: ddaedf1b7a0e41ac981711504493b242
+    post:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Instance'
+                required:
+                - data
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorAccountInactive'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInstanceNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Instances
+      summary: Update instance details
+      description: Updates the details of the specified instance.
+      operationId: postInstance
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier (ID) of the instance
+        required: true
+        schema:
+          description: The unique identifier (ID) of the instance
+          example: ddaedf1b7a0e41ac981711504493b242
+          type: string
+        example: ddaedf1b7a0e41ac981711504493b242
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  minLength: 0
+                  maxLength: 64
+                  description: The new, user-provided name for the instance.
+                  examples:
+                  - My Instance
+              title: InstanceModificationRequest
+              type: object
+        required: true
+components:
+  schemas:
+    ApiErrorInsufficientCapacity:
+      type: object
+      properties:
+        code:
+          const: instance-operations/launch/insufficient-capacity
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Not enough capacity to fulfill launch request.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInsufficientCapacity
+    FirewallRulesetEntry:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the firewall ruleset.
+          examples:
+          - c4d291f47f9d436fa39f58493ce3b50d
+      required:
+      - id
+      title: FirewallRulesetEntry
+      description: Reference to a firewall ruleset.
+    ApiErrorConflict:
+      type: object
+      properties:
+        code:
+          const: global/conflict
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The request conflicts with the current state of the resource.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorConflict
+    RequestedFilesystemMountEntry:
+      type: object
+      properties:
+        mount_point:
+          type: string
+          maxLength: 256
+          pattern: ^(/home|/lambda/nfs|/data)[//a-zA-Z0-9-]*$
+          description: The absolute path indicating where on the instance the filesystem will be mounted.
+          examples:
+          - /data/custom-mount-point
+        file_system_id:
+          type: string
+          description: The id of the filesystem to mount to the instance.
+          examples:
+          - 398578a2336b49079e74043f0bd2cfe8
+      required:
+      - mount_point
+      - file_system_id
+      title: RequestedFilesystemMountEntry
+      description: The mount point for a filesystem mounted to an instance.
+    ImageSpecificationID:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ddaedf1b7a0e41ac981711504493b242
+      required:
+      - id
+      title: ImageSpecificationID
+      description: Specifies the image to use by its unique identifier.
+    ApiErrorQuotaExceeded:
+      type: object
+      properties:
+        code:
+          const: global/quota-exceeded
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Quota exceeded.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Contact Support to increase your quota.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorQuotaExceeded
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    InstanceStatus:
+      title: InstanceStatus
+      description: The current status of the instance.
+      enum:
+      - booting
+      - active
+      - unhealthy
+      - terminated
+      - terminating
+      - preempted
+      type: string
+    InstanceTypeSpecs:
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: The number of virtual CPUs.
+          examples:
+          - 208
+        memory_gib:
+          type: integer
+          description: The amount of RAM in gibibytes (GiB).
+          examples:
+          - 1800
+        storage_gib:
+          type: integer
+          description: The amount of storage in gibibytes (GiB).
+          examples:
+          - 24780
+        gpus:
+          type: integer
+          description: The number of GPUs.
+          examples:
+          - 8
+      required:
+      - vcpus
+      - memory_gib
+      - storage_gib
+      - gpus
+      title: InstanceTypeSpecs
+    ApiErrorInstanceNotFound:
+      type: object
+      properties:
+        code:
+          const: global/object-does-not-exist
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Specified instance does not exist.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInstanceNotFound
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
+    Instance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the instance.
+          examples:
+          - 0920582c7ff041399e34823a0be62549
+        name:
+          type: string
+          minLength: 0
+          maxLength: 64
+          description: If set, the user-provided name of the instance.
+          examples:
+          - My Instance
+        ip:
+          type: string
+          description: The public IPv4 address of the instance.
+          examples:
+          - 198.51.100.2
+        private_ip:
+          type: string
+          description: The private IPv4 address of the instance.
+          examples:
+          - 10.0.2.100
+        status:
+          $ref: '#/components/schemas/InstanceStatus'
+        ssh_key_names:
+          type: array
+          items:
+            type: string
+          description: The names of the SSH keys that are allowed to access the instance.
+          examples:
+          - - My SSH key
+          - []
+        file_system_names:
+          type: array
+          items:
+            type: string
+          description: The names of the filesystems mounted to the instance. If no filesystems are mounted, this array is empty.
+          examples:
+          - - my-filesystem
+          - []
+        file_system_mounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilesystemMountEntry'
+          description: 'The filesystems, along with the mount paths, mounted to
+
+            the instances. If no filesystems are mounted, this parameter
+
+            will be missing from the response.'
+        region:
+          $ref: '#/components/schemas/Region'
+          description: The region in which the instance is deployed.
+        instance_type:
+          $ref: '#/components/schemas/InstanceType'
+          description: Detailed information about the instance's instance type.
+        hostname:
+          type: string
+          description: The hostname assigned to this instance, which resolves to the instance's IP.
+          examples:
+          - headnode1
+        jupyter_token:
+          type: string
+          description: The secret token used to log into the JupyterLab server hosted on the instance.
+          examples:
+          - 03b7d30d9d3e4d8fa41657bc0d478c1b
+        jupyter_url:
+          type: string
+          description: The URL that opens the JupyterLab environment on the instance.
+          examples:
+          - https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b
+        actions:
+          $ref: '#/components/schemas/InstanceActionAvailability'
+          description: A set of status objects representing the current availability of common instance operations.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagEntry'
+          description: Key/value pairs representing the instance's tags.
+        firewall_rulesets:
+          type: array
+          items:
+            $ref: '#/components/schemas/FirewallRulesetEntry'
+          description: The firewall rulesets associated with this instance.
+      required:
+      - id
+      - status
+      - ssh_key_names
+      - file_system_names
+      - region
+      - instance_type
+      - actions
+      title: Instance
+      description: Detailed information about the instance.
+    ApiErrorLaunchResourceNotFound:
+      type: object
+      properties:
+        code:
+          const: global/object-does-not-exist
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: The resource the API was unable to find.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorLaunchResourceNotFound
+    ApiErrorForbidden:
+      type: object
+      properties:
+        code:
+          const: global/forbidden
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorForbidden
+    ApiErrorInvalidBillingAddress:
+      type: object
+      properties:
+        code:
+          const: global/invalid-address
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your billing address is invalid.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure your billing address is valid. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorInvalidBillingAddress
+    RequestedTagEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          maxLength: 55
+          pattern: ^[a-z][a-z0-9-:]+$
+          description: The key of the tag.
+          examples:
+          - key1
+        value:
+          type: string
+          maxLength: 128
+          description: The value of the tag.
+          examples:
+          - value1
+      required:
+      - key
+      - value
+      title: RequestedTagEntry
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
+    InstanceRestartResponse:
+      type: object
+      properties:
+        restarted_instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instance'
+          description: The list of instances that were successfully restarted.
+      required:
+      - restarted_instances
+      title: InstanceRestartResponse
+    TagEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the tag.
+          examples:
+          - key1
+        value:
+          type: string
+          description: The value of the tag.
+          examples:
+          - value1
+      required:
+      - key
+      - value
+      title: TagEntry
+    ApiErrorFileSystemInWrongRegion:
+      type: object
+      properties:
+        code:
+          const: instance-operations/launch/file-system-in-wrong-region
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorFileSystemInWrongRegion
+    InstanceTerminateResponse:
+      type: object
+      properties:
+        terminated_instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instance'
+          description: The list of instances that were successfully terminated.
+      required:
+      - terminated_instances
+      title: InstanceTerminateResponse
+    InstanceActionUnavailableCode:
+      title: InstanceActionUnavailableCode
+      enum:
+      - vm-has-not-launched
+      - vm-is-too-old
+      - vm-is-terminating
+      - vm-action-in-progress
+      type: string
+    InstanceTypes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/InstanceTypesItem'
+      title: InstanceTypes
+      example:
+        gpu_8x_example:
+          instance_type:
+            name: gpu_8x_example
+            description: 8x Example GPU (40 GB SXM4)
+            gpu_description: Example GPU (40 GB SXM4)
+            price_cents_per_hour: 1592
+            specs:
+              vcpus: 124
+              memory_gib: 1800
+              storage_gib: 6144
+              gpus: 8
+          regions_with_capacity_available:
+          - name: us-west-1
+            description: California, USA
+    Region:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The region code.
+        description:
+          type: string
+          description: The region description.
+      required:
+      - name
+      - description
+      title: Region
+    InstanceLaunchResponse:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers (IDs) of the launched instances.
+          examples:
+          - - 0920582c7ff041399e34823a0be62549
+      required:
+      - instance_ids
+      title: InstanceLaunchResponse
+    ImageSpecificationFamily:
+      type: object
+      properties:
+        family:
+          type: string
+          description: The family name of the image.
+      required:
+      - family
+      title: ImageSpecificationFamily
+      description: Specifies the image to use by its family name.
+    InstanceActionAvailability:
+      type: object
+      properties:
+        migrate:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be migrated.
+
+            If not, describes why the operation is blocked.'
+        rebuild:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be rebuilt.
+
+            If not, describes why the operation is blocked.'
+        restart:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be restarted.
+
+            If not, describes why the operation is blocked.'
+        cold_reboot:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently eligible for a cold reboot.
+
+            If not, describes why the operation is blocked.'
+        terminate:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be terminated.
+
+            If not, describes why the operation is blocked.'
+      required:
+      - migrate
+      - rebuild
+      - restart
+      - cold_reboot
+      - terminate
+      title: InstanceActionAvailability
+    FilesystemMountEntry:
+      type: object
+      properties:
+        mount_point:
+          type: string
+          description: The absolute path indicating where on the instance the filesystem will be mounted.
+          examples:
+          - /data/custom-mount-point
+        file_system_id:
+          type: string
+          description: The id of the filesystem to mount to the instance.
+          examples:
+          - 398578a2336b49079e74043f0bd2cfe8
+      required:
+      - mount_point
+      - file_system_id
+      title: FilesystemMountEntry
+      description: The mount point for a filesystem mounted to an instance.
+    InstanceActionAvailabilityDetails:
+      type: object
+      properties:
+        available:
+          type: boolean
+          description: If set, indicates that the relevant operation can be performed on the instance in its current state.
+        reason_code:
+          anyOf:
+          - $ref: '#/components/schemas/InstanceActionUnavailableCode'
+          - type: string
+          description: A code representing the instance state that is blocking the operation. Only provided if the operation is blocked.
+        reason_description:
+          type: string
+          description: A longer description of why this operation is currently blocked. Only provided if the operation is blocked.
+      required:
+      - available
+      title: InstanceActionAvailabilityDetails
+    InstanceTypesItem:
+      type: object
+      properties:
+        instance_type:
+          $ref: '#/components/schemas/InstanceType'
+          description: The description, technical specifications, and metadata for this instance type.
+        regions_with_capacity_available:
+          type: array
+          items:
+            $ref: '#/components/schemas/Region'
+          description: A list of the regions in which this instance type is available.
+      required:
+      - instance_type
+      - regions_with_capacity_available
+      title: InstanceTypesItem
+      description: Detailed information and regional availability for the instance type.
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    InstanceType:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the instance type.
+          examples:
+          - gpu_8x_h100_sxm5gdr
+        description:
+          type: string
+          description: A description of the instance type.
+          examples:
+          - 8x H100 (80 GB SXM5)
+        gpu_description:
+          type: string
+          description: The type of GPU used by this instance type.
+          examples:
+          - H100 (80 GB SXM5)
+        price_cents_per_hour:
+          type: integer
+          description: The price of the instance type in US cents per hour.
+          examples:
+          - 3592
+        specs:
+          $ref: '#/components/schemas/InstanceTypeSpecs'
+          description: Detailed technical specifications for the instance type.
+      required:
+      - name
+      - description
+      - gpu_description
+      - price_cents_per_hour
+      - specs
+      title: InstanceType
+  securitySchemes:
+    basicAuth:
+      type: http
+      description: 'Basic HTTP authentication. Allowed headers:
+
+        * `Authorization: Basic <base64 encoding of api_key>:`
+
+        * `Authorization: Basic <api_key>`'
+      scheme: basic
+    bearerAuth:
+      type: http
+      description: 'Bearer HTTP authentication. Allowed headers:
+
+        * `Authorization: Bearer <api_key>`'
+      scheme: bearer
+x-lambda-api-keys-config-url: https://cloud.lambda.ai/api-keys

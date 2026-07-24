@@ -1,0 +1,319 @@
+openapi: 3.1.0
+info:
+  title: Lambda Cloud Audit Events API
+  version: 1.10.0
+  description: "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.\n\nRequests to the API are generally limited to one request per second. Requests to\nthe `/instance-operations/launch` endpoint are limited to one request per 12\nseconds, or five requests per minute.\n\n## Response types and formats {#formats}\n\nThe format of each response object depends on whether the request succeeded or failed.\n\n### Success responses {#success-responses}\n\nWhen a request succeeds, the API returns a response object in the following format. `<PAYLOAD>`\nrepresents the endpoint-specific data object returned as part of the response object.\n\n```json\n{\n    \"data\": <PAYLOAD>\n}\n```\n\n### Error responses {#error-responses}\n\nWhen a request fails, the API returns an error response object in the following format:\n\n```json\n{\n    \"error\": {\n        \"code\": string,\n        \"message\": string,\n        \"suggestion\": string?\n    }\n}\n```\n\n- `code`: A machine- and human-readable error code specific to a particular failure mode.\n- `message`: An explanation of the error.\n- `suggestion`: When present, a suggestion for how to address the error.\n\n:::note{type=\"info\" title=\"Note\"}\nWhen handling errors, avoid relying on the values of `message` or `suggestion`, as\nthese values are subject to change. Instead, use the value of `code`.\n:::\n\n#### Provider errors {#provider-errors}\n\nIn some cases, you might receive errors that come from upstream services/providers rather than directly\nfrom Lambda services. You can identify these errors by their error code prefix, `provider/`.\n\nCommon provider errors include:\n\n- Network outages or connectivity issues\n- Service unavailability\n- Quota limitations or resource exhaustion\n\nAn example of a typical service unavailability error:\n\n```json\n{\n  \"error\": {\n    \"code\": \"provider/internal-unavailable\",\n    \"message\": \"Provider unavailable\",\n    \"suggestion\": \"Try again shortly\"\n  }\n}\n```\n## Outgoing webhooks {#outgoing-webhooks}\n\nLambda can send webhook notifications to your URL when support ticket events occur,\nenabling near real-time integration with your systems.\n\n### Event types {#event-types}\n\n- `ticket.created` - A support ticket was created.\n- `ticket.status_changed` - A support ticket's status was updated, and the ticket remains open.\n- `ticket.resolved` - A support ticket's status was set to `solved`, or the ticket was closed.\n\n### Payload structure {#payload-structure}\n\nAll webhook payloads follow this structure:\n\n```json\n{\n  \"id\": \"a3b7c9d1e5f642a8b0c2d4e6f8a0b2c4\",\n  \"object\": \"event\",\n  \"type\": \"ticket.created\",\n  \"created\": 1700000000,\n  \"api_version\": \"2025-11-18\",\n  \"data\": {\n    \"object\": \"ticket\",\n    \"id\": \"f1e2d3c4b5a647869708192a3b4c5d6e\",\n    \"subject\": \"Issue with instance 0920582c7ff041399e34823a0be62549\",\n    \"description\": \"Detailed description of the issue...\",\n    \"request_type\": \"incident\",\n    \"severity\": \"sev_2\",\n    \"status\": \"new\",\n    \"created_at\": \"2024-11-15T10:00:00+00:00\",\n    \"updated_at\": \"2024-11-15T10:00:00+00:00\",\n    \"instance_ip\": \"192.168.1.100\",\n    \"instance_id\": \"0920582c7ff041399e34823a0be62549\",\n    \"cluster_id\": null,\n    \"source\": \"api\"\n  }\n}\n```\n\n### Webhook authentication {#webhook-authentication}\n\nWebhook requests include a Bearer token in the `Authorization` header for authentication:\n\n```http\nAuthorization: Bearer <token>\n```\n## Authentication {#authentication}\n\nThe Lambda Cloud API uses API keys to authenticate incoming requests. You\ncan generate a new API key pair or view your existing API keys by visiting\nthe [API keys page](https://cloud.lambda.ai/api-keys) in the Lambda Cloud\ndashboard.\n\nIn general, Lambda recommends passing an HTTP Bearer header that contains\nyour API key:\n\n```http\nAuthorization: Bearer <YOUR-API-KEY>\n```\n\n### Authenticating with `curl` {#authenticating-with-curl}\n\nThe API also supports passing an HTTP Basic header. This option chiefly exists\nto support `curl`'s `-u` flag, which allows you to pass your credentials\nwithout having to write out the full `Authorization: Basic` header string.\nFor example:\n\n```bash\ncurl --request GET --url 'https://cloud.lambda.ai/api/v1/instances' \\\n  --header 'accept: application/json' \\\n  --user '<YOUR-API-KEY>:'\n```\n\nIf your use case requires it, you can also pass the HTTP Basic header directly.\nThe value you pass must be a Base64-encoded string containing your API key\nand a trailing colon:\n\n```http\nAuthorization: Basic <BASE64-ENCODED-API-KEY>:\n```\n\n:::note{type=\"attention\" title=\"Important\"}\nIf you make a request without including a supported `Authorization` header,\nthe request will fail.\n:::"
+servers:
+- url: https://cloud.lambda.ai/
+  description: Production server
+- url: https://cloud.lambdalabs.com/
+  description: Secondary production server (deprecated)
+security:
+- bearerAuth: []
+- basicAuth: []
+tags:
+- name: Audit Events
+paths:
+  /api/v1/audit-events:
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AuditEvent'
+                  page_token:
+                    anyOf:
+                    - type: string
+                    - type: 'null'
+                    description: Provide this token in your next request to retrieve the next page of results. If there are no additional pages, this field has a null value.
+                    examples:
+                    - eyJuZXh0IjoxNzA0MTk2ODAwfQ==
+                required:
+                - data
+                - page_token
+                type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorInvalidParameters'
+                required:
+                - error
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorUnauthorized'
+                required:
+                - error
+                type: object
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorAccountInactive'
+                required:
+                - error
+                type: object
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  error:
+                    $ref: '#/components/schemas/ApiErrorNotFound'
+                required:
+                - error
+                type: object
+      tags:
+      - Audit Events
+      summary: Get audit events
+      description: Retrieves a list of audit events that have occurred in your account. To view the full catalog of possible audit events, visit [Access and security > Audit logs](https://docs.lambda.ai/public-cloud/access-security#audit-logs) in the Lambda Cloud documentation.
+      operationId: getAuditEvents
+      parameters:
+      - name: start
+        in: query
+        description: An ISO 8601 timestamp defining the start of the time range to query, inclusive. If omitted, the response starts at the earliest available event.
+        required: false
+        schema:
+          description: An ISO 8601 timestamp defining the start of the time range to query, inclusive. If omitted, the response starts at the earliest available event.
+          example: '2025-09-01T10:30:45.123456Z'
+          format: date-time
+          type: string
+        example: '2025-09-01T10:30:45.123456Z'
+      - name: end
+        in: query
+        description: An ISO 8601 timestamp defining the end of the time range to query, inclusive. If omitted, the response ends at the most recent event.
+        required: false
+        schema:
+          description: An ISO 8601 timestamp defining the end of the time range to query, inclusive. If omitted, the response ends at the most recent event.
+          example: '2025-09-15T10:30:45.123456Z'
+          format: date-time
+          type: string
+        example: '2025-09-15T10:30:45.123456Z'
+      - name: page_token
+        in: query
+        description: The token returned by the previous API response to retrieve the next page of results.
+        required: false
+        schema:
+          description: The token returned by the previous API response to retrieve the next page of results.
+          example: abCdEFg0h1I2jKlm34n5O6Pq78r=
+          type: string
+        example: abCdEFg0h1I2jKlm34n5O6Pq78r=
+      - name: resource_type
+        in: query
+        description: The resource type to filter by. By default, all available resource types are retrieved.
+        required: false
+        schema:
+          description: The resource type to filter by. By default, all available resource types are retrieved.
+          example: cloud.api_key
+          type: string
+        example: cloud.api_key
+components:
+  schemas:
+    AuditEvent:
+      type: object
+      properties:
+        service_name:
+          type: string
+          description: The service in which the action was performed.
+          examples:
+          - cloud
+        resource_name:
+          type: string
+          description: The type of resource that was affected.
+          examples:
+          - api_key
+        action:
+          type: string
+          description: The action that was performed.
+          examples:
+          - created
+        catalog_version:
+          type: string
+          description: The version of the event catalog schema.
+          examples:
+          - '2025-09-06'
+        event_id:
+          type: string
+          description: The unique identifier (ID) for this audit event.
+          examples:
+          - 0123456789abcdef0123456789abcdef
+        event_time:
+          type: string
+          description: The UTC timestamp for when the event occurred (ISO 8601 format).
+          examples:
+          - '2025-09-15T10:30:45.123456Z'
+        actor_lrn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The Lambda Resource Name (LRN) of the actor who performed the action.
+          examples:
+          - lrn:cloud:identity:00112233445566778899aabbccddeeff
+        resource_lrns:
+          type: array
+          items:
+            type: string
+          description: The Lambda Resource Names (LRNs) of the resources affected by this action.
+          examples:
+          - - lrn:cloud:api_key:ffeeddccbbaa99887766554433221100
+        resource_owner_lrn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The Lambda Resource Name (LRN) of the account that owns the affected resources.
+          examples:
+          - lrn:cloud:account:fedcba9876543210fedcba9876543210
+        request_api_key_lrn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: The Lambda Resource Name (LRN) of the API key used to authenticate the request, if applicable.
+          examples:
+          - lrn:cloud:api_key:0f1e2d3c4b5a69788796a5b4c3d2e1f0
+        additional_details:
+          type: object
+          additionalProperties: true
+          description: Additional event-specific details. The exact keys returned vary by event type.
+          properties: {}
+          examples:
+          - api_key_lrn: lrn:cloud:api_key:ffeeddccbbaa99887766554433221100
+          - ssh_key_lrn: lrn:cloud:ssh_key:fedc7654ba983210dcba5432987610fe
+          - instance_lrn: lrn:cloud:instance:ef016789234abcd0123489ab4567cdef
+            instance_type: gpu_1x_a10
+            region: us-west-1
+      required:
+      - service_name
+      - resource_name
+      - action
+      - catalog_version
+      - event_id
+      - event_time
+      - actor_lrn
+      - resource_lrns
+      - resource_owner_lrn
+      - request_api_key_lrn
+      - additional_details
+      title: AuditEvent
+      description: 'Audit event in the account''s audit log. To view the full catalog of
+
+        possible audit events, visit
+
+        [Access and security > Audit logs](https://docs.lambda.ai/public-cloud/access-security#audit-logs)
+
+        in the Lambda Cloud documentation.'
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+  securitySchemes:
+    basicAuth:
+      type: http
+      description: 'Basic HTTP authentication. Allowed headers:
+
+        * `Authorization: Basic <base64 encoding of api_key>:`
+
+        * `Authorization: Basic <api_key>`'
+      scheme: basic
+    bearerAuth:
+      type: http
+      description: 'Bearer HTTP authentication. Allowed headers:
+
+        * `Authorization: Bearer <api_key>`'
+      scheme: bearer
+x-lambda-api-keys-config-url: https://cloud.lambda.ai/api-keys
