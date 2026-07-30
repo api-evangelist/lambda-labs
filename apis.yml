@@ -4,7 +4,20 @@ description: Lambda (formerly Lambda Labs) is a GPU cloud provider offering on-d
   1-Click Clusters of 16-2,000+ interconnected H100 and B200 GPUs, long-term reserved Hyperplane capacity,
   filesystems, firewalls, and SSH key management. Lambda Cloud is accessed via a REST control-plane API,
   the web console, and SDKs/CLI tooling.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lambda-labs.png
 url: https://raw.githubusercontent.com/api-evangelist/lambda-labs/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-29'
@@ -23,9 +36,10 @@ tags:
 apis:
 - aid: lambda-labs:cloud-api
   name: Lambda Cloud API
-  description: The Lambda Cloud API is the REST control plane for launching, listing, starting, stopping,
-    and terminating GPU instances, managing SSH keys, firewalls, filesystems, images, and instance types.
-    It supports on-demand single instances and underpins programmatic access to Lambda's GPU fleet.
+  description: >-
+    The Lambda Cloud API is the REST control plane for launching, listing, starting, stopping, and terminating
+    GPU instances, managing SSH keys, firewalls, filesystems, images, and instance types. It supports
+    on-demand single instances and underpins programmatic access to Lambda's GPU fleet.
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
@@ -44,8 +58,9 @@ apis:
     url: https://docs.lambda.ai/public-cloud/cloud-api/
 - aid: lambda-labs:1-click-clusters
   name: Lambda 1-Click Clusters
-  description: Lambda 1-Click Clusters provision interconnected clusters of 16 to 2,000+ NVIDIA H100 SXM
-    or B200 GPUs for short-duration distributed training workloads. The product is exposed through the Lambda
+  description: >-
+    Lambda 1-Click Clusters provision interconnected clusters of 16 to 2,000+ NVIDIA H100 SXM or B200
+    GPUs for short-duration distributed training workloads. The product is exposed through the Lambda
     Cloud console and is integrated with the Cloud API surface.
   humanURL: https://docs.lambda.ai/public-cloud/1-click-clusters/
   tags:
@@ -59,8 +74,9 @@ apis:
     url: https://docs.lambda.ai/public-cloud/1-click-clusters/
 - aid: lambda-labs:filesystems
   name: Lambda Cloud Filesystems
-  description: Lambda Cloud Filesystems provide persistent, sharable storage attached to on-demand instances
-    for datasets and checkpoints. Filesystems are managed through the Cloud API and console.
+  description: >-
+    Lambda Cloud Filesystems provide persistent, sharable storage attached to on-demand instances for
+    datasets and checkpoints. Filesystems are managed through the Cloud API and console.
   humanURL: https://docs.lambda.ai/public-cloud/filesystems/
   tags:
   - Filesystems
@@ -71,12 +87,13 @@ apis:
     url: https://docs.lambda.ai/public-cloud/filesystems/
 - aid: lambda-labs:inference-api
   name: Lambda Inference API
-  description: Lambda Inference API is an OpenAI-compatible REST gateway at https://api.lambda.ai/v1 that
-    serves hosted open-source language models (Llama, DeepSeek, Hermes, Qwen, and others) behind the standard
+  description: >-
+    Lambda Inference API is an OpenAI-compatible REST gateway at https://api.lambda.ai/v1 that serves
+    hosted open-source language models (Llama, DeepSeek, Hermes, Qwen, and others) behind the standard
     OpenAI Chat Completions surface. Chat completion responses can be streamed as HTTP Server-Sent Events
-    by setting "stream":true on the POST /chat/completions request body; the SSE stream emits
-    chat.completion.chunk events terminated by a data [DONE] sentinel. As of 2026-05-29 Lambda has announced
-    the Inference API is winding down in favor of customer self-hosted deployments on Lambda GPU instances.
+    by setting "stream":true on the POST /chat/completions request body; the SSE stream emits chat.completion.chunk
+    events terminated by a data [DONE] sentinel. As of 2026-05-29 Lambda has announced the Inference API
+    is winding down in favor of customer self-hosted deployments on Lambda GPU instances.
   humanURL: https://docs.lambda.ai/public-cloud/lambda-inference-api/
   baseURL: https://api.lambda.ai/v1
   tags:
@@ -95,6 +112,96 @@ apis:
     url: https://lambda.ai/inference
   - type: AsyncAPI
     url: asyncapi/lambda-labs-asyncapi.yml
+- aid: lambda-labs:lambda-labs-audit-events-api
+  name: Lambda Audit Events API
+  description: The Audit Events API from Lambda — 1 operation(s) for audit events.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Audit Events
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-audit-events-api-openapi.yml
+- aid: lambda-labs:lambda-labs-fabric-api
+  name: Lambda Fabric API
+  description: The Fabric API from Lambda — 2 operation(s) for fabric.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Fabric
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-fabric-api-openapi.yml
+- aid: lambda-labs:lambda-labs-filesystems-api
+  name: Lambda Filesystems API
+  description: The Filesystems API from Lambda — 3 operation(s) for filesystems.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Filesystems
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-filesystems-api-openapi.yml
+- aid: lambda-labs:lambda-labs-firewalls-api
+  name: Lambda Firewalls API
+  description: The Firewalls API from Lambda — 4 operation(s) for firewalls.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Firewalls
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-firewalls-api-openapi.yml
+- aid: lambda-labs:lambda-labs-images-api
+  name: Lambda Images API
+  description: The Images API from Lambda — 1 operation(s) for images.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-images-api-openapi.yml
+- aid: lambda-labs:lambda-labs-instances-api
+  name: Lambda Instances API
+  description: The Instances API from Lambda — 6 operation(s) for instances.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-instances-api-openapi.yml
+- aid: lambda-labs:lambda-labs-regions-api
+  name: Lambda Regions API
+  description: The Regions API from Lambda — 1 operation(s) for regions.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Regions
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-regions-api-openapi.yml
+- aid: lambda-labs:lambda-labs-ssh-keys-api
+  name: Lambda SSH keys API
+  description: The SSH keys API from Lambda — 2 operation(s) for ssh keys.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - SSH keys
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-ssh-keys-api-openapi.yml
+- aid: lambda-labs:lambda-labs-support-tickets-api
+  name: Lambda Support Tickets API
+  description: The Lambda Support Ticketing API is currently in beta. Contact support to enable access.
+  humanURL: https://docs.lambda.ai/api/cloud
+  baseURL: https://cloud.lambda.ai/api/v1
+  tags:
+  - Support Tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/lambda-labs-support-tickets-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/lambda-labs-agentic-access.yml
