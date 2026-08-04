@@ -1,0 +1,30 @@
+{
+  "provider": "lambda-labs",
+  "sources": [
+    "lambda-labs-audit-events-api-openapi.yml",
+    "lambda-labs-fabric-api-openapi.yml",
+    "lambda-labs-filesystems-api-openapi.yml",
+    "lambda-labs-firewalls-api-openapi.yml",
+    "lambda-labs-images-api-openapi.yml",
+    "lambda-labs-instances-api-openapi.yml",
+    "lambda-labs-regions-api-openapi.yml",
+    "lambda-labs-ssh-keys-api-openapi.yml",
+    "lambda-labs-support-tickets-api-openapi.yml"
+  ],
+  "outputs": [
+    "lambda-labs-audit-events-api-openapi.yml",
+    "lambda-labs-fabric-api-openapi.yml",
+    "lambda-labs-filesystems-api-openapi.yml",
+    "lambda-labs-firewalls-api-openapi.yml",
+    "lambda-labs-images-api-openapi.yml",
+    "lambda-labs-instances-api-openapi.yml",
+    "lambda-labs-regions-api-openapi.yml",
+    "lambda-labs-ssh-keys-api-openapi.yml",
+    "lambda-labs-support-tickets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
