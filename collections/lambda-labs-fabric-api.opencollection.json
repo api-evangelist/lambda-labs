@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events Fabric API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fabric",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create partition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/fabric",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new partition in a region."
+        },
+        {
+          "info": {
+            "name": "Update partition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/fabric/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "43336648-096d-4cba-9aa2-f9bb7727639d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the partition"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a partition's details."
+        },
+        {
+          "info": {
+            "name": "Delete partition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/fabric/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "43336648-096d-4cba-9aa2-f9bb7727639d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the partition"
+              }
+            ]
+          },
+          "docs": "Deletes a partition. This will return a 400 error unless there are no instances currently assigned to the partition."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

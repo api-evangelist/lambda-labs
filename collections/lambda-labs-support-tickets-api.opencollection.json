@@ -1,0 +1,253 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events Support Tickets API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Support Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List support tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets",
+            "params": [
+              {
+                "name": "status",
+                "value": "open,pending",
+                "type": "query",
+                "description": "The current status of a support ticket."
+              },
+              {
+                "name": "type",
+                "value": "incident,service_request,automated_event",
+                "type": "query",
+                "description": "The type of support ticket."
+              },
+              {
+                "name": "severity",
+                "value": "sev_1,sev_2",
+                "type": "query",
+                "description": "The severity level for incident tickets."
+              },
+              {
+                "name": "order_by",
+                "value": "created_at",
+                "type": "query",
+                "description": "Specifies the field used to sort the list of tickets."
+              },
+              {
+                "name": "direction",
+                "value": "desc",
+                "type": "query",
+                "description": "Specifies the order in which to sort the list of tickets."
+              },
+              {
+                "name": "page_token",
+                "value": "abCdEFg0h1I2jKlm34n5O6Pq78r=",
+                "type": "query",
+                "description": "A page token. Provide this token in your next request to retrieve the next page of results. If there are no additional pages, this field has a null value."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of support tickets for your account."
+        },
+        {
+          "info": {
+            "name": "Create a support ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/tickets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new support ticket."
+        },
+        {
+          "info": {
+            "name": "Get a support ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific support ticket by ID."
+        },
+        {
+          "info": {
+            "name": "Update a support ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a support ticket status or severity, or adds a comment to the ticket. Returns a 202. Ticket updates happen asynchronously so to see the result of an update, re-query the tickets API."
+        },
+        {
+          "info": {
+            "name": "List ticket attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "status",
+                "value": "uploaded",
+                "type": "query",
+                "description": "The current status of an attachment upload."
+              }
+            ]
+          },
+          "docs": "Retrieves all attachments for a ticket."
+        },
+        {
+          "info": {
+            "name": "Initiate attachment upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start the upload process for a ticket attachment. Returns a presigned URL for direct upload to storage."
+        },
+        {
+          "info": {
+            "name": "Delete attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments/:attachment_id",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "attachment_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The attachment ID."
+              }
+            ]
+          },
+          "docs": "Delete an attachment."
+        },
+        {
+          "info": {
+            "name": "Complete attachment upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments/:attachment_id/complete",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "attachment_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The attachment ID."
+              }
+            ]
+          },
+          "docs": "Mark attachment upload as complete after client finishes uploading to storage."
+        },
+        {
+          "info": {
+            "name": "Get attachment download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/tickets/:ticket_id/attachments/:attachment_id/download",
+            "params": [
+              {
+                "name": "ticket_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The ticket ID."
+              },
+              {
+                "name": "attachment_id",
+                "value": "0920582c7ff041399e34823a0be62549",
+                "type": "path",
+                "description": "The attachment ID."
+              }
+            ]
+          },
+          "docs": "Generate a temporary download URL for an attachment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

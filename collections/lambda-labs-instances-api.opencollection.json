@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events Instances API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Launch instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instance-operations/launch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launches a Lambda On-Demand Cloud instance."
+        },
+        {
+          "info": {
+            "name": "Restart instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instance-operations/restart",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restarts one or more instances."
+        },
+        {
+          "info": {
+            "name": "Terminate instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instance-operations/terminate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Terminates one or more instances."
+        },
+        {
+          "info": {
+            "name": "List available instance types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/instance-types"
+          },
+          "docs": "Retrieves a list of the instance types currently offered on Lambda's public cloud, as well as details about each type. Details include resource specifications, pricing, and regional availability."
+        },
+        {
+          "info": {
+            "name": "List running instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/instances",
+            "params": [
+              {
+                "name": "cluster_id",
+                "value": "ddaedf1b7a0e41ac981711504493b242",
+                "type": "query",
+                "description": "If provided, the resulting list will only include\ninstances that are part of a cluster with this unique identifier (ID)."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of your running instances."
+        },
+        {
+          "info": {
+            "name": "Retrieve instance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ddaedf1b7a0e41ac981711504493b242",
+                "type": "path",
+                "description": "The unique identifier (ID) of the instance"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific instance, including whether or not the instance is running."
+        },
+        {
+          "info": {
+            "name": "Update instance details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/instances/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ddaedf1b7a0e41ac981711504493b242",
+                "type": "path",
+                "description": "The unique identifier (ID) of the instance"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of the specified instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

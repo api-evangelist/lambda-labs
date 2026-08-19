@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events Filesystems API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filesystems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List filesystems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/file-systems"
+          },
+          "docs": "Retrieves a list of your filesystems."
+        },
+        {
+          "info": {
+            "name": "Create filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/filesystems",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new filesystem."
+        },
+        {
+          "info": {
+            "name": "Delete filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/filesystems/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "398578a2336b49079e74043f0bd2cfe8",
+                "type": "path",
+                "description": "The unique identifier (ID) of the filesystem to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the filesystem with the specified ID. The filesystem must not be mounted to any running instances at the time of deletion."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

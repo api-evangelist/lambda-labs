@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events Firewalls API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Firewalls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List inbound firewall rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rules"
+          },
+          "docs": "Retrieves a list of your firewall rules.\n\n**Note:** Firewall rules do not apply to the **us-south-1** region."
+        },
+        {
+          "info": {
+            "name": "Replace inbound firewall rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrites the inbound firewall rules currently active for your account's instances with the desired rules.\n\n**Note:** Firewall rules do not apply to the **us-south-1** region."
+        },
+        {
+          "info": {
+            "name": "List firewall rulesets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets"
+          },
+          "docs": "Retrieves a list of your firewall rulesets."
+        },
+        {
+          "info": {
+            "name": "Create firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new firewall ruleset with the specified name and rules."
+        },
+        {
+          "info": {
+            "name": "Retrieve global firewall ruleset details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/global"
+          },
+          "docs": "Retrieves the details of the global firewall ruleset."
+        },
+        {
+          "info": {
+            "name": "Update global firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/global",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the global firewall ruleset. This allows updating the rules only."
+        },
+        {
+          "info": {
+            "name": "Retrieve firewall ruleset details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "c4d291f47f9d436fa39f58493ce3b50d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the firewall ruleset"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a specific firewall ruleset."
+        },
+        {
+          "info": {
+            "name": "Update firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "c4d291f47f9d436fa39f58493ce3b50d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the firewall ruleset"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a firewall ruleset. This is a partial update that allows updating either the name, rules, or both."
+        },
+        {
+          "info": {
+            "name": "Delete firewall ruleset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/firewall-rulesets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "c4d291f47f9d436fa39f58493ce3b50d",
+                "type": "path",
+                "description": "The unique identifier (ID) of the firewall ruleset"
+              }
+            ]
+          },
+          "docs": "Deletes the firewall ruleset with the specified ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2299 @@
+{
+  "item": [
+    {
+      "id": "83b3f46d-e472-49d7-969e-b07ba0c15a07",
+      "name": "Instances",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52d623fe-9696-4e1f-92ea-8eba5ef48c5e",
+          "name": "Launch instances",
+          "request": {
+            "name": "Launch instances",
+            "description": {
+              "content": "Launches a Lambda On-Demand Cloud instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instance-operations",
+                "launch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"region_name\": \"<string>\",\n  \"instance_type_name\": \"<string>\",\n  \"ssh_key_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file_system_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"file_system_mounts\": [\n    {\n      \"mount_point\": \"<string>\",\n      \"file_system_id\": \"<string>\"\n    },\n    {\n      \"mount_point\": \"<string>\",\n      \"file_system_id\": \"<string>\"\n    }\n  ],\n  \"hostname\": \"<string>\",\n  \"name\": \"<string>\",\n  \"image\": {\n    \"id\": \"<string>\"\n  },\n  \"user_data\": \"<password>\",\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"firewall_rulesets\": [\n    {\n      \"id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "68288140-3665-4ea3-b828-2ba8b69e9bb9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"region_name\": \"<string>\",\n  \"instance_type_name\": \"gpu_8x_a100\",\n  \"ssh_key_names\": [\n    \"my-public-key\"\n  ],\n  \"file_system_names\": [\n    \"my-filesystem\"\n  ],\n  \"file_system_mounts\": [\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    },\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    }\n  ],\n  \"hostname\": \"headnode1\",\n  \"name\": \"My Instance\",\n  \"image\": {\n    \"id\": \"ddaedf1b7a0e41ac981711504493b242\"\n  },\n  \"user_data\": \"<password>\",\n  \"tags\": [\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    },\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    }\n  ],\n  \"firewall_rulesets\": [\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    },\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"instance_ids\": [\n      \"0920582c7ff041399e34823a0be62549\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "524e3540-ce81-4dde-9d45-430404062922",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"region_name\": \"<string>\",\n  \"instance_type_name\": \"gpu_8x_a100\",\n  \"ssh_key_names\": [\n    \"my-public-key\"\n  ],\n  \"file_system_names\": [\n    \"my-filesystem\"\n  ],\n  \"file_system_mounts\": [\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    },\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    }\n  ],\n  \"hostname\": \"headnode1\",\n  \"name\": \"My Instance\",\n  \"image\": {\n    \"id\": \"ddaedf1b7a0e41ac981711504493b242\"\n  },\n  \"user_data\": \"<password>\",\n  \"tags\": [\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    },\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    }\n  ],\n  \"firewall_rulesets\": [\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    },\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ae58e4e-2ce3-467e-959f-6dea05983fd7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"region_name\": \"<string>\",\n  \"instance_type_name\": \"gpu_8x_a100\",\n  \"ssh_key_names\": [\n    \"my-public-key\"\n  ],\n  \"file_system_names\": [\n    \"my-filesystem\"\n  ],\n  \"file_system_mounts\": [\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    },\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    }\n  ],\n  \"hostname\": \"headnode1\",\n  \"name\": \"My Instance\",\n  \"image\": {\n    \"id\": \"ddaedf1b7a0e41ac981711504493b242\"\n  },\n  \"user_data\": \"<password>\",\n  \"tags\": [\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    },\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    }\n  ],\n  \"firewall_rulesets\": [\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    },\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06bcb3e2-be04-4b68-8d7c-2e80fb45504d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"region_name\": \"<string>\",\n  \"instance_type_name\": \"gpu_8x_a100\",\n  \"ssh_key_names\": [\n    \"my-public-key\"\n  ],\n  \"file_system_names\": [\n    \"my-filesystem\"\n  ],\n  \"file_system_mounts\": [\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    },\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    }\n  ],\n  \"hostname\": \"headnode1\",\n  \"name\": \"My Instance\",\n  \"image\": {\n    \"id\": \"ddaedf1b7a0e41ac981711504493b242\"\n  },\n  \"user_data\": \"<password>\",\n  \"tags\": [\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    },\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    }\n  ],\n  \"firewall_rulesets\": [\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    },\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f18b4de3-b0b8-4fe7-9575-9c81327e75f9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"region_name\": \"<string>\",\n  \"instance_type_name\": \"gpu_8x_a100\",\n  \"ssh_key_names\": [\n    \"my-public-key\"\n  ],\n  \"file_system_names\": [\n    \"my-filesystem\"\n  ],\n  \"file_system_mounts\": [\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    },\n    {\n      \"mount_point\": \"/data/custom-mount-point\",\n      \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n    }\n  ],\n  \"hostname\": \"headnode1\",\n  \"name\": \"My Instance\",\n  \"image\": {\n    \"id\": \"ddaedf1b7a0e41ac981711504493b242\"\n  },\n  \"user_data\": \"<password>\",\n  \"tags\": [\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    },\n    {\n      \"key\": \"key1\",\n      \"value\": \"value1\"\n    }\n  ],\n  \"firewall_rulesets\": [\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    },\n    {\n      \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71085d6b-dc96-4591-9217-0319885d2580",
+          "name": "Restart instances",
+          "request": {
+            "name": "Restart instances",
+            "description": {
+              "content": "Restarts one or more instances.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instance-operations",
+                "restart"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b841412-d702-4402-b179-c15b04d85375",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"restarted_instances\": [\n      {\n        \"id\": \"0920582c7ff041399e34823a0be62549\",\n        \"status\": \"terminating\",\n        \"ssh_key_names\": [\n          \"My SSH key\"\n        ],\n        \"file_system_names\": [\n          \"my-filesystem\"\n        ],\n        \"region\": {\n          \"name\": \"string\",\n          \"description\": \"string\"\n        },\n        \"instance_type\": {\n          \"name\": \"gpu_8x_h100_sxm5gdr\",\n          \"description\": \"8x H100 (80 GB SXM5)\",\n          \"gpu_description\": \"H100 (80 GB SXM5)\",\n          \"price_cents_per_hour\": 3592,\n          \"specs\": {\n            \"vcpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memory_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storage_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"actions\": {\n          \"migrate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"rebuild\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"restart\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cold_reboot\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"terminate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"name\": \"My Instance\",\n        \"ip\": \"198.51.100.2\",\n        \"private_ip\": \"10.0.2.100\",\n        \"file_system_mounts\": [\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          },\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          }\n        ],\n        \"hostname\": \"headnode1\",\n        \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"tags\": [\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          },\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          }\n        ],\n        \"firewall_rulesets\": [\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          },\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          }\n        ]\n      },\n      {\n        \"id\": \"0920582c7ff041399e34823a0be62549\",\n        \"status\": \"preempted\",\n        \"ssh_key_names\": [\n          \"My SSH key\"\n        ],\n        \"file_system_names\": [\n          \"my-filesystem\"\n        ],\n        \"region\": {\n          \"name\": \"string\",\n          \"description\": \"string\"\n        },\n        \"instance_type\": {\n          \"name\": \"gpu_8x_h100_sxm5gdr\",\n          \"description\": \"8x H100 (80 GB SXM5)\",\n          \"gpu_description\": \"H100 (80 GB SXM5)\",\n          \"price_cents_per_hour\": 3592,\n          \"specs\": {\n            \"vcpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memory_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storage_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"actions\": {\n          \"migrate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"rebuild\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"restart\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cold_reboot\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"terminate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"name\": \"My Instance\",\n        \"ip\": \"198.51.100.2\",\n        \"private_ip\": \"10.0.2.100\",\n        \"file_system_mounts\": [\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          },\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          }\n        ],\n        \"hostname\": \"headnode1\",\n        \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"tags\": [\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          },\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          }\n        ],\n        \"firewall_rulesets\": [\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          },\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef0d3ab5-c151-49b3-870f-54b48a1ebc5d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec1d3d96-3d18-4462-a51b-90baf6a4899b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a9fe040-21ac-4f1f-8d12-776ef0f61e1e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e29a8eb-1f71-4cda-976c-3b3c3e2a676d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Specified instance does not exist.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0fcf380-2d4a-4380-b0aa-131ba9561dde",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "restart"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The request conflicts with the current state of the resource.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77667ac9-1ac3-45d4-bf9c-20ce2ab7205f",
+          "name": "Terminate instances",
+          "request": {
+            "name": "Terminate instances",
+            "description": {
+              "content": "Terminates one or more instances.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instance-operations",
+                "terminate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"instance_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4157c4ce-d86a-468e-a16e-7a6624976858",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"terminated_instances\": [\n      {\n        \"id\": \"0920582c7ff041399e34823a0be62549\",\n        \"status\": \"preempted\",\n        \"ssh_key_names\": [\n          \"My SSH key\"\n        ],\n        \"file_system_names\": [\n          \"my-filesystem\"\n        ],\n        \"region\": {\n          \"name\": \"string\",\n          \"description\": \"string\"\n        },\n        \"instance_type\": {\n          \"name\": \"gpu_8x_h100_sxm5gdr\",\n          \"description\": \"8x H100 (80 GB SXM5)\",\n          \"gpu_description\": \"H100 (80 GB SXM5)\",\n          \"price_cents_per_hour\": 3592,\n          \"specs\": {\n            \"vcpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memory_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storage_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"actions\": {\n          \"migrate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"rebuild\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"restart\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cold_reboot\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"terminate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"name\": \"My Instance\",\n        \"ip\": \"198.51.100.2\",\n        \"private_ip\": \"10.0.2.100\",\n        \"file_system_mounts\": [\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          },\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          }\n        ],\n        \"hostname\": \"headnode1\",\n        \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"tags\": [\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          },\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          }\n        ],\n        \"firewall_rulesets\": [\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          },\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          }\n        ]\n      },\n      {\n        \"id\": \"0920582c7ff041399e34823a0be62549\",\n        \"status\": \"unhealthy\",\n        \"ssh_key_names\": [\n          \"My SSH key\"\n        ],\n        \"file_system_names\": [\n          \"my-filesystem\"\n        ],\n        \"region\": {\n          \"name\": \"string\",\n          \"description\": \"string\"\n        },\n        \"instance_type\": {\n          \"name\": \"gpu_8x_h100_sxm5gdr\",\n          \"description\": \"8x H100 (80 GB SXM5)\",\n          \"gpu_description\": \"H100 (80 GB SXM5)\",\n          \"price_cents_per_hour\": 3592,\n          \"specs\": {\n            \"vcpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memory_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"storage_gib\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"actions\": {\n          \"migrate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"rebuild\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"restart\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"cold_reboot\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"terminate\": {\n            \"available\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"reason_description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"name\": \"My Instance\",\n        \"ip\": \"198.51.100.2\",\n        \"private_ip\": \"10.0.2.100\",\n        \"file_system_mounts\": [\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          },\n          {\n            \"mount_point\": \"/data/custom-mount-point\",\n            \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n          }\n        ],\n        \"hostname\": \"headnode1\",\n        \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n        \"tags\": [\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          },\n          {\n            \"key\": \"key1\",\n            \"value\": \"value1\"\n          }\n        ],\n        \"firewall_rulesets\": [\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          },\n          {\n            \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83e248cb-57c3-45c5-a83f-f1796186364c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6547e2e4-777b-430d-9528-7577fd036397",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df26f6f-f67e-4289-beda-d8c6c3c9b191",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceeeddec-606f-4b78-a7bc-e7dbf4f46cbf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-operations",
+                    "terminate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"instance_ids\": [\n    \"0920582c7ff041399e34823a0be62549\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Specified instance does not exist.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b0ef0ea-485b-4d93-9705-c73a20ffd188",
+          "name": "List available instance types",
+          "request": {
+            "name": "List available instance types",
+            "description": {
+              "content": "Retrieves a list of the instance types currently offered on Lambda's public cloud, as well as details about each type. Details include resource specifications, pricing, and regional availability.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instance-types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "303b82a4-ca53-4fc5-86c9-166f90d2ca63",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"gpu_8x_example\": {\n      \"instance_type\": {\n        \"name\": \"gpu_8x_example\",\n        \"description\": \"8x Example GPU (40 GB SXM4)\",\n        \"gpu_description\": \"Example GPU (40 GB SXM4)\",\n        \"price_cents_per_hour\": 1592,\n        \"specs\": {\n          \"vcpus\": 124,\n          \"memory_gib\": 1800,\n          \"storage_gib\": 6144,\n          \"gpus\": 8\n        }\n      },\n      \"regions_with_capacity_available\": [\n        {\n          \"name\": \"us-west-1\",\n          \"description\": \"California, USA\"\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0087e88b-7c9c-4266-8fa9-0e6575edf4cd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ccd9c06-d8c4-49cb-a661-901a5fc74e8d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "157ff928-6c37-4602-9aaf-63627942e331",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe564f8-2a7f-4349-85e5-ad6cbbbc9b38",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instance-types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "754867e5-0e27-4bad-8fbe-f151af8659a7",
+          "name": "List running instances",
+          "request": {
+            "name": "List running instances",
+            "description": {
+              "content": "Retrieves a list of your running instances.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instances"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cluster_id",
+                  "value": "<string>",
+                  "description": "If provided, the resulting list will only include\ninstances that are part of a cluster with this unique identifier (ID)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68217392-934d-4e77-8fb5-a4a0608fb225",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ddaedf1b7a0e41ac981711504493b242"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"0920582c7ff041399e34823a0be62549\",\n      \"status\": \"unhealthy\",\n      \"ssh_key_names\": [\n        \"My SSH key\"\n      ],\n      \"file_system_names\": [\n        \"my-filesystem\"\n      ],\n      \"region\": {\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      \"instance_type\": {\n        \"name\": \"gpu_8x_h100_sxm5gdr\",\n        \"description\": \"8x H100 (80 GB SXM5)\",\n        \"gpu_description\": \"H100 (80 GB SXM5)\",\n        \"price_cents_per_hour\": 3592,\n        \"specs\": {\n          \"vcpus\": 208,\n          \"memory_gib\": 1800,\n          \"storage_gib\": 24780,\n          \"gpus\": 8\n        }\n      },\n      \"actions\": {\n        \"migrate\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"rebuild\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"restart\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"cold_reboot\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"terminate\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        }\n      },\n      \"name\": \"My Instance\",\n      \"ip\": \"198.51.100.2\",\n      \"private_ip\": \"10.0.2.100\",\n      \"file_system_mounts\": [\n        {\n          \"mount_point\": \"/data/custom-mount-point\",\n          \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n        },\n        {\n          \"mount_point\": \"/data/custom-mount-point\",\n          \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n        }\n      ],\n      \"hostname\": \"headnode1\",\n      \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n      \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n      \"tags\": [\n        {\n          \"key\": \"key1\",\n          \"value\": \"value1\"\n        },\n        {\n          \"key\": \"key1\",\n          \"value\": \"value1\"\n        }\n      ],\n      \"firewall_rulesets\": [\n        {\n          \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n        },\n        {\n          \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n        }\n      ]\n    },\n    {\n      \"id\": \"0920582c7ff041399e34823a0be62549\",\n      \"status\": \"terminating\",\n      \"ssh_key_names\": [\n        \"My SSH key\"\n      ],\n      \"file_system_names\": [\n        \"my-filesystem\"\n      ],\n      \"region\": {\n        \"name\": \"string\",\n        \"description\": \"string\"\n      },\n      \"instance_type\": {\n        \"name\": \"gpu_8x_h100_sxm5gdr\",\n        \"description\": \"8x H100 (80 GB SXM5)\",\n        \"gpu_description\": \"H100 (80 GB SXM5)\",\n        \"price_cents_per_hour\": 3592,\n        \"specs\": {\n          \"vcpus\": 208,\n          \"memory_gib\": 1800,\n          \"storage_gib\": 24780,\n          \"gpus\": 8\n        }\n      },\n      \"actions\": {\n        \"migrate\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"rebuild\": {\n          \"available\": false,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"restart\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"cold_reboot\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        },\n        \"terminate\": {\n          \"available\": true,\n          \"reason_code\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"reason_description\": \"string\"\n        }\n      },\n      \"name\": \"My Instance\",\n      \"ip\": \"198.51.100.2\",\n      \"private_ip\": \"10.0.2.100\",\n      \"file_system_mounts\": [\n        {\n          \"mount_point\": \"/data/custom-mount-point\",\n          \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n        },\n        {\n          \"mount_point\": \"/data/custom-mount-point\",\n          \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n        }\n      ],\n      \"hostname\": \"headnode1\",\n      \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n      \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n      \"tags\": [\n        {\n          \"key\": \"key1\",\n          \"value\": \"value1\"\n        },\n        {\n          \"key\": \"key1\",\n          \"value\": \"value1\"\n        }\n      ],\n      \"firewall_rulesets\": [\n        {\n          \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n        },\n        {\n          \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "222f5624-b9a4-4b6f-b2e5-e11760ef4303",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ddaedf1b7a0e41ac981711504493b242"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0ce0593-8b73-452d-981d-d78a61036431",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ddaedf1b7a0e41ac981711504493b242"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ab351e8-0d82-41e8-80b3-1a4bc3a88fc1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ddaedf1b7a0e41ac981711504493b242"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ff44abb-84f2-47a8-bfb7-15c45149181c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cluster_id",
+                      "value": "ddaedf1b7a0e41ac981711504493b242"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10ab3e2c-244a-436f-bf13-be4e0d682dcf",
+          "name": "Retrieve instance details",
+          "request": {
+            "name": "Retrieve instance details",
+            "description": {
+              "content": "Retrieves the details of a specific instance, including whether or not the instance is running.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instances",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (ID) of the instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ba2d79c-6ce8-4013-905a-7f4e10065333",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"0920582c7ff041399e34823a0be62549\",\n    \"status\": \"unhealthy\",\n    \"ssh_key_names\": [\n      \"My SSH key\"\n    ],\n    \"file_system_names\": [\n      \"my-filesystem\"\n    ],\n    \"region\": {\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    \"instance_type\": {\n      \"name\": \"gpu_8x_h100_sxm5gdr\",\n      \"description\": \"8x H100 (80 GB SXM5)\",\n      \"gpu_description\": \"H100 (80 GB SXM5)\",\n      \"price_cents_per_hour\": 3592,\n      \"specs\": {\n        \"vcpus\": 208,\n        \"memory_gib\": 1800,\n        \"storage_gib\": 24780,\n        \"gpus\": 8\n      }\n    },\n    \"actions\": {\n      \"migrate\": {\n        \"available\": false,\n        \"reason_code\": \"vm-action-in-progress\",\n        \"reason_description\": \"string\"\n      },\n      \"rebuild\": {\n        \"available\": true,\n        \"reason_code\": \"vm-has-not-launched\",\n        \"reason_description\": \"string\"\n      },\n      \"restart\": {\n        \"available\": true,\n        \"reason_code\": \"vm-has-not-launched\",\n        \"reason_description\": \"string\"\n      },\n      \"cold_reboot\": {\n        \"available\": false,\n        \"reason_code\": \"vm-is-terminating\",\n        \"reason_description\": \"string\"\n      },\n      \"terminate\": {\n        \"available\": false,\n        \"reason_code\": \"vm-is-terminating\",\n        \"reason_description\": \"string\"\n      }\n    },\n    \"name\": \"My Instance\",\n    \"ip\": \"198.51.100.2\",\n    \"private_ip\": \"10.0.2.100\",\n    \"file_system_mounts\": [\n      {\n        \"mount_point\": \"/data/custom-mount-point\",\n        \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n      },\n      {\n        \"mount_point\": \"/data/custom-mount-point\",\n        \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n      }\n    ],\n    \"hostname\": \"headnode1\",\n    \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n    \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n    \"tags\": [\n      {\n        \"key\": \"key1\",\n        \"value\": \"value1\"\n      },\n      {\n        \"key\": \"key1\",\n        \"value\": \"value1\"\n      }\n    ],\n    \"firewall_rulesets\": [\n      {\n        \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n      },\n      {\n        \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5715d3cd-e198-4be9-815b-24ab1284de97",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceb14e55-1ff9-40f3-8311-b8b27ae22d64",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fb3437c-f5e5-4b6f-a03c-70923227601f",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2546ca73-520c-4dc8-9886-5e473452eb47",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Specified instance does not exist.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5bb1ad7-a3cc-4799-8b1d-f5957292ed4d",
+          "name": "Update instance details",
+          "request": {
+            "name": "Update instance details",
+            "description": {
+              "content": "Updates the details of the specified instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "instances",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (ID) of the instance"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37917cdf-8b2b-472d-a7c7-e4cd640ad35f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My Instance\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"0920582c7ff041399e34823a0be62549\",\n    \"status\": \"unhealthy\",\n    \"ssh_key_names\": [\n      \"My SSH key\"\n    ],\n    \"file_system_names\": [\n      \"my-filesystem\"\n    ],\n    \"region\": {\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    \"instance_type\": {\n      \"name\": \"gpu_8x_h100_sxm5gdr\",\n      \"description\": \"8x H100 (80 GB SXM5)\",\n      \"gpu_description\": \"H100 (80 GB SXM5)\",\n      \"price_cents_per_hour\": 3592,\n      \"specs\": {\n        \"vcpus\": 208,\n        \"memory_gib\": 1800,\n        \"storage_gib\": 24780,\n        \"gpus\": 8\n      }\n    },\n    \"actions\": {\n      \"migrate\": {\n        \"available\": false,\n        \"reason_code\": \"vm-action-in-progress\",\n        \"reason_description\": \"string\"\n      },\n      \"rebuild\": {\n        \"available\": true,\n        \"reason_code\": \"vm-has-not-launched\",\n        \"reason_description\": \"string\"\n      },\n      \"restart\": {\n        \"available\": true,\n        \"reason_code\": \"vm-has-not-launched\",\n        \"reason_description\": \"string\"\n      },\n      \"cold_reboot\": {\n        \"available\": false,\n        \"reason_code\": \"vm-is-terminating\",\n        \"reason_description\": \"string\"\n      },\n      \"terminate\": {\n        \"available\": false,\n        \"reason_code\": \"vm-is-terminating\",\n        \"reason_description\": \"string\"\n      }\n    },\n    \"name\": \"My Instance\",\n    \"ip\": \"198.51.100.2\",\n    \"private_ip\": \"10.0.2.100\",\n    \"file_system_mounts\": [\n      {\n        \"mount_point\": \"/data/custom-mount-point\",\n        \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n      },\n      {\n        \"mount_point\": \"/data/custom-mount-point\",\n        \"file_system_id\": \"398578a2336b49079e74043f0bd2cfe8\"\n      }\n    ],\n    \"hostname\": \"headnode1\",\n    \"jupyter_token\": \"03b7d30d9d3e4d8fa41657bc0d478c1b\",\n    \"jupyter_url\": \"https://jupyter-249e1ccff1894822af39ac822637f881.lambdaspaces.com/?token=03b7d30d9d3e4d8fa41657bc0d478c1b\",\n    \"tags\": [\n      {\n        \"key\": \"key1\",\n        \"value\": \"value1\"\n      },\n      {\n        \"key\": \"key1\",\n        \"value\": \"value1\"\n      }\n    ],\n    \"firewall_rulesets\": [\n      {\n        \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n      },\n      {\n        \"id\": \"c4d291f47f9d436fa39f58493ce3b50d\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17edb120-bbd0-4d9e-a9e4-1714db2328fc",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My Instance\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7f34521-25bd-49e8-b3e8-002f2ac3e1fd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My Instance\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b16409-088f-44dd-a51e-e67a1c605383",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My Instance\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4729be1a-811f-43bd-9a38-5467ee52f072",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "instances",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (ID) of the instance"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"My Instance\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Specified instance does not exist.\",\n    \"suggestion\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://cloud.lambda.ai/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "24d81ece-722f-4eb4-9c3e-2f135877aba8",
+    "name": "Lambda Cloud Audit Events Instances API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.\n\nRequests to the API are generally limited to one request per second. Requests to\nthe `/instance-operations/launch` endpoint are limited to one request per 12\nseconds, or five requests per minute.\n\n## Response types and formats {#formats}\n\nThe format of each response object depends on whether the request succeeded or failed.\n\n### Success responses {#success-responses}\n\nWhen a request succeeds, the API returns a response object in the following format. `<PAYLOAD>`\nrepresents the endpoint-specific data object returned as part of the response object.\n\n```json\n{\n    \"data\": <PAYLOAD>\n}\n```\n\n### Error responses {#error-responses}\n\nWhen a request fails, the API returns an error response object in the following format:\n\n```json\n{\n    \"error\": {\n        \"code\": string,\n        \"message\": string,\n        \"suggestion\": string?\n    }\n}\n```\n\n- `code`: A machine- and human-readable error code specific to a particular failure mode.\n- `message`: An explanation of the error.\n- `suggestion`: When present, a suggestion for how to address the error.\n\n:::note{type=\"info\" title=\"Note\"}\nWhen handling errors, avoid relying on the values of `message` or `suggestion`, as\nthese values are subject to change. Instead, use the value of `code`.\n:::\n\n#### Provider errors {#provider-errors}\n\nIn some cases, you might receive errors that come from upstream services/providers rather than directly\nfrom Lambda services. You can identify these errors by their error code prefix, `provider/`.\n\nCommon provider errors include:\n\n- Network outages or connectivity issues\n- Service unavailability\n- Quota limitations or resource exhaustion\n\nAn example of a typical service unavailability error:\n\n```json\n{\n  \"error\": {\n    \"code\": \"provider/internal-unavailable\",\n    \"message\": \"Provider unavailable\",\n    \"suggestion\": \"Try again shortly\"\n  }\n}\n```\n## Outgoing webhooks {#outgoing-webhooks}\n\nLambda can send webhook notifications to your URL when support ticket events occur,\nenabling near real-time integration with your systems.\n\n### Event types {#event-types}\n\n- `ticket.created` - A support ticket was created.\n- `ticket.status_changed` - A support ticket's status was updated, and the ticket remains open.\n- `ticket.resolved` - A support ticket's status was set to `solved`, or the ticket was closed.\n\n### Payload structure {#payload-structure}\n\nAll webhook payloads follow this structure:\n\n```json\n{\n  \"id\": \"a3b7c9d1e5f642a8b0c2d4e6f8a0b2c4\",\n  \"object\": \"event\",\n  \"type\": \"ticket.created\",\n  \"created\": 1700000000,\n  \"api_version\": \"2025-11-18\",\n  \"data\": {\n    \"object\": \"ticket\",\n    \"id\": \"f1e2d3c4b5a647869708192a3b4c5d6e\",\n    \"subject\": \"Issue with instance 0920582c7ff041399e34823a0be62549\",\n    \"description\": \"Detailed description of the issue...\",\n    \"request_type\": \"incident\",\n    \"severity\": \"sev_2\",\n    \"status\": \"new\",\n    \"created_at\": \"2024-11-15T10:00:00+00:00\",\n    \"updated_at\": \"2024-11-15T10:00:00+00:00\",\n    \"instance_ip\": \"192.168.1.100\",\n    \"instance_id\": \"0920582c7ff041399e34823a0be62549\",\n    \"cluster_id\": null,\n    \"source\": \"api\"\n  }\n}\n```\n\n### Webhook authentication {#webhook-authentication}\n\nWebhook requests include a Bearer token in the `Authorization` header for authentication:\n\n```http\nAuthorization: Bearer <token>\n```\n## Authentication {#authentication}\n\nThe Lambda Cloud API uses API keys to authenticate incoming requests. You\ncan generate a new API key pair or view your existing API keys by visiting\nthe [API keys page](https://cloud.lambda.ai/api-keys) in the Lambda Cloud\ndashboard.\n\nIn general, Lambda recommends passing an HTTP Bearer header that contains\nyour API key:\n\n```http\nAuthorization: Bearer <YOUR-API-KEY>\n```\n\n### Authenticating with `curl` {#authenticating-with-curl}\n\nThe API also supports passing an HTTP Basic header. This option chiefly exists\nto support `curl`'s `-u` flag, which allows you to pass your credentials\nwithout having to write out the full `Authorization: Basic` header string.\nFor example:\n\n```bash\ncurl --request GET --url 'https://cloud.lambda.ai/api/v1/instances' \\\n  --header 'accept: application/json' \\\n  --user '<YOUR-API-KEY>:'\n```\n\nIf your use case requires it, you can also pass the HTTP Basic header directly.\nThe value you pass must be a Base64-encoded string containing your API key\nand a trailing colon:\n\n```http\nAuthorization: Basic <BASE64-ENCODED-API-KEY>:\n```\n\n:::note{type=\"attention\" title=\"Important\"}\nIf you make a request without including a supported `Authorization` header,\nthe request will fail.\n:::",
+      "type": "text/plain"
+    }
+  }
+}

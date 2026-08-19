@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events SSH keys API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SSH keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List your SSH keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/ssh-keys"
+          },
+          "docs": "Retrieves a list of your SSH keys."
+        },
+        {
+          "info": {
+            "name": "Add an SSH key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cloud.lambda.ai/api/v1/ssh-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an SSH key to your Lambda Cloud account. You can upload an existing public\nkey, or you can generate a new key pair.\n\n-  To use an existing key pair, set the `public_key` property in the request body\n   to your public key.\n\n-  To generate a new key pair, omit the `public_key` property from the request\n   body.\n\n:::note{type=\"attention\" title=\"Important\"}\nLambda doesn't store your private key after it's been generated.\nIf you generate a new key pair, make sure to save the resulting private key"
+        },
+        {
+          "info": {
+            "name": "Delete an SSH key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cloud.lambda.ai/api/v1/ssh-keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "ddf9a910ceb744a0bb95242cbba6cb50",
+                "type": "path",
+                "description": "The unique identifier (ID) of the SSH key to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the specified SSH key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

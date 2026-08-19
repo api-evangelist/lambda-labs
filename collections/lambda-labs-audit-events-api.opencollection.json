@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lambda Cloud Audit Events API",
+    "version": "1.10.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get audit events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cloud.lambda.ai/api/v1/audit-events",
+            "params": [
+              {
+                "name": "start",
+                "value": "2025-09-01T10:30:45.123456Z",
+                "type": "query",
+                "description": "An ISO 8601 timestamp defining the start of the time range to query, inclusive. If omitted, the response starts at the earliest available event."
+              },
+              {
+                "name": "end",
+                "value": "2025-09-15T10:30:45.123456Z",
+                "type": "query",
+                "description": "An ISO 8601 timestamp defining the end of the time range to query, inclusive. If omitted, the response ends at the most recent event."
+              },
+              {
+                "name": "page_token",
+                "value": "abCdEFg0h1I2jKlm34n5O6Pq78r=",
+                "type": "query",
+                "description": "The token returned by the previous API response to retrieve the next page of results."
+              },
+              {
+                "name": "resource_type",
+                "value": "cloud.api_key",
+                "type": "query",
+                "description": "The resource type to filter by. By default, all available resource types are retrieved."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of audit events that have occurred in your account. To view the full catalog of possible audit events, visit [Access and security > Audit logs](https://docs.lambda.ai/public-cloud/access-security#audit-logs) in the Lambda Cloud documentation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
