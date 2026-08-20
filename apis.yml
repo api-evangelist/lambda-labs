@@ -26,6 +26,14 @@ type: Index
 access: 3rd-Party
 position: Producer
 tags:
+- Artificial Intelligence
+- Cloud
+- Cluster
+- Compute
+- GPU
+- Inference
+- Machine-Learning
+tags_raw:
 - AI
 - Cloud
 - Clusters
@@ -43,6 +51,15 @@ apis:
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
+  - Cloud
+  - Compute
+  - Filesystem
+  - Firewalls
+  - GPU
+  - Instances
+  - REST
+  - SSH Keys
+  tags_raw:
   - Cloud
   - Compute
   - Filesystems
@@ -65,6 +82,12 @@ apis:
   humanURL: https://docs.lambda.ai/public-cloud/1-click-clusters/
   tags:
   - B200
+  - Cluster
+  - GPU
+  - H100
+  - Training
+  tags_raw:
+  - B200
   - Clusters
   - GPU
   - H100
@@ -79,6 +102,10 @@ apis:
     datasets and checkpoints. Filesystems are managed through the Cloud API and console.
   humanURL: https://docs.lambda.ai/public-cloud/filesystems/
   tags:
+  - Filesystem
+  - Persistent Storage
+  - Storage
+  tags_raw:
   - Filesystems
   - Persistent Storage
   - Storage
@@ -97,6 +124,15 @@ apis:
   humanURL: https://docs.lambda.ai/public-cloud/lambda-inference-api/
   baseURL: https://api.lambda.ai/v1
   tags:
+  - Artificial Intelligence
+  - Chat
+  - Completions
+  - Inference
+  - LLM
+  - OpenAI-Compatible
+  - SSE
+  - Streaming
+  tags_raw:
   - AI
   - Chat
   - Completions
@@ -138,6 +174,8 @@ apis:
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
+  - Filesystem
+  tags_raw:
   - Filesystems
   properties:
   - type: OpenAPI
@@ -158,6 +196,8 @@ apis:
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
@@ -188,6 +228,8 @@ apis:
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
+  - SSH Keys
+  tags_raw:
   - SSH keys
   properties:
   - type: OpenAPI
