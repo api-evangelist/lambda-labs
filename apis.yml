@@ -4,6 +4,18 @@ description: Lambda (formerly Lambda Labs) is a GPU cloud provider offering on-d
   1-Click Clusters of 16-2,000+ interconnected H100 and B200 GPUs, long-term reserved Hyperplane capacity,
   filesystems, firewalls, and SSH key management. Lambda Cloud is accessed via a REST control-plane API,
   the web console, and SDKs/CLI tooling.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
