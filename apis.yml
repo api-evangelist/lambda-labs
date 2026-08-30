@@ -65,7 +65,7 @@ apis:
   tags:
   - Cloud
   - Compute
-  - Filesystem
+  - Filesystems
   - Firewalls
   - GPU
   - Instances
@@ -114,7 +114,7 @@ apis:
     datasets and checkpoints. Filesystems are managed through the Cloud API and console.
   humanURL: https://docs.lambda.ai/public-cloud/filesystems/
   tags:
-  - Filesystem
+  - Filesystems
   - Persistent Storage
   - Storage
   tags_raw:
@@ -186,7 +186,7 @@ apis:
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
-  - Filesystem
+  - Filesystems
   tags_raw:
   - Filesystems
   properties:
@@ -240,7 +240,7 @@ apis:
   humanURL: https://docs.lambda.ai/api/cloud
   baseURL: https://cloud.lambda.ai/api/v1
   tags:
-  - SSH Keys
+  - SSH keys
   tags_raw:
   - SSH keys
   properties:
