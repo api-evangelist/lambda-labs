@@ -1,0 +1,65 @@
+slug: lambda-labs
+provider: Lambda
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Electrical Components & Equipment
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Instances
+  spec_file: lambda-labs-instances-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /api/v1/instance-operations/launch  launchInstance  Launch instances; POST /api/v1/instance-operations/terminate  terminateInstance
+  reason: Launch, restart, terminate and inspect GPU cloud compute instances — direct provisioning and
+    lifecycle of cloud compute infrastructure, matching IT Infrastructure Management.
+- tag: Filesystems
+  spec_file: lambda-labs-filesystems-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /api/v1/filesystems  createFilesystem  Create filesystem
+  reason: Create/list/delete of persistent cloud storage filesystems is storage infrastructure provisioning,
+    squarely IT Infrastructure Management (compute, storage, network, cloud). No business-domain reading
+    fits.
+- tag: Fabric
+  spec_file: lambda-labs-fabric-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: 'POST /api/v1/fabric  createFabricPartition  Create partition ... schemas: FabricPartition,
+    Region'
+  reason: Creating/updating/deleting network fabric partitions for interconnected GPU clusters is provisioning
+    of compute/network infrastructure, i.e. IT Infrastructure Management. Confidence moderate because
+    the tag is terse and only inferred from schema names and the vendor's cluster interconnect description.
+- tag: SSH keys
+  spec_file: lambda-labs-ssh-keys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/v1/ssh-keys  addSSHKey  Add an SSH key; DELETE /api/v1/ssh-keys/{id}  deleteSSHKey
+  reason: Issuance and revocation of SSH credentials used to access cloud instances is access-credential
+    lifecycle management, mapping to Identity & Access Management. Confidence tempered because it could
+    also be read as generic infrastructure configuration.
+- tag: Support Tickets
+  spec_file: lambda-labs-support-tickets-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: POST /api/v1/tickets  createTicket  Create a support ticket; PATCH /api/v1/tickets/{ticket_id}  updateTicket
+  reason: 'Full ticket lifecycle with severity, status, comments and attachments is a customer support
+    inquiry surface, realising Customer Inquiry Management. Some ambiguity: from the consuming enterprise''s
+    side this could equally be consumed as IT Service Management, hence 0.7.'

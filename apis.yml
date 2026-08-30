@@ -257,6 +257,9 @@ apis:
   - type: OpenAPI
     url: openapi/lambda-labs-support-tickets-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/lambda-labs-capability-edges.yml
+  name: Lambda Business Capability Map
 - type: AgenticAccess
   url: agentic-access/lambda-labs-agentic-access.yml
 - type: TrustCenter
