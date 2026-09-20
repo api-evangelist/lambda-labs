@@ -1,52 +1,133 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Lambda
-providerId: lambda-labs
-created: '2026-05-22'
-modified: '2026-05-22'
-tags:
-- AI
-- Cloud
-- Clusters
-- Compute
-- GPU
-- Inference
-- Machine Learning
-description: Machine-readable plans scaffold for the Lambda API surface. Conforms to the API Commons Plans schema. Tier limits
-  and prices are scaffold defaults; replace with provider-published values.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://lambda.ai/instances
+sources:
+- https://lambda.ai/instances
+- https://lambda.ai/service/gpu-cloud
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: usage-other
+published: true
+note: GPU instance hourly pricing per GPU; prices exclude sales tax/VAT/GST; no egress fees; pay by the
+  minute. Some repeated $1.99/$1.09 configurations across tabs not listed separately.
+plan_count: 16
+currency: USD
 plans:
-- id: lambda-labs-free
-  name: Free
-  type: freemium
-  description: Free entry tier for the Lambda API surface. Intended for evaluation, prototyping, and low-volume integrations.
-    Real limits and pricing must be reconciled with the provider's published plan documentation.
-  entries:
-  - label: API Requests
-    description: Monthly API request quota across all included endpoints
-    name: api_requests
-    type: quota
-    metric: requests
-    limit: 1000
-    timeFrame: month
-    geo: global
-    domains:
-    - https://cloud.lambda.ai/api/v1
-    unit: 1
-    price: '0.00'
-    userMultiplied: false
-  - label: Rate Limit
-    description: Maximum requests per minute on the free tier
-    name: rate_limit
-    type: rate
-    metric: requests_per_minute
-    limit: 10
-    timeFrame: minute
-    geo: global
-    domains:
-    - https://cloud.lambda.ai/api/v1
-    unit: 1
-    price: '0.00'
-references:
-- name: Lambda API Documentation
-  url: https://raw.githubusercontent.com/api-evangelist/lambda-labs/refs/heads/main/apis.yml
+- name: 8x NVIDIA B200 SXM6
+  price_text: $6.69
+  price: 6.69
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 180 GB VRAM/GPU, 208 vCPUs, 2900 GiB RAM, 22 TiB SSD
+- name: 8x NVIDIA H100 SXM
+  price_text: $3.99
+  price: 3.99
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 80 GB VRAM/GPU, 208 vCPUs, 1800 GiB RAM, 22 TiB SSD
+- name: 8x NVIDIA A100 SXM 80 GB
+  price_text: $2.79
+  price: 2.79
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 240 vCPUs, 1800 GiB RAM, 19.5 TiB SSD
+- name: 8x NVIDIA A100 SXM 40 GB
+  price_text: $1.99
+  price: 1.99
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 124 vCPUs, 1800 GiB RAM, 5.8 TiB SSD
+- name: 8x NVIDIA Tesla V100
+  price_text: $0.79
+  price: 0.79
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 16 GB VRAM/GPU, 88 vCPUs, 448 GiB RAM, 5.8 TiB SSD
+- name: 4x NVIDIA B200 SXM6
+  price_text: $6.79
+  price: 6.79
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 104 vCPUs, 1440 GiB RAM, 11 TiB SSD
+- name: 4x NVIDIA H100 SXM
+  price_text: $4.09
+  price: 4.09
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 104 vCPUs, 900 GiB RAM, 11 TiB SSD
+- name: 4x NVIDIA A6000
+  price_text: $1.09
+  price: 1.09
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 48 GB VRAM/GPU, 56 vCPUs, 400 GiB RAM, 1 TiB SSD
+- name: 2x NVIDIA B200 SXM6
+  price_text: $6.89
+  price: 6.89
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 52 vCPUs, 720 GiB RAM, 5.5 TiB SSD
+- name: 2x NVIDIA H100 SXM
+  price_text: $4.19
+  price: 4.19
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 52 vCPUs, 450 GiB RAM, 5.5 TiB SSD
+- name: 1x NVIDIA B200 SXM6
+  price_text: $6.99
+  price: 6.99
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 26 vCPUs, 360 GiB RAM, 2.75 TiB SSD
+- name: 1x NVIDIA GH200
+  price_text: $2.29
+  price: 2.29
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 96 GB VRAM, 64 vCPUs, 432 GiB RAM, 4 TiB SSD
+- name: 1x NVIDIA H100 SXM
+  price_text: $4.29
+  price: 4.29
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 26 vCPUs, 225 GiB RAM, 2.75 TiB SSD
+- name: 1x NVIDIA H100 PCIe
+  price_text: $3.29
+  price: 3.29
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 26 vCPUs, 225 GiB RAM, 1 TiB SSD
+- name: 1x NVIDIA A10
+  price_text: $1.29
+  price: 1.29
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 24 GB VRAM, 30 vCPUs, 226 GiB RAM, 1.3 TiB SSD
+- name: 1x NVIDIA Quadro RTX 6000
+  price_text: $0.69
+  price: 0.69
+  currency: USD
+  period: per-use
+  unit: per GPU per hour
+  included_quota: 24 GB VRAM, 14 vCPUs, 46 GiB RAM, 512 GiB SSD
+rate_limit_statements:
+- Full GPU access, zero throttling

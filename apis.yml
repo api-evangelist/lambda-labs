@@ -258,6 +258,8 @@ apis:
   - type: OpenAPI
     url: openapi/lambda-labs-support-tickets-api-openapi.yml
 common:
+- type: Plans
+  url: plans/lambda-labs-plans-pricing.yml
 - type: CapabilityMap
   url: capabilities/lambda-labs-capability-edges.yml
   name: Lambda Business Capability Map
