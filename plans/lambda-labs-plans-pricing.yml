@@ -11,6 +11,10 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: developer-api
 pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: keyword-prefilter
+  read: '2026-09-20'
 published: true
 note: GPU instance hourly pricing per GPU; prices exclude sales tax/VAT/GST; no egress fees; pay by the
   minute. Some repeated $1.99/$1.09 configurations across tabs not listed separately.
