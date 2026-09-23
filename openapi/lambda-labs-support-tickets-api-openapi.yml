@@ -1,8 +1,10 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Lambda Cloud Audit Events Support Tickets API
+  title: Lambda Cloud Support Tickets API
   version: 1.10.0
-  description: "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.\n\nRequests to the API are generally limited to one request per second. Requests to\nthe `/instance-operations/launch` endpoint are limited to one request per 12\nseconds, or five requests per minute.\n\n## Response types and formats {#formats}\n\nThe format of each response object depends on whether the request succeeded or failed.\n\n### Success responses {#success-responses}\n\nWhen a request succeeds, the API returns a response object in the following format. `<PAYLOAD>`\nrepresents the endpoint-specific data object returned as part of the response object.\n\n```json\n{\n    \"data\": <PAYLOAD>\n}\n```\n\n### Error responses {#error-responses}\n\nWhen a request fails, the API returns an error response object in the following format:\n\n```json\n{\n    \"error\": {\n        \"code\": string,\n        \"message\": string,\n        \"suggestion\": string?\n    }\n}\n```\n\n- `code`: A machine- and human-readable error code specific to a particular failure mode.\n- `message`: An explanation of the error.\n- `suggestion`: When present, a suggestion for how to address the error.\n\n:::note{type=\"info\" title=\"Note\"}\nWhen handling errors, avoid relying on the values of `message` or `suggestion`, as\nthese values are subject to change. Instead, use the value of `code`.\n:::\n\n#### Provider errors {#provider-errors}\n\nIn some cases, you might receive errors that come from upstream services/providers rather than directly\nfrom Lambda services. You can identify these errors by their error code prefix, `provider/`.\n\nCommon provider errors include:\n\n- Network outages or connectivity issues\n- Service unavailability\n- Quota limitations or resource exhaustion\n\nAn example of a typical service unavailability error:\n\n```json\n{\n  \"error\": {\n    \"code\": \"provider/internal-unavailable\",\n    \"message\": \"Provider unavailable\",\n    \"suggestion\": \"Try again shortly\"\n  }\n}\n```\n## Outgoing webhooks {#outgoing-webhooks}\n\nLambda can send webhook notifications to your URL when support ticket events occur,\nenabling near real-time integration with your systems.\n\n### Event types {#event-types}\n\n- `ticket.created` - A support ticket was created.\n- `ticket.status_changed` - A support ticket's status was updated, and the ticket remains open.\n- `ticket.resolved` - A support ticket's status was set to `solved`, or the ticket was closed.\n\n### Payload structure {#payload-structure}\n\nAll webhook payloads follow this structure:\n\n```json\n{\n  \"id\": \"a3b7c9d1e5f642a8b0c2d4e6f8a0b2c4\",\n  \"object\": \"event\",\n  \"type\": \"ticket.created\",\n  \"created\": 1700000000,\n  \"api_version\": \"2025-11-18\",\n  \"data\": {\n    \"object\": \"ticket\",\n    \"id\": \"f1e2d3c4b5a647869708192a3b4c5d6e\",\n    \"subject\": \"Issue with instance 0920582c7ff041399e34823a0be62549\",\n    \"description\": \"Detailed description of the issue...\",\n    \"request_type\": \"incident\",\n    \"severity\": \"sev_2\",\n    \"status\": \"new\",\n    \"created_at\": \"2024-11-15T10:00:00+00:00\",\n    \"updated_at\": \"2024-11-15T10:00:00+00:00\",\n    \"instance_ip\": \"192.168.1.100\",\n    \"instance_id\": \"0920582c7ff041399e34823a0be62549\",\n    \"cluster_id\": null,\n    \"source\": \"api\"\n  }\n}\n```\n\n### Webhook authentication {#webhook-authentication}\n\nWebhook requests include a Bearer token in the `Authorization` header for authentication:\n\n```http\nAuthorization: Bearer <token>\n```\n## Authentication {#authentication}\n\nThe Lambda Cloud API uses API keys to authenticate incoming requests. You\ncan generate a new API key pair or view your existing API keys by visiting\nthe [API keys page](https://cloud.lambda.ai/api-keys) in the Lambda Cloud\ndashboard.\n\nIn general, Lambda recommends passing an HTTP Bearer header that contains\nyour API key:\n\n```http\nAuthorization: Bearer <YOUR-API-KEY>\n```\n\n### Authenticating with `curl` {#authenticating-with-curl}\n\nThe API also supports passing an HTTP Basic header. This option chiefly exists\nto support `curl`'s `-u` flag, which allows you to pass your credentials\nwithout having to write out the full `Authorization: Basic` header string.\nFor example:\n\n```bash\ncurl --request GET --url 'https://cloud.lambda.ai/api/v1/instances' \\\n  --header 'accept: application/json' \\\n  --user '<YOUR-API-KEY>:'\n```\n\nIf your use case requires it, you can also pass the HTTP Basic header directly.\nThe value you pass must be a Base64-encoded string containing your API key\nand a trailing colon:\n\n```http\nAuthorization: Basic <BASE64-ENCODED-API-KEY>:\n```\n\n:::note{type=\"attention\" title=\"Important\"}\nIf you make a request without including a supported `Authorization` header,\nthe request will fail.\n:::"
+  description: 'The Lambda Cloud API provides a set of REST API endpoints you can use to create
+
+    and manage your Lambda Cloud resources.'
 servers:
 - url: https://cloud.lambda.ai/
   description: Production server
@@ -923,16 +925,283 @@ paths:
         example: 0920582c7ff041399e34823a0be62549
 components:
   schemas:
-    TicketStatus:
-      title: TicketStatus
-      description: The current status of a support ticket.
+    AttachmentDownloadResponse:
+      type: object
+      properties:
+        download_url:
+          type: string
+          description: A presigned URL for downloading the file.
+          examples:
+          - https://s3.amazonaws.com/...presigned-download-url
+        expires_in:
+          type: integer
+          description: The URL expiration time in seconds.
+          examples:
+          - 3600
+      required:
+      - download_url
+      - expires_in
+      title: AttachmentDownloadResponse
+      description: The response with the download URL.
+    AttachmentInitiateResponse:
+      type: object
+      properties:
+        attachment_id:
+          type: string
+          description: The unique identifier for the attachment.
+          examples:
+          - 0920582c7ff041399e34823a0be62549
+        upload_url:
+          type: string
+          description: A presigned URL. Use this URL to directly upload the attachment to storage.
+          examples:
+          - https://s3.amazonaws.com/...presigned-url
+        upload_method:
+          type: string
+          description: The HTTP method to use when uploading your attachment (PUT or POST).
+          examples:
+          - PUT
+        upload_status:
+          $ref: '#/components/schemas/AttachmentUploadStatus'
+          description: The current upload status of your attachment.
+          examples:
+          - pending
+        expires_in:
+          type: integer
+          description: The window of time, in seconds, that the provided presigned URL is available to be uploaded to.
+          examples:
+          - 3600
+      required:
+      - attachment_id
+      - upload_url
+      - upload_method
+      - upload_status
+      - expires_in
+      title: AttachmentInitiateResponse
+      description: Response with upload instructions.
+    ApiErrorTicketNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Ticket not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check the ticket ID and try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorTicketNotFound
+    TicketComment:
+      type: object
+      properties:
+        body:
+          type: string
+          description: Comment text.
+          examples:
+          - Instance is experiencing high latency on GPU operations
+        author:
+          type: string
+          description: The identifier of the comment author.
+          examples:
+          - support-agent-123
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time at which the comment was created. Formatted as an ISO 8601 timestamp.
+          examples:
+          - '2024-10-23T14:30:00Z'
+      required:
+      - body
+      - author
+      - created_at
+      title: TicketComment
+    TicketType:
+      title: TicketType
+      description: The type of support ticket.
       enum:
-      - open
-      - on_hold
-      - pending
-      - solved
-      - confirm_solved
+      - service_request
+      - incident
+      - automated_event
       type: string
+    TicketCreateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the ticket.
+          examples:
+          - 0920582c7ff041399e34823a0be62549
+        external_ticket_provider:
+          type: string
+          description: The external ticketing provider name (e.g., "zendesk").
+          examples:
+          - zendesk
+        external_ticket_id:
+          type: string
+          description: The external provider ticket ID (e.g., Zendesk ticket ID).
+          examples:
+          - '12345'
+        status:
+          $ref: '#/components/schemas/TicketStatus'
+          description: The current status of the ticket.
+          examples:
+          - open
+        type:
+          $ref: '#/components/schemas/TicketType'
+          description: The type of issue or request.
+          examples:
+          - incident
+        severity:
+          $ref: '#/components/schemas/TicketSeverity'
+          description: The severity level of the issue represented by the ticket. Omitted if the ticket isn't an `incident`.
+          examples:
+          - sev_1
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time at which the ticket was created. Formatted as an ISO 8601 timestamp.
+          examples:
+          - '2024-10-20T10:15:00Z'
+      required:
+      - id
+      - status
+      - type
+      - created_at
+      title: TicketCreateResponse
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the attachment.
+          examples:
+          - 0920582c7ff041399e34823a0be62549
+        filename:
+          type: string
+          description: The original filename.
+          examples:
+          - debug-logs.tar.gz
+        content_type:
+          type: string
+          description: The MIME type of the attached file.
+          examples:
+          - application/gzip
+        size_bytes:
+          type: integer
+          description: The attached file's size in bytes.
+          examples:
+          - 1024000
+        upload_status:
+          $ref: '#/components/schemas/AttachmentUploadStatus'
+          description: The current upload status of the attachment.
+          examples:
+          - uploaded
+        uploaded_at:
+          type: string
+          format: date-time
+          description: The date and time at which the attachment finished uploading. Formatted as an ISO 8601 timestamp. Omitted if the attachment hasn't been uploaded yet.
+          examples:
+          - '2024-10-20T10:15:00Z'
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time at which the attachment was created. Formatted as an ISO 8601 timestamp.
+          examples:
+          - '2024-10-20T10:10:00Z'
+      required:
+      - id
+      - filename
+      - content_type
+      - size_bytes
+      - upload_status
+      - created_at
+      title: Attachment
+      description: Attachment metadata.
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
+    TicketListResponse:
+      type: object
+      properties:
+        tickets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticket'
+          description: The current page of tickets.
+        page_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: A page token. Provide this token in your next request to retrieve the next page of results. Null if there are no additional pages.
+      required:
+      - tickets
+      - page_token
+      title: TicketListResponse
+    AttachmentUploadStatus:
+      title: AttachmentUploadStatus
+      description: The current status of an attachment upload.
+      enum:
+      - pending
+      - uploaded
+      - failed
+      - deleted
+      type: string
+    TicketCommentInput:
+      type: object
+      properties:
+        body:
+          type: string
+          description: The text of the new comment.
+          examples:
+          - Turns out this was a non-issue on our end. Closing the ticket.
+      required:
+      - body
+      title: TicketCommentInput
     Ticket:
       type: object
       properties:
@@ -1006,85 +1275,20 @@ components:
       - created_at
       - comments
       title: Ticket
-    ApiErrorInvalidParameters:
-      type: object
-      properties:
-        code:
-          const: global/invalid-parameters
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
-    TicketOrderByField:
-      title: TicketOrderByField
-      description: Specifies the field used to sort the list of tickets.
+    TicketRequestType:
+      title: TicketRequestType
+      description: The type of support ticket.
       enum:
-      - created_at
-      - updated_at
+      - incident
+      - service_request
       type: string
-    AttachmentInitiateResponse:
-      type: object
-      properties:
-        attachment_id:
-          type: string
-          description: The unique identifier for the attachment.
-          examples:
-          - 0920582c7ff041399e34823a0be62549
-        upload_url:
-          type: string
-          description: A presigned URL. Use this URL to directly upload the attachment to storage.
-          examples:
-          - https://s3.amazonaws.com/...presigned-url
-        upload_method:
-          type: string
-          description: The HTTP method to use when uploading your attachment (PUT or POST).
-          examples:
-          - PUT
-        upload_status:
-          $ref: '#/components/schemas/AttachmentUploadStatus'
-          description: The current upload status of your attachment.
-          examples:
-          - pending
-        expires_in:
-          type: integer
-          description: The window of time, in seconds, that the provided presigned URL is available to be uploaded to.
-          examples:
-          - 3600
-      required:
-      - attachment_id
-      - upload_url
-      - upload_method
-      - upload_status
-      - expires_in
-      title: AttachmentInitiateResponse
-      description: Response with upload instructions.
-    ApiErrorResourceNotFound:
-      type: object
-      properties:
-        code:
-          const: global/object-does-not-exist
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorResourceNotFound
+    SortDirection:
+      title: SortDirection
+      description: Specifies the order in which to sort the list of tickets.
+      enum:
+      - asc
+      - desc
+      type: string
     ApiErrorNotFound:
       type: object
       properties:
@@ -1103,75 +1307,73 @@ components:
       - code
       - message
       title: ApiErrorNotFound
-    Attachment:
+    TicketSeverity:
+      title: TicketSeverity
+      description: The severity level for incident tickets.
+      enum:
+      - sev_1
+      - sev_2
+      - sev_3
+      type: string
+    EmptyResponse:
       type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the attachment.
-          examples:
-          - 0920582c7ff041399e34823a0be62549
-        filename:
-          type: string
-          description: The original filename.
-          examples:
-          - debug-logs.tar.gz
-        content_type:
-          type: string
-          description: The MIME type of the attached file.
-          examples:
-          - application/gzip
-        size_bytes:
-          type: integer
-          description: The attached file's size in bytes.
-          examples:
-          - 1024000
-        upload_status:
-          $ref: '#/components/schemas/AttachmentUploadStatus'
-          description: The current upload status of the attachment.
-          examples:
-          - uploaded
-        uploaded_at:
-          type: string
-          format: date-time
-          description: The date and time at which the attachment finished uploading. Formatted as an ISO 8601 timestamp. Omitted if the attachment hasn't been uploaded yet.
-          examples:
-          - '2024-10-20T10:15:00Z'
-        created_at:
-          type: string
-          format: date-time
-          description: The date and time at which the attachment was created. Formatted as an ISO 8601 timestamp.
-          examples:
-          - '2024-10-20T10:10:00Z'
-      required:
-      - id
-      - filename
-      - content_type
-      - size_bytes
-      - upload_status
-      - created_at
-      title: Attachment
-      description: Attachment metadata.
-    ApiErrorTicketNotFound:
+      properties: {}
+      title: EmptyResponse
+    ApiErrorInvalidParameters:
       type: object
       properties:
         code:
-          const: global/not-found
+          const: global/invalid-parameters
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Ticket not found.
+          default: Invalid request data.
           description: A description of the error.
         suggestion:
           type: string
-          default: Check the ticket ID and try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    ApiErrorResourceNotFound:
+      type: object
+      properties:
+        code:
+          const: global/object-does-not-exist
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
       - suggestion
-      title: ApiErrorTicketNotFound
+      title: ApiErrorResourceNotFound
+    TicketOrderByField:
+      title: TicketOrderByField
+      description: Specifies the field used to sort the list of tickets.
+      enum:
+      - created_at
+      - updated_at
+      type: string
+    AttachmentListResponse:
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          description: Retrieves all attachments associated with the specified ticket. If status is omitted, only uploaded attachments will be returned.
+      required:
+      - attachments
+      title: AttachmentListResponse
+      description: Response containing list of attachments.
     ApiErrorForbidden:
       type: object
       properties:
@@ -1189,216 +1391,16 @@ components:
       - code
       - message
       title: ApiErrorForbidden
-    TicketRequestType:
-      title: TicketRequestType
-      description: The type of support ticket.
+    TicketStatus:
+      title: TicketStatus
+      description: The current status of a support ticket.
       enum:
-      - incident
-      - service_request
-      type: string
-    TicketCommentInput:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The text of the new comment.
-          examples:
-          - Turns out this was a non-issue on our end. Closing the ticket.
-      required:
-      - body
-      title: TicketCommentInput
-    SortDirection:
-      title: SortDirection
-      description: Specifies the order in which to sort the list of tickets.
-      enum:
-      - asc
-      - desc
-      type: string
-    AttachmentUploadStatus:
-      title: AttachmentUploadStatus
-      description: The current status of an attachment upload.
-      enum:
+      - open
+      - on_hold
       - pending
-      - uploaded
-      - failed
-      - deleted
+      - solved
+      - confirm_solved
       type: string
-    ApiErrorUnauthorized:
-      type: object
-      properties:
-        code:
-          const: global/invalid-api-key
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: API key was invalid, expired, or deleted.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Check your API key or create a new one, then try again.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorUnauthorized
-    AttachmentDownloadResponse:
-      type: object
-      properties:
-        download_url:
-          type: string
-          description: A presigned URL for downloading the file.
-          examples:
-          - https://s3.amazonaws.com/...presigned-download-url
-        expires_in:
-          type: integer
-          description: The URL expiration time in seconds.
-          examples:
-          - 3600
-      required:
-      - download_url
-      - expires_in
-      title: AttachmentDownloadResponse
-      description: The response with the download URL.
-    TicketListResponse:
-      type: object
-      properties:
-        tickets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ticket'
-          description: The current page of tickets.
-        page_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          description: A page token. Provide this token in your next request to retrieve the next page of results. Null if there are no additional pages.
-      required:
-      - tickets
-      - page_token
-      title: TicketListResponse
-    AttachmentListResponse:
-      type: object
-      properties:
-        attachments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-          description: Retrieves all attachments associated with the specified ticket. If status is omitted, only uploaded attachments will be returned.
-      required:
-      - attachments
-      title: AttachmentListResponse
-      description: Response containing list of attachments.
-    TicketSeverity:
-      title: TicketSeverity
-      description: The severity level for incident tickets.
-      enum:
-      - sev_1
-      - sev_2
-      - sev_3
-      type: string
-    TicketCreateResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the ticket.
-          examples:
-          - 0920582c7ff041399e34823a0be62549
-        external_ticket_provider:
-          type: string
-          description: The external ticketing provider name (e.g., "zendesk").
-          examples:
-          - zendesk
-        external_ticket_id:
-          type: string
-          description: The external provider ticket ID (e.g., Zendesk ticket ID).
-          examples:
-          - '12345'
-        status:
-          $ref: '#/components/schemas/TicketStatus'
-          description: The current status of the ticket.
-          examples:
-          - open
-        type:
-          $ref: '#/components/schemas/TicketType'
-          description: The type of issue or request.
-          examples:
-          - incident
-        severity:
-          $ref: '#/components/schemas/TicketSeverity'
-          description: The severity level of the issue represented by the ticket. Omitted if the ticket isn't an `incident`.
-          examples:
-          - sev_1
-        created_at:
-          type: string
-          format: date-time
-          description: The date and time at which the ticket was created. Formatted as an ISO 8601 timestamp.
-          examples:
-          - '2024-10-20T10:15:00Z'
-      required:
-      - id
-      - status
-      - type
-      - created_at
-      title: TicketCreateResponse
-    TicketType:
-      title: TicketType
-      description: The type of support ticket.
-      enum:
-      - service_request
-      - incident
-      - automated_event
-      type: string
-    TicketComment:
-      type: object
-      properties:
-        body:
-          type: string
-          description: Comment text.
-          examples:
-          - Instance is experiencing high latency on GPU operations
-        author:
-          type: string
-          description: The identifier of the comment author.
-          examples:
-          - support-agent-123
-        created_at:
-          type: string
-          format: date-time
-          description: The date and time at which the comment was created. Formatted as an ISO 8601 timestamp.
-          examples:
-          - '2024-10-23T14:30:00Z'
-      required:
-      - body
-      - author
-      - created_at
-      title: TicketComment
-    ApiErrorAccountInactive:
-      type: object
-      properties:
-        code:
-          const: global/account-inactive
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Your account is inactive.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorAccountInactive
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
   securitySchemes:
     basicAuth:
       type: http

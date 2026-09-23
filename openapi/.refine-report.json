@@ -1,15 +1,7 @@
 {
   "provider": "lambda-labs",
   "sources": [
-    "lambda-labs-audit-events-api-openapi.yml",
-    "lambda-labs-fabric-api-openapi.yml",
-    "lambda-labs-filesystems-api-openapi.yml",
-    "lambda-labs-firewalls-api-openapi.yml",
-    "lambda-labs-images-api-openapi.yml",
-    "lambda-labs-instances-api-openapi.yml",
-    "lambda-labs-regions-api-openapi.yml",
-    "lambda-labs-ssh-keys-api-openapi.yml",
-    "lambda-labs-support-tickets-api-openapi.yml"
+    "_original/lambda-labs-openapi.json"
   ],
   "outputs": [
     "lambda-labs-audit-events-api-openapi.yml",
@@ -25,6 +17,28 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lambda-labs-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lambda-labs-openapi.json: declared missing tag: Audit Events",
+    "lambda-labs-openapi.json: declared missing tag: Fabric",
+    "lambda-labs-openapi.json: declared missing tag: Filesystems",
+    "lambda-labs-openapi.json: declared missing tag: Firewalls",
+    "lambda-labs-openapi.json: declared missing tag: Images",
+    "lambda-labs-openapi.json: declared missing tag: Instances",
+    "lambda-labs-openapi.json: declared missing tag: Regions",
+    "lambda-labs-openapi.json: declared missing tag: SSH keys",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "lambda-labs-audit-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-fabric-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-filesystems-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-firewalls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-regions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-ssh-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lambda-labs-support-tickets-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
