@@ -265,48 +265,103 @@ paths:
         example: 398578a2336b49079e74043f0bd2cfe8
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the user.
-          examples:
-          - 3da5a70a57a7422ea8a7203f98b2198b
-        email:
-          type: string
-          description: The email address of the user.
-          examples:
-          - me@example.com
-        status:
-          $ref: '#/components/schemas/UserStatus'
-          description: The status of the user's account.
-      required:
-      - id
-      - email
-      - status
-      title: User
-      description: Information about a user in your Team.
-    ApiErrorAccountInactive:
+    UserStatus:
+      title: UserStatus
+      description: Status of the user's account.
+      enum:
+      - active
+      - deactivated
+      type: string
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/account-inactive
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Your account is inactive.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
+    ApiErrorFilesystemInUse:
+      type: object
+      properties:
+        code:
+          const: filesystems/filesystem-in-use
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorFilesystemInUse
+    ApiErrorInvalidBillingAddress:
+      type: object
+      properties:
+        code:
+          const: global/invalid-address
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your billing address is invalid.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure your billing address is valid. Contact Support if problems continue.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
       - suggestion
-      title: ApiErrorAccountInactive
+      title: ApiErrorInvalidBillingAddress
+    ApiErrorDuplicate:
+      type: object
+      properties:
+        code:
+          const: global/duplicate
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorDuplicate
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
     ApiErrorUnauthorized:
       type: object
       properties:
@@ -327,41 +382,26 @@ components:
       - message
       - suggestion
       title: ApiErrorUnauthorized
-    ApiErrorFilesystemInUse:
+    ApiErrorAccountInactive:
       type: object
       properties:
         code:
-          const: filesystems/filesystem-in-use
+          const: global/account-inactive
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
+          default: Your account is inactive.
           description: A description of the error.
         suggestion:
           type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      title: ApiErrorFilesystemInUse
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
+      - suggestion
+      title: ApiErrorAccountInactive
     Filesystem:
       type: object
       properties:
@@ -414,55 +454,19 @@ components:
       - region
       title: Filesystem
       description: Information about a shared filesystem.
-    FilesystemDeleteResponse:
+    Region:
       type: object
       properties:
-        deleted_ids:
-          type: array
-          items:
-            type: string
-          description: The unique identifiers of the filesystems that were deleted.
-          examples:
-          - - 398578a2336b49079e74043f0bd2cfe8
+        name:
+          type: string
+          description: The region code.
+        description:
+          type: string
+          description: The region description.
       required:
-      - deleted_ids
-      title: FilesystemDeleteResponse
-    ApiErrorInvalidParameters:
-      type: object
-      properties:
-        code:
-          const: global/invalid-parameters
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
-    ApiErrorFilesystemNotFound:
-      type: object
-      properties:
-        code:
-          const: global/object-does-not-exist
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Filesystem was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorFilesystemNotFound
+      - name
+      - description
+      title: Region
     ApiErrorQuotaExceeded:
       type: object
       properties:
@@ -483,55 +487,29 @@ components:
       - message
       - suggestion
       title: ApiErrorQuotaExceeded
-    UserStatus:
-      title: UserStatus
-      description: Status of the user's account.
-      enum:
-      - active
-      - deactivated
-      type: string
-    Region:
+    FilesystemDeleteResponse:
       type: object
       properties:
-        name:
-          type: string
-          description: The region code.
-        description:
-          type: string
-          description: The region description.
+        deleted_ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers of the filesystems that were deleted.
+          examples:
+          - - 398578a2336b49079e74043f0bd2cfe8
       required:
-      - name
-      - description
-      title: Region
-    ApiErrorInvalidBillingAddress:
+      - deleted_ids
+      title: FilesystemDeleteResponse
+    ApiErrorFilesystemNotFound:
       type: object
       properties:
         code:
-          const: global/invalid-address
+          const: global/object-does-not-exist
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Your billing address is invalid.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure your billing address is valid. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorInvalidBillingAddress
-    ApiErrorDuplicate:
-      type: object
-      properties:
-        code:
-          const: global/duplicate
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
+          default: Filesystem was not found.
           description: A description of the error.
         suggestion:
           type: string
@@ -539,7 +517,29 @@ components:
       required:
       - code
       - message
-      title: ApiErrorDuplicate
+      title: ApiErrorFilesystemNotFound
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          examples:
+          - 3da5a70a57a7422ea8a7203f98b2198b
+        email:
+          type: string
+          description: The email address of the user.
+          examples:
+          - me@example.com
+        status:
+          $ref: '#/components/schemas/UserStatus'
+          description: The status of the user's account.
+      required:
+      - id
+      - email
+      - status
+      title: User
+      description: Information about a user in your Team.
   securitySchemes:
     basicAuth:
       type: http

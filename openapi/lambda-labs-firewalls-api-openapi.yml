@@ -783,26 +783,46 @@ paths:
         example: c4d291f47f9d436fa39f58493ce3b50d
 components:
   schemas:
-    ApiErrorAccountInactive:
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/account-inactive
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Your account is inactive.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      - suggestion
-      title: ApiErrorAccountInactive
+      title: ApiErrorNotFound
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
     ApiErrorUnauthorized:
       type: object
       properties:
@@ -823,62 +843,150 @@ components:
       - message
       - suggestion
       title: ApiErrorUnauthorized
-    ApiErrorInternal:
+    ApiErrorFirewallRulesetNotFound:
       type: object
       properties:
         code:
-          const: global/internal-error
+          const: global/object-does-not-exist
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: An internal server error occurred.
+          default: Firewall ruleset does not exist or you do not have permission to access it.
           description: A description of the error.
         suggestion:
           type: string
-          default: Try again later. Contact Support if the problem persists.
+          default: Check your firewall ruleset ID and try again.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
       - suggestion
-      title: ApiErrorInternal
-    ApiErrorNotFound:
+      title: ApiErrorFirewallRulesetNotFound
+    ApiErrorAccountInactive:
       type: object
       properties:
         code:
-          const: global/not-found
+          const: global/account-inactive
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: The requested resource was not found.
+          default: Your account is inactive.
           description: A description of the error.
         suggestion:
           type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      title: ApiErrorNotFound
-    ApiErrorInvalidParameters:
+      - suggestion
+      title: ApiErrorAccountInactive
+    GlobalFirewallRuleset:
       type: object
       properties:
-        code:
-          const: global/invalid-parameters
+        id:
+          const: global
           type: string
-          description: The unique identifier for the type of error.
-        message:
+          description: The unique identifier of the firewall ruleset.
+          examples:
+          - global
+        name:
           type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
+          description: The name of the firewall ruleset.
+          examples:
+          - Default Workspace Global Rules
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/FirewallRule'
+          description: The list of firewall rules in this ruleset.
       required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
+      - id
+      - name
+      - rules
+      title: GlobalFirewallRuleset
+      description: Firewall rules that apply across all regions.
+    NetworkProtocol:
+      title: NetworkProtocol
+      enum:
+      - tcp
+      - udp
+      - icmp
+      - all
+      type: string
+    FirewallRule:
+      type: object
+      properties:
+        protocol:
+          $ref: '#/components/schemas/NetworkProtocol'
+          description: The protocol to which the rule applies.
+          examples:
+          - tcp
+        port_range:
+          type: array
+          items:
+            type: integer
+            maximum: 65535
+            minimum: 1
+          minItems: 2
+          maxItems: 2
+          description: 'An inclusive range of network ports specified as `[min, max]`.
+
+            Not allowed for the `icmp` protocol but required for the others.
+
+
+            To specify a single port, list it twice (for example, `[22,22]`).'
+          examples:
+          - - 22
+            - 22
+        source_network:
+          type: string
+          format: ipv4network
+          description: 'The set of source IPv4 addresses from which you want to allow inbound
+
+            traffic. These addresses must be specified in CIDR notation. You can
+
+            specify individual public IPv4 CIDR blocks such as `1.2.3.4` or
+
+            `1.2.3.4/32`, or you can specify `0.0.0.0/0` to allow access from any
+
+            address.
+
+
+            This value is a string consisting of a public IPv4 address optionally
+
+            followed by a slash (/) and an integer mask (the network prefix).
+
+            If no mask is provided, the API assumes `/32` by default.'
+          examples:
+          - 0.0.0.0/0
+        description:
+          type: string
+          minLength: 0
+          maxLength: 128
+          description: A human-readable description of the rule.
+          examples:
+          - Allow SSH from anywhere
+      required:
+      - protocol
+      - source_network
+      - description
+      title: FirewallRule
+    Region:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The region code.
+        description:
+          type: string
+          description: The region description.
+      required:
+      - name
+      - description
+      title: Region
     FirewallRuleset:
       type: object
       properties:
@@ -958,134 +1066,26 @@ components:
       - message
       - suggestion
       title: ApiErrorFirewallRulesetInUse
-    FirewallRule:
-      type: object
-      properties:
-        protocol:
-          $ref: '#/components/schemas/NetworkProtocol'
-          description: The protocol to which the rule applies.
-          examples:
-          - tcp
-        port_range:
-          type: array
-          items:
-            type: integer
-            maximum: 65535
-            minimum: 1
-          minItems: 2
-          maxItems: 2
-          description: 'An inclusive range of network ports specified as `[min, max]`.
-
-            Not allowed for the `icmp` protocol but required for the others.
-
-
-            To specify a single port, list it twice (for example, `[22,22]`).'
-          examples:
-          - - 22
-            - 22
-        source_network:
-          type: string
-          format: ipv4network
-          description: 'The set of source IPv4 addresses from which you want to allow inbound
-
-            traffic. These addresses must be specified in CIDR notation. You can
-
-            specify individual public IPv4 CIDR blocks such as `1.2.3.4` or
-
-            `1.2.3.4/32`, or you can specify `0.0.0.0/0` to allow access from any
-
-            address.
-
-
-            This value is a string consisting of a public IPv4 address optionally
-
-            followed by a slash (/) and an integer mask (the network prefix).
-
-            If no mask is provided, the API assumes `/32` by default.'
-          examples:
-          - 0.0.0.0/0
-        description:
-          type: string
-          minLength: 0
-          maxLength: 128
-          description: A human-readable description of the rule.
-          examples:
-          - Allow SSH from anywhere
-      required:
-      - protocol
-      - source_network
-      - description
-      title: FirewallRule
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    GlobalFirewallRuleset:
-      type: object
-      properties:
-        id:
-          const: global
-          type: string
-          description: The unique identifier of the firewall ruleset.
-          examples:
-          - global
-        name:
-          type: string
-          description: The name of the firewall ruleset.
-          examples:
-          - Default Workspace Global Rules
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/FirewallRule'
-          description: The list of firewall rules in this ruleset.
-      required:
-      - id
-      - name
-      - rules
-      title: GlobalFirewallRuleset
-      description: Firewall rules that apply across all regions.
-    ApiErrorFirewallRulesetNotFound:
+    ApiErrorInternal:
       type: object
       properties:
         code:
-          const: global/object-does-not-exist
+          const: global/internal-error
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Firewall ruleset does not exist or you do not have permission to access it.
+          default: An internal server error occurred.
           description: A description of the error.
         suggestion:
           type: string
-          default: Check your firewall ruleset ID and try again.
+          default: Try again later. Contact Support if the problem persists.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
       - suggestion
-      title: ApiErrorFirewallRulesetNotFound
-    Region:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The region code.
-        description:
-          type: string
-          description: The region description.
-      required:
-      - name
-      - description
-      title: Region
-    NetworkProtocol:
-      title: NetworkProtocol
-      enum:
-      - tcp
-      - udp
-      - icmp
-      - all
-      type: string
+      title: ApiErrorInternal
   securitySchemes:
     basicAuth:
       type: http

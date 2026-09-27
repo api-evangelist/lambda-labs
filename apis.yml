@@ -45,7 +45,8 @@ tags:
 - Compute
 - GPU
 - Inference
-- Machine-Learning
+- Machine Learning
+- Real-Time
 tags_raw:
 - AI
 - Cloud
@@ -54,6 +55,8 @@ tags_raw:
 - GPU
 - Inference
 - Machine Learning
+- Machine-Learning
+- Real-Time
 apis:
 - aid: lambda-labs:cloud-api
   name: Lambda Cloud API
