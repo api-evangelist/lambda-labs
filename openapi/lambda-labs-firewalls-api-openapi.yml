@@ -783,106 +783,39 @@ paths:
         example: c4d291f47f9d436fa39f58493ce3b50d
 components:
   schemas:
-    ApiErrorNotFound:
+    Region:
       type: object
       properties:
-        code:
-          const: global/not-found
+        name:
           type: string
-          description: The unique identifier for the type of error.
-        message:
+          description: The region code.
+        description:
           type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
+          description: The region description.
       required:
-      - code
-      - message
-      title: ApiErrorNotFound
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    ApiErrorInvalidParameters:
+      - name
+      - description
+      title: Region
+    ApiErrorInternal:
       type: object
       properties:
         code:
-          const: global/invalid-parameters
+          const: global/internal-error
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Invalid request data.
+          default: An internal server error occurred.
           description: A description of the error.
         suggestion:
           type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
-    ApiErrorUnauthorized:
-      type: object
-      properties:
-        code:
-          const: global/invalid-api-key
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: API key was invalid, expired, or deleted.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Check your API key or create a new one, then try again.
+          default: Try again later. Contact Support if the problem persists.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
       - suggestion
-      title: ApiErrorUnauthorized
-    ApiErrorFirewallRulesetNotFound:
-      type: object
-      properties:
-        code:
-          const: global/object-does-not-exist
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Firewall ruleset does not exist or you do not have permission to access it.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Check your firewall ruleset ID and try again.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorFirewallRulesetNotFound
-    ApiErrorAccountInactive:
-      type: object
-      properties:
-        code:
-          const: global/account-inactive
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Your account is inactive.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorAccountInactive
+      title: ApiErrorInternal
     GlobalFirewallRuleset:
       type: object
       properties:
@@ -908,6 +841,66 @@ components:
       - rules
       title: GlobalFirewallRuleset
       description: Firewall rules that apply across all regions.
+    ApiErrorQuotaExceeded:
+      type: object
+      properties:
+        code:
+          const: global/quota-exceeded
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Quota exceeded.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Contact Support to increase your quota.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorQuotaExceeded
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
     NetworkProtocol:
       title: NetworkProtocol
       enum:
@@ -916,6 +909,125 @@ components:
       - icmp
       - all
       type: string
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    ApiErrorFirewallRulesetInUse:
+      type: object
+      properties:
+        code:
+          const: firewall-rulesets/firewall-ruleset-in-use
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Firewall ruleset is in use by one or more instances.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Terminate all instances that are using the ruleset before deleting it.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorFirewallRulesetInUse
+    ApiErrorFirewallRulesetNotFound:
+      type: object
+      properties:
+        code:
+          const: global/object-does-not-exist
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Firewall ruleset does not exist or you do not have permission to access it.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your firewall ruleset ID and try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorFirewallRulesetNotFound
+    FirewallRuleset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the firewall ruleset.
+          examples:
+          - c4d291f47f9d436fa39f58493ce3b50d
+        name:
+          type: string
+          description: The name of the firewall ruleset.
+          examples:
+          - My Firewall Ruleset
+        region:
+          $ref: '#/components/schemas/Region'
+          description: The region in which the firewall ruleset is deployed.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/FirewallRule'
+          description: The list of firewall rules in this ruleset.
+        created:
+          type: string
+          format: date-time
+          description: The date and time at which the firewall ruleset was created. Formatted as an ISO 8601 timestamp.
+        instance_ids:
+          type: array
+          items:
+            type: string
+          description: The IDs of instances this firewall ruleset is associated with.
+      required:
+      - id
+      - name
+      - region
+      - rules
+      - created
+      - instance_ids
+      title: FirewallRuleset
+      description: A collection of firewall rules that can be associated with instances.
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
     FirewallRule:
       type: object
       properties:
@@ -974,118 +1086,6 @@ components:
       - source_network
       - description
       title: FirewallRule
-    Region:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The region code.
-        description:
-          type: string
-          description: The region description.
-      required:
-      - name
-      - description
-      title: Region
-    FirewallRuleset:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the firewall ruleset.
-          examples:
-          - c4d291f47f9d436fa39f58493ce3b50d
-        name:
-          type: string
-          description: The name of the firewall ruleset.
-          examples:
-          - My Firewall Ruleset
-        region:
-          $ref: '#/components/schemas/Region'
-          description: The region in which the firewall ruleset is deployed.
-        rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/FirewallRule'
-          description: The list of firewall rules in this ruleset.
-        created:
-          type: string
-          format: date-time
-          description: The date and time at which the firewall ruleset was created. Formatted as an ISO 8601 timestamp.
-        instance_ids:
-          type: array
-          items:
-            type: string
-          description: The IDs of instances this firewall ruleset is associated with.
-      required:
-      - id
-      - name
-      - region
-      - rules
-      - created
-      - instance_ids
-      title: FirewallRuleset
-      description: A collection of firewall rules that can be associated with instances.
-    ApiErrorQuotaExceeded:
-      type: object
-      properties:
-        code:
-          const: global/quota-exceeded
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Quota exceeded.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Contact Support to increase your quota.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorQuotaExceeded
-    ApiErrorFirewallRulesetInUse:
-      type: object
-      properties:
-        code:
-          const: firewall-rulesets/firewall-ruleset-in-use
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Firewall ruleset is in use by one or more instances.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Terminate all instances that are using the ruleset before deleting it.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorFirewallRulesetInUse
-    ApiErrorInternal:
-      type: object
-      properties:
-        code:
-          const: global/internal-error
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: An internal server error occurred.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Try again later. Contact Support if the problem persists.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorInternal
   securitySchemes:
     basicAuth:
       type: http

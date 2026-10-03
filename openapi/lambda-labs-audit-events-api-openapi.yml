@@ -135,16 +135,56 @@ paths:
         example: cloud.api_key
 components:
   schemas:
-    ApiErrorNotFound:
+    ApiErrorUnauthorized:
       type: object
       properties:
         code:
-          const: global/not-found
+          const: global/invalid-api-key
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: The requested resource was not found.
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
           description: A description of the error.
         suggestion:
           type: string
@@ -152,7 +192,7 @@ components:
       required:
       - code
       - message
-      title: ApiErrorNotFound
+      title: ApiErrorInvalidParameters
     AuditEvent:
       type: object
       properties:
@@ -245,16 +285,16 @@ components:
         [Access and security > Audit logs](https://docs.lambda.ai/public-cloud/access-security#audit-logs)
 
         in the Lambda Cloud documentation.'
-    ApiErrorInvalidParameters:
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/invalid-parameters
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Invalid request data.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
@@ -262,47 +302,7 @@ components:
       required:
       - code
       - message
-      title: ApiErrorInvalidParameters
-    ApiErrorUnauthorized:
-      type: object
-      properties:
-        code:
-          const: global/invalid-api-key
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: API key was invalid, expired, or deleted.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Check your API key or create a new one, then try again.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorUnauthorized
-    ApiErrorAccountInactive:
-      type: object
-      properties:
-        code:
-          const: global/account-inactive
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Your account is inactive.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorAccountInactive
+      title: ApiErrorNotFound
   securitySchemes:
     basicAuth:
       type: http

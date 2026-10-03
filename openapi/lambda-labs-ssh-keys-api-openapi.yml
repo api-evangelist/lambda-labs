@@ -347,46 +347,6 @@ paths:
         example: ddf9a910ceb744a0bb95242cbba6cb50
 components:
   schemas:
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    ApiErrorInvalidParameters:
-      type: object
-      properties:
-        code:
-          const: global/invalid-parameters
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
     ApiErrorUnauthorized:
       type: object
       properties:
@@ -427,6 +387,24 @@ components:
       - message
       - suggestion
       title: ApiErrorAccountInactive
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
     SSHKey:
       type: object
       properties:
@@ -455,6 +433,28 @@ components:
       - public_key
       title: SSHKey
       description: Information about a stored SSH key that can be used to access instances over SSH.
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
     GeneratedSSHKey:
       type: object
       properties:

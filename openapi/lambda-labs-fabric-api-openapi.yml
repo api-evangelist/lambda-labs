@@ -289,46 +289,53 @@ paths:
         example: 43336648-096d-4cba-9aa2-f9bb7727639d
 components:
   schemas:
-    ApiErrorNotFound:
+    Region:
       type: object
       properties:
-        code:
-          const: global/not-found
+        name:
           type: string
-          description: The unique identifier for the type of error.
-        message:
+          description: The region code.
+        description:
           type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
+          description: The region description.
       required:
-      - code
-      - message
-      title: ApiErrorNotFound
-    EmptyResponse:
-      type: object
-      properties: {}
-      title: EmptyResponse
-    ApiErrorInvalidParameters:
+      - name
+      - description
+      title: Region
+    FabricPartition:
       type: object
       properties:
-        code:
-          const: global/invalid-parameters
+        id:
           type: string
-          description: The unique identifier for the type of error.
-        message:
+          description: The unique identifier (ID) for the partition.
+          examples:
+          - 43336648-096d-4cba-9aa2-f9bb7727639d
+        created:
           type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
+          format: date-time
+          description: The date and time at which the partition was created.
+        name:
           type: string
-          description: One or more suggestions of possible ways to fix the error.
+          description: The human-readable identifier for the partition.
+          examples:
+          - training-one
+        workspace_id:
+          type: string
+          example: ddaedf1b7a0e41ac981711504493b242
+          description: The ID of the workspace the partition is in.
+          examples:
+          - 232582c7ff041399e34823a0be62554
+        region:
+          $ref: '#/components/schemas/Region'
+          description: The region in which this partition exists.
       required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
+      - id
+      - created
+      - name
+      - workspace_id
+      - region
+      title: FabricPartition
+      description: A partition of the compute fabric.
     ApiErrorUnauthorized:
       type: object
       properties:
@@ -369,53 +376,46 @@ components:
       - message
       - suggestion
       title: ApiErrorAccountInactive
-    FabricPartition:
+    ApiErrorInvalidParameters:
       type: object
       properties:
-        id:
+        code:
+          const: global/invalid-parameters
           type: string
-          description: The unique identifier (ID) for the partition.
-          examples:
-          - 43336648-096d-4cba-9aa2-f9bb7727639d
-        created:
+          description: The unique identifier for the type of error.
+        message:
           type: string
-          format: date-time
-          description: The date and time at which the partition was created.
-        name:
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
           type: string
-          description: The human-readable identifier for the partition.
-          examples:
-          - training-one
-        workspace_id:
-          type: string
-          example: ddaedf1b7a0e41ac981711504493b242
-          description: The ID of the workspace the partition is in.
-          examples:
-          - 232582c7ff041399e34823a0be62554
-        region:
-          $ref: '#/components/schemas/Region'
-          description: The region in which this partition exists.
+          description: One or more suggestions of possible ways to fix the error.
       required:
-      - id
-      - created
-      - name
-      - workspace_id
-      - region
-      title: FabricPartition
-      description: A partition of the compute fabric.
-    Region:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    EmptyResponse:
+      type: object
+      properties: {}
+      title: EmptyResponse
+    ApiErrorNotFound:
       type: object
       properties:
-        name:
+        code:
+          const: global/not-found
           type: string
-          description: The region code.
-        description:
+          description: The unique identifier for the type of error.
+        message:
           type: string
-          description: The region description.
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
       required:
-      - name
-      - description
-      title: Region
+      - code
+      - message
+      title: ApiErrorNotFound
   securitySchemes:
     basicAuth:
       type: http
