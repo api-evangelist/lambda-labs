@@ -265,28 +265,6 @@ paths:
         example: 398578a2336b49079e74043f0bd2cfe8
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the user.
-          examples:
-          - 3da5a70a57a7422ea8a7203f98b2198b
-        email:
-          type: string
-          description: The email address of the user.
-          examples:
-          - me@example.com
-        status:
-          $ref: '#/components/schemas/UserStatus'
-          description: The status of the user's account.
-      required:
-      - id
-      - email
-      - status
-      title: User
-      description: Information about a user in your Team.
     Region:
       type: object
       properties:
@@ -300,6 +278,26 @@ components:
       - name
       - description
       title: Region
+    ApiErrorQuotaExceeded:
+      type: object
+      properties:
+        code:
+          const: global/quota-exceeded
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Quota exceeded.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Contact Support to increase your quota.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorQuotaExceeded
     Filesystem:
       type: object
       properties:
@@ -352,53 +350,46 @@ components:
       - region
       title: Filesystem
       description: Information about a shared filesystem.
-    ApiErrorQuotaExceeded:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          examples:
+          - 3da5a70a57a7422ea8a7203f98b2198b
+        email:
+          type: string
+          description: The email address of the user.
+          examples:
+          - me@example.com
+        status:
+          $ref: '#/components/schemas/UserStatus'
+          description: The status of the user's account.
+      required:
+      - id
+      - email
+      - status
+      title: User
+      description: Information about a user in your Team.
+    ApiErrorFilesystemNotFound:
       type: object
       properties:
         code:
-          const: global/quota-exceeded
+          const: global/object-does-not-exist
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Quota exceeded.
+          default: Filesystem was not found.
           description: A description of the error.
         suggestion:
           type: string
-          default: Contact Support to increase your quota.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      - suggestion
-      title: ApiErrorQuotaExceeded
-    UserStatus:
-      title: UserStatus
-      description: Status of the user's account.
-      enum:
-      - active
-      - deactivated
-      type: string
-    ApiErrorUnauthorized:
-      type: object
-      properties:
-        code:
-          const: global/invalid-api-key
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: API key was invalid, expired, or deleted.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Check your API key or create a new one, then try again.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorUnauthorized
+      title: ApiErrorFilesystemNotFound
     FilesystemDeleteResponse:
       type: object
       properties:
@@ -412,16 +403,16 @@ components:
       required:
       - deleted_ids
       title: FilesystemDeleteResponse
-    ApiErrorInvalidParameters:
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/invalid-parameters
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Invalid request data.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
@@ -429,27 +420,7 @@ components:
       required:
       - code
       - message
-      title: ApiErrorInvalidParameters
-    ApiErrorAccountInactive:
-      type: object
-      properties:
-        code:
-          const: global/account-inactive
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Your account is inactive.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorAccountInactive
+      title: ApiErrorNotFound
     ApiErrorInvalidBillingAddress:
       type: object
       properties:
@@ -470,59 +441,6 @@ components:
       - message
       - suggestion
       title: ApiErrorInvalidBillingAddress
-    ApiErrorFilesystemNotFound:
-      type: object
-      properties:
-        code:
-          const: global/object-does-not-exist
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Filesystem was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorFilesystemNotFound
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
-    ApiErrorDuplicate:
-      type: object
-      properties:
-        code:
-          const: global/duplicate
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorDuplicate
     ApiErrorFilesystemInUse:
       type: object
       properties:
@@ -540,6 +458,88 @@ components:
       - code
       - message
       title: ApiErrorFilesystemInUse
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    UserStatus:
+      title: UserStatus
+      description: Status of the user's account.
+      enum:
+      - active
+      - deactivated
+      type: string
+    ApiErrorDuplicate:
+      type: object
+      properties:
+        code:
+          const: global/duplicate
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorDuplicate
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
   securitySchemes:
     basicAuth:
       type: http

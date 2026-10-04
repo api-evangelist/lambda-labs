@@ -101,26 +101,30 @@ components:
       - name
       - description
       title: Region
-    ApiErrorUnauthorized:
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/invalid-api-key
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: API key was invalid, expired, or deleted.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
-          default: Check your API key or create a new one, then try again.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      - suggestion
-      title: ApiErrorUnauthorized
+      title: ApiErrorNotFound
+    ImageArchitecture:
+      title: ImageArchitecture
+      enum:
+      - x86_64
+      - arm64
+      type: string
     ApiErrorAccountInactive:
       type: object
       properties:
@@ -141,6 +145,26 @@ components:
       - message
       - suggestion
       title: ApiErrorAccountInactive
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
     ApiErrorInvalidParameters:
       type: object
       properties:
@@ -213,30 +237,6 @@ components:
       - region
       title: Image
       description: An available machine image in Lambda Cloud.
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
-    ImageArchitecture:
-      title: ImageArchitecture
-      enum:
-      - x86_64
-      - arm64
-      type: string
   securitySchemes:
     basicAuth:
       type: http

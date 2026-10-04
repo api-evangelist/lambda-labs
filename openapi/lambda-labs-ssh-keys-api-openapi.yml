@@ -347,114 +347,10 @@ paths:
         example: ddf9a910ceb744a0bb95242cbba6cb50
 components:
   schemas:
-    ApiErrorUnauthorized:
-      type: object
-      properties:
-        code:
-          const: global/invalid-api-key
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: API key was invalid, expired, or deleted.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Check your API key or create a new one, then try again.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorUnauthorized
-    ApiErrorAccountInactive:
-      type: object
-      properties:
-        code:
-          const: global/account-inactive
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Your account is inactive.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorAccountInactive
-    ApiErrorInvalidParameters:
-      type: object
-      properties:
-        code:
-          const: global/invalid-parameters
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
-    SSHKey:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier (ID) of the SSH key.
-          examples:
-          - ddf9a910ceb744a0bb95242cbba6cb50
-        name:
-          type: string
-          minLength: 1
-          maxLength: 64
-          description: The name of the SSH key.
-          examples:
-          - my-public-key
-        public_key:
-          type: string
-          minLength: 1
-          maxLength: 4096
-          description: The public key for the SSH key.
-          examples:
-          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname
-      required:
-      - id
-      - name
-      - public_key
-      title: SSHKey
-      description: Information about a stored SSH key that can be used to access instances over SSH.
     EmptyResponse:
       type: object
       properties: {}
       title: EmptyResponse
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
     GeneratedSSHKey:
       type: object
       properties:
@@ -491,6 +387,110 @@ components:
       - private_key
       title: GeneratedSSHKey
       description: Information about a server-generated SSH key.
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    SSHKey:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier (ID) of the SSH key.
+          examples:
+          - ddf9a910ceb744a0bb95242cbba6cb50
+        name:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The name of the SSH key.
+          examples:
+          - my-public-key
+        public_key:
+          type: string
+          minLength: 1
+          maxLength: 4096
+          description: The public key for the SSH key.
+          examples:
+          - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname
+      required:
+      - id
+      - name
+      - public_key
+      title: SSHKey
+      description: Information about a stored SSH key that can be used to access instances over SSH.
+    ApiErrorUnauthorized:
+      type: object
+      properties:
+        code:
+          const: global/invalid-api-key
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: API key was invalid, expired, or deleted.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Check your API key or create a new one, then try again.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorUnauthorized
   securitySchemes:
     basicAuth:
       type: http

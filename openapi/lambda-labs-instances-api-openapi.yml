@@ -794,37 +794,115 @@ paths:
         required: true
 components:
   schemas:
-    ApiErrorQuotaExceeded:
+    ApiErrorConflict:
       type: object
       properties:
         code:
-          const: global/quota-exceeded
+          const: global/conflict
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Quota exceeded.
+          default: The request conflicts with the current state of the resource.
           description: A description of the error.
         suggestion:
           type: string
-          default: Contact Support to increase your quota.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      - suggestion
-      title: ApiErrorQuotaExceeded
-    InstanceRestartResponse:
+      title: ApiErrorConflict
+    InstanceActionUnavailableCode:
+      title: InstanceActionUnavailableCode
+      enum:
+      - vm-has-not-launched
+      - vm-is-too-old
+      - vm-is-terminating
+      - vm-action-in-progress
+      type: string
+    InstanceActionAvailabilityDetails:
       type: object
       properties:
-        restarted_instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Instance'
-          description: The list of instances that were successfully restarted.
+        available:
+          type: boolean
+          description: If set, indicates that the relevant operation can be performed on the instance in its current state.
+        reason_code:
+          anyOf:
+          - $ref: '#/components/schemas/InstanceActionUnavailableCode'
+          - type: string
+          description: A code representing the instance state that is blocking the operation. Only provided if the operation is blocked.
+        reason_description:
+          type: string
+          description: A longer description of why this operation is currently blocked. Only provided if the operation is blocked.
       required:
-      - restarted_instances
-      title: InstanceRestartResponse
+      - available
+      title: InstanceActionAvailabilityDetails
+    InstanceTypeSpecs:
+      type: object
+      properties:
+        vcpus:
+          type: integer
+          description: The number of virtual CPUs.
+          examples:
+          - 208
+        memory_gib:
+          type: integer
+          description: The amount of RAM in gibibytes (GiB).
+          examples:
+          - 1800
+        storage_gib:
+          type: integer
+          description: The amount of storage in gibibytes (GiB).
+          examples:
+          - 24780
+        gpus:
+          type: integer
+          description: The number of GPUs.
+          examples:
+          - 8
+      required:
+      - vcpus
+      - memory_gib
+      - storage_gib
+      - gpus
+      title: InstanceTypeSpecs
+    TagEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the tag.
+          examples:
+          - key1
+        value:
+          type: string
+          description: The value of the tag.
+          examples:
+          - value1
+      required:
+      - key
+      - value
+      title: TagEntry
+    RequestedFilesystemMountEntry:
+      type: object
+      properties:
+        mount_point:
+          type: string
+          maxLength: 256
+          pattern: ^(/home|/lambda/nfs|/data)[//a-zA-Z0-9-]*$
+          description: The absolute path indicating where on the instance the filesystem will be mounted.
+          examples:
+          - /data/custom-mount-point
+        file_system_id:
+          type: string
+          description: The id of the filesystem to mount to the instance.
+          examples:
+          - 398578a2336b49079e74043f0bd2cfe8
+      required:
+      - mount_point
+      - file_system_id
+      title: RequestedFilesystemMountEntry
+      description: The mount point for a filesystem mounted to an instance.
     ApiErrorInstanceNotFound:
       type: object
       properties:
@@ -843,16 +921,16 @@ components:
       - code
       - message
       title: ApiErrorInstanceNotFound
-    ApiErrorInvalidParameters:
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/invalid-parameters
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Invalid request data.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
@@ -860,27 +938,7 @@ components:
       required:
       - code
       - message
-      title: ApiErrorInvalidParameters
-    InstanceTypes:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/InstanceTypesItem'
-      title: InstanceTypes
-      example:
-        gpu_8x_example:
-          instance_type:
-            name: gpu_8x_example
-            description: 8x Example GPU (40 GB SXM4)
-            gpu_description: Example GPU (40 GB SXM4)
-            price_cents_per_hour: 1592
-            specs:
-              vcpus: 124
-              memory_gib: 1800
-              storage_gib: 6144
-              gpus: 8
-          regions_with_capacity_available:
-          - name: us-west-1
-            description: California, USA
+      title: ApiErrorNotFound
     ApiErrorInvalidBillingAddress:
       type: object
       properties:
@@ -901,6 +959,159 @@ components:
       - message
       - suggestion
       title: ApiErrorInvalidBillingAddress
+    ApiErrorAccountInactive:
+      type: object
+      properties:
+        code:
+          const: global/account-inactive
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Your account is inactive.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorAccountInactive
+    ApiErrorForbidden:
+      type: object
+      properties:
+        code:
+          const: global/forbidden
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorForbidden
+    InstanceTypes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/InstanceTypesItem'
+      title: InstanceTypes
+      example:
+        gpu_8x_example:
+          instance_type:
+            name: gpu_8x_example
+            description: 8x Example GPU (40 GB SXM4)
+            gpu_description: Example GPU (40 GB SXM4)
+            price_cents_per_hour: 1592
+            specs:
+              vcpus: 124
+              memory_gib: 1800
+              storage_gib: 6144
+              gpus: 8
+          regions_with_capacity_available:
+          - name: us-west-1
+            description: California, USA
+    InstanceTerminateResponse:
+      type: object
+      properties:
+        terminated_instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instance'
+          description: The list of instances that were successfully terminated.
+      required:
+      - terminated_instances
+      title: InstanceTerminateResponse
+    ApiErrorFileSystemInWrongRegion:
+      type: object
+      properties:
+        code:
+          const: instance-operations/launch/file-system-in-wrong-region
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorFileSystemInWrongRegion
+    InstanceType:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the instance type.
+          examples:
+          - gpu_8x_h100_sxm5gdr
+        description:
+          type: string
+          description: A description of the instance type.
+          examples:
+          - 8x H100 (80 GB SXM5)
+        gpu_description:
+          type: string
+          description: The type of GPU used by this instance type.
+          examples:
+          - H100 (80 GB SXM5)
+        price_cents_per_hour:
+          type: integer
+          description: The price of the instance type in US cents per hour.
+          examples:
+          - 3592
+        specs:
+          $ref: '#/components/schemas/InstanceTypeSpecs'
+          description: Detailed technical specifications for the instance type.
+      required:
+      - name
+      - description
+      - gpu_description
+      - price_cents_per_hour
+      - specs
+      title: InstanceType
+    InstanceActionAvailability:
+      type: object
+      properties:
+        migrate:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be migrated.
+
+            If not, describes why the operation is blocked.'
+        rebuild:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be rebuilt.
+
+            If not, describes why the operation is blocked.'
+        restart:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be restarted.
+
+            If not, describes why the operation is blocked.'
+        cold_reboot:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently eligible for a cold reboot.
+
+            If not, describes why the operation is blocked.'
+        terminate:
+          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
+          description: 'Indicates whether the instance is currently able to be terminated.
+
+            If not, describes why the operation is blocked.'
+      required:
+      - migrate
+      - rebuild
+      - restart
+      - cold_reboot
+      - terminate
+      title: InstanceActionAvailability
     Instance:
       type: object
       properties:
@@ -997,27 +1208,16 @@ components:
       - actions
       title: Instance
       description: Detailed information about the instance.
-    InstanceTerminateResponse:
-      type: object
-      properties:
-        terminated_instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Instance'
-          description: The list of instances that were successfully terminated.
-      required:
-      - terminated_instances
-      title: InstanceTerminateResponse
-    ApiErrorNotFound:
+    ApiErrorInsufficientCapacity:
       type: object
       properties:
         code:
-          const: global/not-found
+          const: instance-operations/launch/insufficient-capacity
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: The requested resource was not found.
+          default: Not enough capacity to fulfill launch request.
           description: A description of the error.
         suggestion:
           type: string
@@ -1025,122 +1225,7 @@ components:
       required:
       - code
       - message
-      title: ApiErrorNotFound
-    FirewallRulesetEntry:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the firewall ruleset.
-          examples:
-          - c4d291f47f9d436fa39f58493ce3b50d
-      required:
-      - id
-      title: FirewallRulesetEntry
-      description: Reference to a firewall ruleset.
-    InstanceActionAvailability:
-      type: object
-      properties:
-        migrate:
-          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
-          description: 'Indicates whether the instance is currently able to be migrated.
-
-            If not, describes why the operation is blocked.'
-        rebuild:
-          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
-          description: 'Indicates whether the instance is currently able to be rebuilt.
-
-            If not, describes why the operation is blocked.'
-        restart:
-          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
-          description: 'Indicates whether the instance is currently able to be restarted.
-
-            If not, describes why the operation is blocked.'
-        cold_reboot:
-          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
-          description: 'Indicates whether the instance is currently eligible for a cold reboot.
-
-            If not, describes why the operation is blocked.'
-        terminate:
-          $ref: '#/components/schemas/InstanceActionAvailabilityDetails'
-          description: 'Indicates whether the instance is currently able to be terminated.
-
-            If not, describes why the operation is blocked.'
-      required:
-      - migrate
-      - rebuild
-      - restart
-      - cold_reboot
-      - terminate
-      title: InstanceActionAvailability
-    TagEntry:
-      type: object
-      properties:
-        key:
-          type: string
-          description: The key of the tag.
-          examples:
-          - key1
-        value:
-          type: string
-          description: The value of the tag.
-          examples:
-          - value1
-      required:
-      - key
-      - value
-      title: TagEntry
-    Region:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The region code.
-        description:
-          type: string
-          description: The region description.
-      required:
-      - name
-      - description
-      title: Region
-    ApiErrorConflict:
-      type: object
-      properties:
-        code:
-          const: global/conflict
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The request conflicts with the current state of the resource.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorConflict
-    ApiErrorAccountInactive:
-      type: object
-      properties:
-        code:
-          const: global/account-inactive
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Your account is inactive.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorAccountInactive
+      title: ApiErrorInsufficientCapacity
     ApiErrorUnauthorized:
       type: object
       properties:
@@ -1161,209 +1246,29 @@ components:
       - message
       - suggestion
       title: ApiErrorUnauthorized
-    ImageSpecificationFamily:
+    InstanceRestartResponse:
       type: object
       properties:
-        family:
-          type: string
-          description: The family name of the image.
+        restarted_instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instance'
+          description: The list of instances that were successfully restarted.
       required:
-      - family
-      title: ImageSpecificationFamily
-      description: Specifies the image to use by its family name.
-    InstanceActionUnavailableCode:
-      title: InstanceActionUnavailableCode
-      enum:
-      - vm-has-not-launched
-      - vm-is-too-old
-      - vm-is-terminating
-      - vm-action-in-progress
-      type: string
-    ApiErrorInsufficientCapacity:
-      type: object
-      properties:
-        code:
-          const: instance-operations/launch/insufficient-capacity
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Not enough capacity to fulfill launch request.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInsufficientCapacity
-    ApiErrorFileSystemInWrongRegion:
-      type: object
-      properties:
-        code:
-          const: instance-operations/launch/file-system-in-wrong-region
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorFileSystemInWrongRegion
-    ImageSpecificationID:
+      - restarted_instances
+      title: InstanceRestartResponse
+    FirewallRulesetEntry:
       type: object
       properties:
         id:
           type: string
-          example: ddaedf1b7a0e41ac981711504493b242
+          description: The unique identifier of the firewall ruleset.
+          examples:
+          - c4d291f47f9d436fa39f58493ce3b50d
       required:
       - id
-      title: ImageSpecificationID
-      description: Specifies the image to use by its unique identifier.
-    InstanceStatus:
-      title: InstanceStatus
-      description: The current status of the instance.
-      enum:
-      - booting
-      - active
-      - unhealthy
-      - terminated
-      - terminating
-      - preempted
-      type: string
-    RequestedFilesystemMountEntry:
-      type: object
-      properties:
-        mount_point:
-          type: string
-          maxLength: 256
-          pattern: ^(/home|/lambda/nfs|/data)[//a-zA-Z0-9-]*$
-          description: The absolute path indicating where on the instance the filesystem will be mounted.
-          examples:
-          - /data/custom-mount-point
-        file_system_id:
-          type: string
-          description: The id of the filesystem to mount to the instance.
-          examples:
-          - 398578a2336b49079e74043f0bd2cfe8
-      required:
-      - mount_point
-      - file_system_id
-      title: RequestedFilesystemMountEntry
-      description: The mount point for a filesystem mounted to an instance.
-    ApiErrorForbidden:
-      type: object
-      properties:
-        code:
-          const: global/forbidden
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorForbidden
-    InstanceType:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the instance type.
-          examples:
-          - gpu_8x_h100_sxm5gdr
-        description:
-          type: string
-          description: A description of the instance type.
-          examples:
-          - 8x H100 (80 GB SXM5)
-        gpu_description:
-          type: string
-          description: The type of GPU used by this instance type.
-          examples:
-          - H100 (80 GB SXM5)
-        price_cents_per_hour:
-          type: integer
-          description: The price of the instance type in US cents per hour.
-          examples:
-          - 3592
-        specs:
-          $ref: '#/components/schemas/InstanceTypeSpecs'
-          description: Detailed technical specifications for the instance type.
-      required:
-      - name
-      - description
-      - gpu_description
-      - price_cents_per_hour
-      - specs
-      title: InstanceType
-    InstanceActionAvailabilityDetails:
-      type: object
-      properties:
-        available:
-          type: boolean
-          description: If set, indicates that the relevant operation can be performed on the instance in its current state.
-        reason_code:
-          anyOf:
-          - $ref: '#/components/schemas/InstanceActionUnavailableCode'
-          - type: string
-          description: A code representing the instance state that is blocking the operation. Only provided if the operation is blocked.
-        reason_description:
-          type: string
-          description: A longer description of why this operation is currently blocked. Only provided if the operation is blocked.
-      required:
-      - available
-      title: InstanceActionAvailabilityDetails
-    InstanceTypeSpecs:
-      type: object
-      properties:
-        vcpus:
-          type: integer
-          description: The number of virtual CPUs.
-          examples:
-          - 208
-        memory_gib:
-          type: integer
-          description: The amount of RAM in gibibytes (GiB).
-          examples:
-          - 1800
-        storage_gib:
-          type: integer
-          description: The amount of storage in gibibytes (GiB).
-          examples:
-          - 24780
-        gpus:
-          type: integer
-          description: The number of GPUs.
-          examples:
-          - 8
-      required:
-      - vcpus
-      - memory_gib
-      - storage_gib
-      - gpus
-      title: InstanceTypeSpecs
-    InstanceLaunchResponse:
-      type: object
-      properties:
-        instance_ids:
-          type: array
-          items:
-            type: string
-          description: The unique identifiers (IDs) of the launched instances.
-          examples:
-          - - 0920582c7ff041399e34823a0be62549
-      required:
-      - instance_ids
-      title: InstanceLaunchResponse
+      title: FirewallRulesetEntry
+      description: Reference to a firewall ruleset.
     ApiErrorLaunchResourceNotFound:
       type: object
       properties:
@@ -1382,6 +1287,63 @@ components:
       - message
       - suggestion
       title: ApiErrorLaunchResourceNotFound
+    InstanceStatus:
+      title: InstanceStatus
+      description: The current status of the instance.
+      enum:
+      - booting
+      - active
+      - unhealthy
+      - terminated
+      - terminating
+      - preempted
+      type: string
+    InstanceLaunchResponse:
+      type: object
+      properties:
+        instance_ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers (IDs) of the launched instances.
+          examples:
+          - - 0920582c7ff041399e34823a0be62549
+      required:
+      - instance_ids
+      title: InstanceLaunchResponse
+    ApiErrorQuotaExceeded:
+      type: object
+      properties:
+        code:
+          const: global/quota-exceeded
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Quota exceeded.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Contact Support to increase your quota.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorQuotaExceeded
+    Region:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The region code.
+        description:
+          type: string
+          description: The region description.
+      required:
+      - name
+      - description
+      title: Region
     RequestedTagEntry:
       type: object
       properties:
@@ -1402,6 +1364,16 @@ components:
       - key
       - value
       title: RequestedTagEntry
+    ImageSpecificationID:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ddaedf1b7a0e41ac981711504493b242
+      required:
+      - id
+      title: ImageSpecificationID
+      description: Specifies the image to use by its unique identifier.
     InstanceTypesItem:
       type: object
       properties:
@@ -1436,6 +1408,34 @@ components:
       - file_system_id
       title: FilesystemMountEntry
       description: The mount point for a filesystem mounted to an instance.
+    ApiErrorInvalidParameters:
+      type: object
+      properties:
+        code:
+          const: global/invalid-parameters
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Invalid request data.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorInvalidParameters
+    ImageSpecificationFamily:
+      type: object
+      properties:
+        family:
+          type: string
+          description: The family name of the image.
+      required:
+      - family
+      title: ImageSpecificationFamily
+      description: Specifies the image to use by its family name.
   securitySchemes:
     basicAuth:
       type: http

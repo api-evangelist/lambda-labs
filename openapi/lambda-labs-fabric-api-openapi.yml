@@ -336,26 +336,42 @@ components:
       - region
       title: FabricPartition
       description: A partition of the compute fabric.
-    ApiErrorUnauthorized:
+    ApiErrorInvalidParameters:
       type: object
       properties:
         code:
-          const: global/invalid-api-key
+          const: global/invalid-parameters
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: API key was invalid, expired, or deleted.
+          default: Invalid request data.
           description: A description of the error.
         suggestion:
           type: string
-          default: Check your API key or create a new one, then try again.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      - suggestion
-      title: ApiErrorUnauthorized
+      title: ApiErrorInvalidParameters
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
     ApiErrorAccountInactive:
       type: object
       properties:
@@ -376,46 +392,30 @@ components:
       - message
       - suggestion
       title: ApiErrorAccountInactive
-    ApiErrorInvalidParameters:
+    ApiErrorUnauthorized:
       type: object
       properties:
         code:
-          const: global/invalid-parameters
+          const: global/invalid-api-key
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Invalid request data.
+          default: API key was invalid, expired, or deleted.
           description: A description of the error.
         suggestion:
           type: string
+          default: Check your API key or create a new one, then try again.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      title: ApiErrorInvalidParameters
+      - suggestion
+      title: ApiErrorUnauthorized
     EmptyResponse:
       type: object
       properties: {}
       title: EmptyResponse
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
   securitySchemes:
     basicAuth:
       type: http
