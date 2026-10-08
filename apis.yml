@@ -264,6 +264,10 @@ apis:
   - type: OpenAPI
     url: openapi/lambda-labs-support-tickets-api-openapi.yml
 common:
+- type: RateLimits
+  url: rate-limits/lambda-labs-rate-limits.yml
+- type: FinOps
+  url: finops/lambda-labs-finops.yml
 - type: Plans
   url: plans/lambda-labs-plans-pricing.yml
 - type: CapabilityMap
