@@ -76,26 +76,24 @@ paths:
       operationId: listRegions
 components:
   schemas:
-    ApiErrorUnauthorized:
+    ApiErrorNotFound:
       type: object
       properties:
         code:
-          const: global/invalid-api-key
+          const: global/not-found
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: API key was invalid, expired, or deleted.
+          default: The requested resource was not found.
           description: A description of the error.
         suggestion:
           type: string
-          default: Check your API key or create a new one, then try again.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      - suggestion
-      title: ApiErrorUnauthorized
+      title: ApiErrorNotFound
     ApiErrorAccountInactive:
       type: object
       properties:
@@ -129,24 +127,26 @@ components:
       - name
       - description
       title: Region
-    ApiErrorNotFound:
+    ApiErrorUnauthorized:
       type: object
       properties:
         code:
-          const: global/not-found
+          const: global/invalid-api-key
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: The requested resource was not found.
+          default: API key was invalid, expired, or deleted.
           description: A description of the error.
         suggestion:
           type: string
+          default: Check your API key or create a new one, then try again.
           description: One or more suggestions of possible ways to fix the error.
       required:
       - code
       - message
-      title: ApiErrorNotFound
+      - suggestion
+      title: ApiErrorUnauthorized
   securitySchemes:
     basicAuth:
       type: http

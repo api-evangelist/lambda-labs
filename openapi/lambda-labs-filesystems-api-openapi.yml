@@ -265,39 +265,6 @@ paths:
         example: 398578a2336b49079e74043f0bd2cfe8
 components:
   schemas:
-    Region:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The region code.
-        description:
-          type: string
-          description: The region description.
-      required:
-      - name
-      - description
-      title: Region
-    ApiErrorQuotaExceeded:
-      type: object
-      properties:
-        code:
-          const: global/quota-exceeded
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Quota exceeded.
-          description: A description of the error.
-        suggestion:
-          type: string
-          default: Contact Support to increase your quota.
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      - suggestion
-      title: ApiErrorQuotaExceeded
     Filesystem:
       type: object
       properties:
@@ -350,38 +317,16 @@ components:
       - region
       title: Filesystem
       description: Information about a shared filesystem.
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier for the user.
-          examples:
-          - 3da5a70a57a7422ea8a7203f98b2198b
-        email:
-          type: string
-          description: The email address of the user.
-          examples:
-          - me@example.com
-        status:
-          $ref: '#/components/schemas/UserStatus'
-          description: The status of the user's account.
-      required:
-      - id
-      - email
-      - status
-      title: User
-      description: Information about a user in your Team.
-    ApiErrorFilesystemNotFound:
+    ApiErrorInvalidParameters:
       type: object
       properties:
         code:
-          const: global/object-does-not-exist
+          const: global/invalid-parameters
           type: string
           description: The unique identifier for the type of error.
         message:
           type: string
-          default: Filesystem was not found.
+          default: Invalid request data.
           description: A description of the error.
         suggestion:
           type: string
@@ -389,38 +334,7 @@ components:
       required:
       - code
       - message
-      title: ApiErrorFilesystemNotFound
-    FilesystemDeleteResponse:
-      type: object
-      properties:
-        deleted_ids:
-          type: array
-          items:
-            type: string
-          description: The unique identifiers of the filesystems that were deleted.
-          examples:
-          - - 398578a2336b49079e74043f0bd2cfe8
-      required:
-      - deleted_ids
-      title: FilesystemDeleteResponse
-    ApiErrorNotFound:
-      type: object
-      properties:
-        code:
-          const: global/not-found
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: The requested resource was not found.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorNotFound
+      title: ApiErrorInvalidParameters
     ApiErrorInvalidBillingAddress:
       type: object
       properties:
@@ -458,6 +372,85 @@ components:
       - code
       - message
       title: ApiErrorFilesystemInUse
+    ApiErrorQuotaExceeded:
+      type: object
+      properties:
+        code:
+          const: global/quota-exceeded
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Quota exceeded.
+          description: A description of the error.
+        suggestion:
+          type: string
+          default: Contact Support to increase your quota.
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      - suggestion
+      title: ApiErrorQuotaExceeded
+    ApiErrorDuplicate:
+      type: object
+      properties:
+        code:
+          const: global/duplicate
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorDuplicate
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the user.
+          examples:
+          - 3da5a70a57a7422ea8a7203f98b2198b
+        email:
+          type: string
+          description: The email address of the user.
+          examples:
+          - me@example.com
+        status:
+          $ref: '#/components/schemas/UserStatus'
+          description: The status of the user's account.
+      required:
+      - id
+      - email
+      - status
+      title: User
+      description: Information about a user in your Team.
+    UserStatus:
+      title: UserStatus
+      description: Status of the user's account.
+      enum:
+      - active
+      - deactivated
+      type: string
+    FilesystemDeleteResponse:
+      type: object
+      properties:
+        deleted_ids:
+          type: array
+          items:
+            type: string
+          description: The unique identifiers of the filesystems that were deleted.
+          examples:
+          - - 398578a2336b49079e74043f0bd2cfe8
+      required:
+      - deleted_ids
+      title: FilesystemDeleteResponse
     ApiErrorAccountInactive:
       type: object
       properties:
@@ -478,48 +471,6 @@ components:
       - message
       - suggestion
       title: ApiErrorAccountInactive
-    ApiErrorInvalidParameters:
-      type: object
-      properties:
-        code:
-          const: global/invalid-parameters
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          default: Invalid request data.
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorInvalidParameters
-    UserStatus:
-      title: UserStatus
-      description: Status of the user's account.
-      enum:
-      - active
-      - deactivated
-      type: string
-    ApiErrorDuplicate:
-      type: object
-      properties:
-        code:
-          const: global/duplicate
-          type: string
-          description: The unique identifier for the type of error.
-        message:
-          type: string
-          description: A description of the error.
-        suggestion:
-          type: string
-          description: One or more suggestions of possible ways to fix the error.
-      required:
-      - code
-      - message
-      title: ApiErrorDuplicate
     ApiErrorUnauthorized:
       type: object
       properties:
@@ -540,6 +491,55 @@ components:
       - message
       - suggestion
       title: ApiErrorUnauthorized
+    ApiErrorFilesystemNotFound:
+      type: object
+      properties:
+        code:
+          const: global/object-does-not-exist
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: Filesystem was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorFilesystemNotFound
+    Region:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The region code.
+        description:
+          type: string
+          description: The region description.
+      required:
+      - name
+      - description
+      title: Region
+    ApiErrorNotFound:
+      type: object
+      properties:
+        code:
+          const: global/not-found
+          type: string
+          description: The unique identifier for the type of error.
+        message:
+          type: string
+          default: The requested resource was not found.
+          description: A description of the error.
+        suggestion:
+          type: string
+          description: One or more suggestions of possible ways to fix the error.
+      required:
+      - code
+      - message
+      title: ApiErrorNotFound
   securitySchemes:
     basicAuth:
       type: http
