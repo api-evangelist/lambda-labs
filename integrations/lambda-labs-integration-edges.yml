@@ -69,6 +69,44 @@ edges:
     detected: '2026-10-20'
   detected_by: sweep-network-edge.py
   first_seen: '2026-10-20'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/lambda
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - lambda/pokemon-blip-captions
+  - lambda/naruto-blip-captions
+  - lambda/hermes-agent-reasoning-traces
+  - lambda/text2bricks
+  - lambda/sd-image-variations-diffusers
+  - lambda/miniSD-diffusers
+  - lambda/Llama-3.3-70B-Instruct-AWQ-4bit
+  - lambda/sd-pokemon-diffusers
+  - lambda/pythia-1.4b-deduped-synthetic-instruct
+  - lambda/pythia-6.9b-deduped-synthetic-instruct
+  - lambda/pythia-2.8b-deduped-synthetic-instruct
+  - lambda/sd-naruto-diffusers
+  - lambda/image-mixer-demo
+  - lambda/stable-diffusion-image-variations
+  - lambda/text-to-naruto
+  - lambda/text-to-pokemon
+  - lambda/text-to-avatar
+  - lambda/LambdaSuperRes
+  - lambda/generative-music-visualizer
+  - lambda/clip2latent-demo
+  listing_count: 3
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-13'
 method: searched
 checked:
@@ -78,6 +116,7 @@ checked:
 - https://www.peeringdb.com/api/fac
 - https://www.peeringdb.com/api/ix
 - https://www.peeringdb.com/api/net
+- hugging-face/integrations/hugging-face-integration-edges.yml
 source:
 - https://www.peeringdb.com/api/net
 - https://www.peeringdb.com/api/ix
