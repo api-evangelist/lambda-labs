@@ -264,6 +264,8 @@ apis:
   - type: OpenAPI
     url: openapi/lambda-labs-support-tickets-api-openapi.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/lambda/overview
 - type: RateLimits
   url: rate-limits/lambda-labs-rate-limits.yml
 - type: FinOps
