@@ -1,1023 +1,1055 @@
 {
+  "info": {
+    "_postman_id": "2060678f-dc84-49f0-9e9c-ed618f752eee",
+    "name": "Lambda Cloud Fabric API",
+    "description": "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:20:35.000Z",
+    "updatedAt": "2026-10-21T20:20:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2060678f-dc84-49f0-9e9c-ed618f752eee"
+  },
   "item": [
     {
-      "id": "8d9fff24-8be2-45e9-b999-15e2e60bf6a2",
-      "name": "Fabric",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "3ed598ef-673b-4dee-8d4a-1c5e496dcfe8",
-          "name": "Create partition",
-          "request": {
-            "name": "Create partition",
-            "description": {
-              "content": "Creates a new partition in a region.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "fabric"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "a741353d-9a56-4cd8-b305-ecea80f27c2d",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"ddaedf1b7a0e41ac981711504493b242\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "fabric",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Update partition",
+                      "id": "af02c7e9-3126-493a-b22b-8b3eb0a6d76b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"p0r84z\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "74023d34-1e6e-4463-bfc7-3170ad6ef340",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier (ID) of the partition"
+                            }
+                          ]
+                        },
+                        "description": "Updates a partition's details."
+                      },
+                      "response": [
+                        {
+                          "id": "632fb650-b4bc-4976-8284-b21b1c731158",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"p0r84z\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"created\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"workspace_id\": \"<string>\",\n    \"region\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-632fb650-b4bc-4976-8284-b21b1c731158"
+                        },
+                        {
+                          "id": "809b4d3c-05f8-4d7a-acc8-b8ae7a1b5b22",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"p0r84z\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-809b4d3c-05f8-4d7a-acc8-b8ae7a1b5b22"
+                        },
+                        {
+                          "id": "8b1ebf8a-a66f-48ba-9275-4975b0c0a4c6",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"p0r84z\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-8b1ebf8a-a66f-48ba-9275-4975b0c0a4c6"
+                        },
+                        {
+                          "id": "b1a0b56b-3173-4eba-b09e-02b13dcd1de2",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"p0r84z\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-b1a0b56b-3173-4eba-b09e-02b13dcd1de2"
+                        },
+                        {
+                          "id": "1e4b12af-e3b7-487f-8e08-a9522b082e78",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"p0r84z\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-1e4b12af-e3b7-487f-8e08-a9522b082e78"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-af02c7e9-3126-493a-b22b-8b3eb0a6d76b"
+                    },
+                    {
+                      "name": "Delete partition",
+                      "id": "1fafb454-e48f-4945-bb9c-30976c57afcd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "a75f4dd6-c4fd-4a25-bbe4-eb56eb366a8d",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier (ID) of the partition"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a partition. This will return a 400 error unless there are no instances currently assigned to the partition."
+                      },
+                      "response": [
+                        {
+                          "id": "db534927-b925-4f79-b664-fb6184d14d2f",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {}\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-db534927-b925-4f79-b664-fb6184d14d2f"
+                        },
+                        {
+                          "id": "86d27fc6-5a35-4d5b-9789-f6a6a7e4aa85",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-86d27fc6-5a35-4d5b-9789-f6a6a7e4aa85"
+                        },
+                        {
+                          "id": "9f42a2fd-d6fa-491d-ba9a-09a8a2d6f372",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-9f42a2fd-d6fa-491d-ba9a-09a8a2d6f372"
+                        },
+                        {
+                          "id": "109eec65-067f-4043-a0db-4d521500dee2",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-109eec65-067f-4043-a0db-4d521500dee2"
+                        },
+                        {
+                          "id": "115e98c1-bb53-4646-9d04-65c497ca1b33",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/fabric/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "fabric",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:20:35.000Z",
+                          "updatedAt": "2026-10-21T20:20:35.000Z",
+                          "uid": "35240-115e98c1-bb53-4646-9d04-65c497ca1b33"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-1fafb454-e48f-4945-bb9c-30976c57afcd"
+                    }
+                  ],
+                  "id": "b4b0e235-4923-47fb-a273-8d9dcbada6cc",
+                  "createdAt": "2026-10-21T20:20:35.000Z",
+                  "updatedAt": "2026-10-21T20:20:35.000Z",
+                  "uid": "35240-b4b0e235-4923-47fb-a273-8d9dcbada6cc"
+                },
+                {
+                  "name": "Create partition",
+                  "id": "fae6c84c-df60-491c-92d4-02442fc2cf4b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"ic7hqx4itoehovzj7\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/fabric",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "fabric"
+                      ]
+                    },
+                    "description": "Creates a new partition in a region."
+                  },
+                  "response": [
+                    {
+                      "id": "768c274a-c0d1-4c03-bbd6-c5987f3528d4",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ic7hqx4itoehovzj7\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"created\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"workspace_id\": \"<string>\",\n    \"region\": {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-768c274a-c0d1-4c03-bbd6-c5987f3528d4"
+                    },
+                    {
+                      "id": "84b3b808-18d1-4c99-ad5c-d33d7198841f",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ic7hqx4itoehovzj7\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-84b3b808-18d1-4c99-ad5c-d33d7198841f"
+                    },
+                    {
+                      "id": "44c1bf7b-3fed-4f70-96bc-853639aee255",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ic7hqx4itoehovzj7\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-44c1bf7b-3fed-4f70-96bc-853639aee255"
+                    },
+                    {
+                      "id": "46529b25-5234-4249-b3df-8375c448c4c8",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ic7hqx4itoehovzj7\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-46529b25-5234-4249-b3df-8375c448c4c8"
+                    },
+                    {
+                      "id": "b6e9bd24-9c1b-43ba-8a19-3ae1f36758d9",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"ic7hqx4itoehovzj7\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/fabric",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "fabric"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:20:35.000Z",
+                      "updatedAt": "2026-10-21T20:20:35.000Z",
+                      "uid": "35240-b6e9bd24-9c1b-43ba-8a19-3ae1f36758d9"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:20:35.000Z",
+                  "updatedAt": "2026-10-21T20:20:35.000Z",
+                  "uid": "35240-fae6c84c-df60-491c-92d4-02442fc2cf4b"
                 }
               ],
-              "body": "{\n  \"data\": {\n    \"id\": \"43336648-096d-4cba-9aa2-f9bb7727639d\",\n    \"created\": \"1997-10-18T12:16:49.683Z\",\n    \"name\": \"training-one\",\n    \"workspace_id\": \"232582c7ff041399e34823a0be62554\",\n    \"region\": {\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cd88abc8-bc4d-4a6d-8097-b39e808ab728",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"ddaedf1b7a0e41ac981711504493b242\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f8a088f3-786a-4142-a2f4-92138d65b76f",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"ddaedf1b7a0e41ac981711504493b242\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "32bead78-4c8d-4aa5-a669-c91a5e91a708",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"ddaedf1b7a0e41ac981711504493b242\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bde6078a-7e6c-4d02-b849-e5ef9af5f0f7",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\",\n  \"region\": \"<string>\",\n  \"workspace_id\": \"ddaedf1b7a0e41ac981711504493b242\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "a071e255-d9d9-4685-923b-eecb08789bb2",
+              "createdAt": "2026-10-21T20:20:35.000Z",
+              "updatedAt": "2026-10-21T20:20:35.000Z",
+              "uid": "35240-a071e255-d9d9-4685-923b-eecb08789bb2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f2cfdbe9-dd7a-4707-a73d-bf414c0056e5",
-          "name": "Update partition",
-          "request": {
-            "name": "Update partition",
-            "description": {
-              "content": "Updates a partition's details.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "fabric",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The unique identifier (ID) of the partition"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "cd14d3c7-8e9b-4d99-bc43-56ed84242766",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"43336648-096d-4cba-9aa2-f9bb7727639d\",\n    \"created\": \"1997-10-18T12:16:49.683Z\",\n    \"name\": \"training-one\",\n    \"workspace_id\": \"232582c7ff041399e34823a0be62554\",\n    \"region\": {\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "48dd8800-fcad-428e-b94e-a6ec261bf72f",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7e295734-4eed-403d-9d30-f0a6a8f2fad2",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e648ec14-8d0a-4c0c-ac1d-a2c671e83c5c",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2a54126c-fa15-4fde-885f-c674207a3756",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"training-one\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7f74a793-8a9c-4be3-8623-8ca53a056bd0",
-          "name": "Delete partition",
-          "request": {
-            "name": "Delete partition",
-            "description": {
-              "content": "Deletes a partition. This will return a 400 error unless there are no instances currently assigned to the partition.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "fabric",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The unique identifier (ID) of the partition"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "899f792c-9229-488e-ba8b-b2d3338349c1",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "67b42192-4038-420d-96d4-902ee4f39ad4",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "62af0ec3-b562-47e7-9b80-a0ccc7200132",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5c81146a-9b22-4e99-8df1-ee0f9c61f75a",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "346b94ec-e9e5-43b4-8d91-08effb3b5c7b",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "fabric",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the partition"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c3d2ed1c-f52d-49a6-8ba0-b030705af837",
+          "createdAt": "2026-10-21T20:20:35.000Z",
+          "updatedAt": "2026-10-21T20:20:35.000Z",
+          "uid": "35240-c3d2ed1c-f52d-49a6-8ba0-b030705af837"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://cloud.lambda.ai/",
-      "key": "baseUrl"
+      "id": "180eaf9b-d013-49c9-98d4-f1821a770297",
+      "createdAt": "2026-10-21T20:20:35.000Z",
+      "updatedAt": "2026-10-21T20:20:35.000Z",
+      "uid": "35240-180eaf9b-d013-49c9-98d4-f1821a770297"
     }
   ],
   "auth": {
@@ -1025,17 +1057,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4a049cfa-57e7-4844-b835-afcbc6992e21",
-    "name": "Lambda Cloud Audit Events Fabric API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.\n\nRequests to the API are generally limited to one request per second. Requests to\nthe `/instance-operations/launch` endpoint are limited to one request per 12\nseconds, or five requests per minute.\n\n## Response types and formats {#formats}\n\nThe format of each response object depends on whether the request succeeded or failed.\n\n### Success responses {#success-responses}\n\nWhen a request succeeds, the API returns a response object in the following format. `<PAYLOAD>`\nrepresents the endpoint-specific data object returned as part of the response object.\n\n```json\n{\n    \"data\": <PAYLOAD>\n}\n```\n\n### Error responses {#error-responses}\n\nWhen a request fails, the API returns an error response object in the following format:\n\n```json\n{\n    \"error\": {\n        \"code\": string,\n        \"message\": string,\n        \"suggestion\": string?\n    }\n}\n```\n\n- `code`: A machine- and human-readable error code specific to a particular failure mode.\n- `message`: An explanation of the error.\n- `suggestion`: When present, a suggestion for how to address the error.\n\n:::note{type=\"info\" title=\"Note\"}\nWhen handling errors, avoid relying on the values of `message` or `suggestion`, as\nthese values are subject to change. Instead, use the value of `code`.\n:::\n\n#### Provider errors {#provider-errors}\n\nIn some cases, you might receive errors that come from upstream services/providers rather than directly\nfrom Lambda services. You can identify these errors by their error code prefix, `provider/`.\n\nCommon provider errors include:\n\n- Network outages or connectivity issues\n- Service unavailability\n- Quota limitations or resource exhaustion\n\nAn example of a typical service unavailability error:\n\n```json\n{\n  \"error\": {\n    \"code\": \"provider/internal-unavailable\",\n    \"message\": \"Provider unavailable\",\n    \"suggestion\": \"Try again shortly\"\n  }\n}\n```\n## Outgoing webhooks {#outgoing-webhooks}\n\nLambda can send webhook notifications to your URL when support ticket events occur,\nenabling near real-time integration with your systems.\n\n### Event types {#event-types}\n\n- `ticket.created` - A support ticket was created.\n- `ticket.status_changed` - A support ticket's status was updated, and the ticket remains open.\n- `ticket.resolved` - A support ticket's status was set to `solved`, or the ticket was closed.\n\n### Payload structure {#payload-structure}\n\nAll webhook payloads follow this structure:\n\n```json\n{\n  \"id\": \"a3b7c9d1e5f642a8b0c2d4e6f8a0b2c4\",\n  \"object\": \"event\",\n  \"type\": \"ticket.created\",\n  \"created\": 1700000000,\n  \"api_version\": \"2025-11-18\",\n  \"data\": {\n    \"object\": \"ticket\",\n    \"id\": \"f1e2d3c4b5a647869708192a3b4c5d6e\",\n    \"subject\": \"Issue with instance 0920582c7ff041399e34823a0be62549\",\n    \"description\": \"Detailed description of the issue...\",\n    \"request_type\": \"incident\",\n    \"severity\": \"sev_2\",\n    \"status\": \"new\",\n    \"created_at\": \"2024-11-15T10:00:00+00:00\",\n    \"updated_at\": \"2024-11-15T10:00:00+00:00\",\n    \"instance_ip\": \"192.168.1.100\",\n    \"instance_id\": \"0920582c7ff041399e34823a0be62549\",\n    \"cluster_id\": null,\n    \"source\": \"api\"\n  }\n}\n```\n\n### Webhook authentication {#webhook-authentication}\n\nWebhook requests include a Bearer token in the `Authorization` header for authentication:\n\n```http\nAuthorization: Bearer <token>\n```\n## Authentication {#authentication}\n\nThe Lambda Cloud API uses API keys to authenticate incoming requests. You\ncan generate a new API key pair or view your existing API keys by visiting\nthe [API keys page](https://cloud.lambda.ai/api-keys) in the Lambda Cloud\ndashboard.\n\nIn general, Lambda recommends passing an HTTP Bearer header that contains\nyour API key:\n\n```http\nAuthorization: Bearer <YOUR-API-KEY>\n```\n\n### Authenticating with `curl` {#authenticating-with-curl}\n\nThe API also supports passing an HTTP Basic header. This option chiefly exists\nto support `curl`'s `-u` flag, which allows you to pass your credentials\nwithout having to write out the full `Authorization: Basic` header string.\nFor example:\n\n```bash\ncurl --request GET --url 'https://cloud.lambda.ai/api/v1/instances' \\\n  --header 'accept: application/json' \\\n  --user '<YOUR-API-KEY>:'\n```\n\nIf your use case requires it, you can also pass the HTTP Basic header directly.\nThe value you pass must be a Base64-encoded string containing your API key\nand a trailing colon:\n\n```http\nAuthorization: Basic <BASE64-ENCODED-API-KEY>:\n```\n\n:::note{type=\"attention\" title=\"Important\"}\nIf you make a request without including a supported `Authorization` header,\nthe request will fail.\n:::",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.lambda.ai/"
     }
-  }
+  ]
 }

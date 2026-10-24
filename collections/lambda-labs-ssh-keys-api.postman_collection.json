@@ -1,916 +1,932 @@
 {
+  "info": {
+    "_postman_id": "42dbb626-20a8-4900-a46b-3bcf34145a48",
+    "name": "Lambda Cloud SSH keys API",
+    "description": "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:21:05.000Z",
+    "updatedAt": "2026-10-21T20:21:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-42dbb626-20a8-4900-a46b-3bcf34145a48"
+  },
   "item": [
     {
-      "id": "6f0da3eb-691d-4dbb-a36b-2aa36d74c061",
-      "name": "SSH keys",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "b30fdd0a-b0f5-4bfb-8293-be4ebab6402b",
-          "name": "List your SSH keys",
-          "request": {
-            "name": "List your SSH keys",
-            "description": {
-              "content": "Retrieves a list of your SSH keys.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "ssh-keys"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "1fa4b4cc-ccf8-4fb5-b724-608ef4661040",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "ssh-keys",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Delete an SSH key",
+                      "id": "775d5f92-b176-4679-8c35-2a2b935f2e16",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7439cde0-9356-471c-ac5e-59c207beb11e",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier (ID) of the SSH key to delete"
+                            }
+                          ]
+                        },
+                        "description": "Deletes the specified SSH key."
+                      },
+                      "response": [
+                        {
+                          "id": "11ff5512-af84-4472-99e6-332c0badd710",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh-keys/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh-keys",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {}\n}",
+                          "createdAt": "2026-10-21T20:21:05.000Z",
+                          "updatedAt": "2026-10-21T20:21:05.000Z",
+                          "uid": "35240-11ff5512-af84-4472-99e6-332c0badd710"
+                        },
+                        {
+                          "id": "9ab0ea94-5720-4a72-bfb1-ae928811b7e6",
+                          "name": "Bad Request",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh-keys/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh-keys",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:21:05.000Z",
+                          "updatedAt": "2026-10-21T20:21:05.000Z",
+                          "uid": "35240-9ab0ea94-5720-4a72-bfb1-ae928811b7e6"
+                        },
+                        {
+                          "id": "4347bdd3-cee9-441a-9992-a6352ca9d156",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh-keys/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh-keys",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:21:05.000Z",
+                          "updatedAt": "2026-10-21T20:21:05.000Z",
+                          "uid": "35240-4347bdd3-cee9-441a-9992-a6352ca9d156"
+                        },
+                        {
+                          "id": "f445612c-13cc-4301-97da-21ac17f518d4",
+                          "name": "Forbidden",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh-keys/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh-keys",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:21:05.000Z",
+                          "updatedAt": "2026-10-21T20:21:05.000Z",
+                          "uid": "35240-f445612c-13cc-4301-97da-21ac17f518d4"
+                        },
+                        {
+                          "id": "30fde591-1cb9-4b2c-90c7-7337e45dfbf1",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/ssh-keys/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "ssh-keys",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-21T20:21:05.000Z",
+                          "updatedAt": "2026-10-21T20:21:05.000Z",
+                          "uid": "35240-30fde591-1cb9-4b2c-90c7-7337e45dfbf1"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-775d5f92-b176-4679-8c35-2a2b935f2e16"
+                    }
+                  ],
+                  "id": "b061815c-44e6-4857-bae6-64a6568d9953",
+                  "createdAt": "2026-10-21T20:21:05.000Z",
+                  "updatedAt": "2026-10-21T20:21:05.000Z",
+                  "uid": "35240-b061815c-44e6-4857-bae6-64a6568d9953"
+                },
+                {
+                  "name": "List your SSH keys",
+                  "id": "27545b2f-5182-4b4c-8030-345232de962f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "ssh-keys"
+                      ]
+                    },
+                    "description": "Retrieves a list of your SSH keys."
+                  },
+                  "response": [
+                    {
+                      "id": "88378490-dc40-4fa5-b6b9-1a2fb40d41f4",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"public_key\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"public_key\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-88378490-dc40-4fa5-b6b9-1a2fb40d41f4"
+                    },
+                    {
+                      "id": "f36a36ab-846c-49ab-809e-25ad0dd5a4a0",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-f36a36ab-846c-49ab-809e-25ad0dd5a4a0"
+                    },
+                    {
+                      "id": "e922c278-84c3-417e-9842-6d53d0537d26",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-e922c278-84c3-417e-9842-6d53d0537d26"
+                    },
+                    {
+                      "id": "ef2fdb1f-4d18-42c0-88b6-1bbc182d805f",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-ef2fdb1f-4d18-42c0-88b6-1bbc182d805f"
+                    },
+                    {
+                      "id": "2c00957a-fc75-42b7-aab5-0441515fbdf6",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-2c00957a-fc75-42b7-aab5-0441515fbdf6"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:21:05.000Z",
+                  "updatedAt": "2026-10-21T20:21:05.000Z",
+                  "uid": "35240-27545b2f-5182-4b4c-8030-345232de962f"
+                },
+                {
+                  "name": "Add an SSH key",
+                  "id": "57754ad3-3f13-45ce-9d5c-1a3aae35b421",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "ssh-keys"
+                      ]
+                    },
+                    "description": "Add an SSH key to your Lambda Cloud account. You can upload an existing public\nkey, or you can generate a new key pair.\n\n- To use an existing key pair, set the `public_key` property in the request body\nto your public key.\n\n- To generate a new key pair, omit the `public_key` property from the request\nbody.\n\n:::note{type=\"attention\" title=\"Important\"}\nLambda doesn't store your private key after it's been generated.\nIf you generate a new key pair, make sure to save the resulting private key locally.\n:::\n\nFor example, to generate a new key pair and associate it with a Lambda\nOn-Demand Cloud instance:\n\n1. Generate the key pair. The command provided below automatically extracts and\nsaves the returned private key to a new file called `key.pem`. Replace\n`` with the name you want to assign to the SSH key:\n\n```bash\ncurl --request POST --url 'https://cloud.lambda.ai/api/v1/ssh-keys' \\\n--fail \\\n--user ${LAMBDA_API_KEY}: \\\n--data '{\"name\": \"\"}' \\\n| jq -r '.data.private_key' > key.pem\n```\n\n2. Next, set the private key's permissions to read-only:\n\n```bash\nchmod 400 key.pem\n```\n\n3. Launch a new instance. Replace `` with the name you assigned\nto your SSH key.\n\n```bash\ncurl --request POST 'https://cloud.lambda.ai/api/v1/instance-operations/launch' \\\n--fail \\\n--user ${LAMBDA_API_KEY}: \\\n--data '{\"region_name\":\"us-west-1\",\"instance_type_name\":\"gpu_1x_a10\",\"ssh_key_names\":[\"\"],\"file_system_names\":[],\"quantity\":1,\"name\":\"My Instance\"}'\n```\n\n4. From your local terminal, establish an SSH connection to the instance.\nReplace `` with the public IP of the instance:\n\n```bash\nssh -i key.pem\n```"
+                  },
+                  "response": [
+                    {
+                      "id": "bd2b6cf3-1379-4182-af59-385e63b3d827",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"public_key\": \"<string>\",\n    \"private_key\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-bd2b6cf3-1379-4182-af59-385e63b3d827"
+                    },
+                    {
+                      "id": "9c8babab-62fa-4290-b0a1-334c62aa71c8",
+                      "name": "Bad Request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-9c8babab-62fa-4290-b0a1-334c62aa71c8"
+                    },
+                    {
+                      "id": "842a4d9f-1c61-4a61-b97c-e5eb7f3ae673",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-842a4d9f-1c61-4a61-b97c-e5eb7f3ae673"
+                    },
+                    {
+                      "id": "74823e72-29e4-4c46-8e03-d3db442b9cc1",
+                      "name": "Forbidden",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-74823e72-29e4-4c46-8e03-d3db442b9cc1"
+                    },
+                    {
+                      "id": "c78bcd80-f2fe-49ba-93a6-d5a493daa2a8",
+                      "name": "Not Found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/ssh-keys",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "ssh-keys"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:21:05.000Z",
+                      "updatedAt": "2026-10-21T20:21:05.000Z",
+                      "uid": "35240-c78bcd80-f2fe-49ba-93a6-d5a493daa2a8"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:21:05.000Z",
+                  "updatedAt": "2026-10-21T20:21:05.000Z",
+                  "uid": "35240-57754ad3-3f13-45ce-9d5c-1a3aae35b421"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"ddf9a910ceb744a0bb95242cbba6cb50\",\n      \"name\": \"my-public-key\",\n      \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n    },\n    {\n      \"id\": \"ddf9a910ceb744a0bb95242cbba6cb50\",\n      \"name\": \"my-public-key\",\n      \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3686e01f-b46f-40a3-8060-51e90dffceb4",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0e4d0308-11a5-4837-8c0a-90faccc38bd2",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f7aff69b-f98c-4ff5-83ff-f63ec1df236b",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4f8c5d57-80f8-4eda-a997-da3ee0ea89f8",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "8271d707-fe89-4e20-87b8-e23db58496a1",
+              "createdAt": "2026-10-21T20:21:05.000Z",
+              "updatedAt": "2026-10-21T20:21:05.000Z",
+              "uid": "35240-8271d707-fe89-4e20-87b8-e23db58496a1"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "567d3723-1d05-4f79-afc5-db10cc29313a",
-          "name": "Add an SSH key",
-          "request": {
-            "name": "Add an SSH key",
-            "description": {
-              "content": "Add an SSH key to your Lambda Cloud account. You can upload an existing public\nkey, or you can generate a new key pair.\n\n-  To use an existing key pair, set the `public_key` property in the request body\n   to your public key.\n\n-  To generate a new key pair, omit the `public_key` property from the request\n   body.\n\n:::note{type=\"attention\" title=\"Important\"}\nLambda doesn't store your private key after it's been generated.\nIf you generate a new key pair, make sure to save the resulting private key locally.\n:::\n\nFor example, to generate a new key pair and associate it with a Lambda\nOn-Demand Cloud instance:\n\n1. Generate the key pair. The command provided below automatically extracts and\n    saves the returned private key to a new file called `key.pem`. Replace\n    `<NEW-KEY-NAME>` with the name you want to assign to the SSH key:\n\n    ```bash\n    curl --request POST --url 'https://cloud.lambda.ai/api/v1/ssh-keys' \\\n    --fail \\\n    --user ${LAMBDA_API_KEY}: \\\n    --data '{\"name\": \"<NEW-KEY-NAME>\"}' \\\n    | jq -r '.data.private_key' > key.pem\n    ```\n\n2. Next, set the private key's permissions to read-only:\n\n    ```bash\n    chmod 400 key.pem\n    ```\n\n3. Launch a new instance. Replace `<NEW-KEY-NAME>` with the name you assigned\n   to your SSH key.\n\n    ```bash\n    curl --request POST 'https://cloud.lambda.ai/api/v1/instance-operations/launch' \\\n    --fail \\\n    --user ${LAMBDA_API_KEY}: \\\n    --data '{\"region_name\":\"us-west-1\",\"instance_type_name\":\"gpu_1x_a10\",\"ssh_key_names\":[\"<NEW-KEY-NAME>\"],\"file_system_names\":[],\"quantity\":1,\"name\":\"My Instance\"}'\n    ```\n\n4. From your local terminal, establish an SSH connection to the instance.\n   Replace `<INSTANCE-IP>` with the public IP of the instance:\n\n    ```bash\n    ssh -i key.pem <INSTANCE-IP>\n    ```",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "ssh-keys"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"public_key\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "eb0e02ba-af51-4ae5-ae84-cfeef7fd8378",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"my-public-key\",\n  \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {\n    \"id\": \"ddf9a910ceb744a0bb95242cbba6cb50\",\n    \"name\": \"my-public-key\",\n    \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\",\n    \"private_key\": \"-----BEGIN RSA PRIVATE KEY-----\\\\n...\\\\n-----END RSA PRIVATE KEY-----\\\\n\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9b820ca9-a32f-4d31-bdec-acf5599549e2",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"my-public-key\",\n  \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9e80094b-6fc9-413a-80c1-e1ba3c20b6c6",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"my-public-key\",\n  \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7f8b5487-e735-4beb-94b8-ce1ccd365779",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"my-public-key\",\n  \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "56abcdc7-cede-412a-a6dd-7de72e09ae82",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"my-public-key\",\n  \"public_key\": \"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICN+lJwsONkwrdsSnQsu1ydUkIuIg5oOC+Eslvmtt60T noname\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a7a6893b-8872-475d-b11b-f100a2f9c37e",
-          "name": "Delete an SSH key",
-          "request": {
-            "name": "Delete an SSH key",
-            "description": {
-              "content": "Deletes the specified SSH key.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "ssh-keys",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "id",
-                  "description": "(Required) The unique identifier (ID) of the SSH key to delete"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "f224db1a-9dd1-44f9-881b-063a72f5d4ed",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the SSH key to delete"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"data\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a2ac668c-75b5-4a2a-acb2-c8bbbbb2bd05",
-              "name": "Bad Request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the SSH key to delete"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Invalid request data.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "055b1afa-901e-4e51-ae49-d338dc49baed",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the SSH key to delete"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"API key was invalid, expired, or deleted.\",\n    \"suggestion\": \"Check your API key or create a new one, then try again.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8b4dade2-8af1-4716-bdea-99345ac5143c",
-              "name": "Forbidden",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the SSH key to delete"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"Your account is inactive.\",\n    \"suggestion\": \"Make sure you have verified your email address and have a valid payment method. Contact Support if problems continue.\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "eba158fb-5139-445e-a124-d76aebde24f6",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "ssh-keys",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "id",
-                      "description": "(Required) The unique identifier (ID) of the SSH key to delete"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"The requested resource was not found.\",\n    \"suggestion\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a3426b6d-5a15-46b3-8dfb-b5c75a152642",
+          "createdAt": "2026-10-21T20:21:05.000Z",
+          "updatedAt": "2026-10-21T20:21:05.000Z",
+          "uid": "35240-a3426b6d-5a15-46b3-8dfb-b5c75a152642"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://cloud.lambda.ai/",
-      "key": "baseUrl"
+      "id": "76cf18b5-c100-4a6d-b567-6c918bd8e032",
+      "createdAt": "2026-10-21T20:21:05.000Z",
+      "updatedAt": "2026-10-21T20:21:05.000Z",
+      "uid": "35240-76cf18b5-c100-4a6d-b567-6c918bd8e032"
     }
   ],
   "auth": {
@@ -918,17 +934,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e4fc127c-bbcc-4a73-9f15-3e8c5b86ef34",
-    "name": "Lambda Cloud Audit Events SSH keys API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Lambda Cloud API provides a set of REST API endpoints you can use to create\nand manage your Lambda Cloud resources.\n\nRequests to the API are generally limited to one request per second. Requests to\nthe `/instance-operations/launch` endpoint are limited to one request per 12\nseconds, or five requests per minute.\n\n## Response types and formats {#formats}\n\nThe format of each response object depends on whether the request succeeded or failed.\n\n### Success responses {#success-responses}\n\nWhen a request succeeds, the API returns a response object in the following format. `<PAYLOAD>`\nrepresents the endpoint-specific data object returned as part of the response object.\n\n```json\n{\n    \"data\": <PAYLOAD>\n}\n```\n\n### Error responses {#error-responses}\n\nWhen a request fails, the API returns an error response object in the following format:\n\n```json\n{\n    \"error\": {\n        \"code\": string,\n        \"message\": string,\n        \"suggestion\": string?\n    }\n}\n```\n\n- `code`: A machine- and human-readable error code specific to a particular failure mode.\n- `message`: An explanation of the error.\n- `suggestion`: When present, a suggestion for how to address the error.\n\n:::note{type=\"info\" title=\"Note\"}\nWhen handling errors, avoid relying on the values of `message` or `suggestion`, as\nthese values are subject to change. Instead, use the value of `code`.\n:::\n\n#### Provider errors {#provider-errors}\n\nIn some cases, you might receive errors that come from upstream services/providers rather than directly\nfrom Lambda services. You can identify these errors by their error code prefix, `provider/`.\n\nCommon provider errors include:\n\n- Network outages or connectivity issues\n- Service unavailability\n- Quota limitations or resource exhaustion\n\nAn example of a typical service unavailability error:\n\n```json\n{\n  \"error\": {\n    \"code\": \"provider/internal-unavailable\",\n    \"message\": \"Provider unavailable\",\n    \"suggestion\": \"Try again shortly\"\n  }\n}\n```\n## Outgoing webhooks {#outgoing-webhooks}\n\nLambda can send webhook notifications to your URL when support ticket events occur,\nenabling near real-time integration with your systems.\n\n### Event types {#event-types}\n\n- `ticket.created` - A support ticket was created.\n- `ticket.status_changed` - A support ticket's status was updated, and the ticket remains open.\n- `ticket.resolved` - A support ticket's status was set to `solved`, or the ticket was closed.\n\n### Payload structure {#payload-structure}\n\nAll webhook payloads follow this structure:\n\n```json\n{\n  \"id\": \"a3b7c9d1e5f642a8b0c2d4e6f8a0b2c4\",\n  \"object\": \"event\",\n  \"type\": \"ticket.created\",\n  \"created\": 1700000000,\n  \"api_version\": \"2025-11-18\",\n  \"data\": {\n    \"object\": \"ticket\",\n    \"id\": \"f1e2d3c4b5a647869708192a3b4c5d6e\",\n    \"subject\": \"Issue with instance 0920582c7ff041399e34823a0be62549\",\n    \"description\": \"Detailed description of the issue...\",\n    \"request_type\": \"incident\",\n    \"severity\": \"sev_2\",\n    \"status\": \"new\",\n    \"created_at\": \"2024-11-15T10:00:00+00:00\",\n    \"updated_at\": \"2024-11-15T10:00:00+00:00\",\n    \"instance_ip\": \"192.168.1.100\",\n    \"instance_id\": \"0920582c7ff041399e34823a0be62549\",\n    \"cluster_id\": null,\n    \"source\": \"api\"\n  }\n}\n```\n\n### Webhook authentication {#webhook-authentication}\n\nWebhook requests include a Bearer token in the `Authorization` header for authentication:\n\n```http\nAuthorization: Bearer <token>\n```\n## Authentication {#authentication}\n\nThe Lambda Cloud API uses API keys to authenticate incoming requests. You\ncan generate a new API key pair or view your existing API keys by visiting\nthe [API keys page](https://cloud.lambda.ai/api-keys) in the Lambda Cloud\ndashboard.\n\nIn general, Lambda recommends passing an HTTP Bearer header that contains\nyour API key:\n\n```http\nAuthorization: Bearer <YOUR-API-KEY>\n```\n\n### Authenticating with `curl` {#authenticating-with-curl}\n\nThe API also supports passing an HTTP Basic header. This option chiefly exists\nto support `curl`'s `-u` flag, which allows you to pass your credentials\nwithout having to write out the full `Authorization: Basic` header string.\nFor example:\n\n```bash\ncurl --request GET --url 'https://cloud.lambda.ai/api/v1/instances' \\\n  --header 'accept: application/json' \\\n  --user '<YOUR-API-KEY>:'\n```\n\nIf your use case requires it, you can also pass the HTTP Basic header directly.\nThe value you pass must be a Base64-encoded string containing your API key\nand a trailing colon:\n\n```http\nAuthorization: Basic <BASE64-ENCODED-API-KEY>:\n```\n\n:::note{type=\"attention\" title=\"Important\"}\nIf you make a request without including a supported `Authorization` header,\nthe request will fail.\n:::",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://cloud.lambda.ai/"
     }
-  }
+  ]
 }
